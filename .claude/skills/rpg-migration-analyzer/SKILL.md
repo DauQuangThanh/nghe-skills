@@ -1,11 +1,6 @@
 ---
 name: rpg-migration-analyzer
 description: Analyzes legacy RPG (Report Program Generator) programs to assist with migration to modern Java applications. Extracts business logic from RPG III/IV/ILE, identifies data structures, file operations, and dependencies. Generates migration reports and creates Java implementation strategies. Use when working with AS/400 or IBM i system migration, RPG analysis, legacy system modernization, or when users mention RPG to Java conversion, analyzing .rpg/.RPG/.rpgle files, working with data specifications, or planning Java service implementations from RPG programs.
-license: MIT
-metadata:
-  author: Dau Quang Thanh
-  version: "1.0"
-  category: development
 ---
 
 # RPG Migration Analyzer
@@ -121,4 +116,4 @@ Provide: Program overview, dependencies, data structures, logic summary, Java de
 
 ## Integration
 
-Works with AS/400 analysis tools, structure files, pseudocode rules (references/PSEUDOCODE-RPG-RULES.md), version control, and modern IDEs.
+Works with AS/400 analysis tools, structure files, pseudocode rules (references/pseudocode-rpg-rules.md), version control, and modern IDEs.

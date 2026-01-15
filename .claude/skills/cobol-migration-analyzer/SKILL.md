@@ -1,11 +1,6 @@
 ---
 name: cobol-migration-analyzer
 description: Analyzes legacy COBOL programs and JCL jobs to assist with migration to modern Java applications. Extracts business logic, identifies dependencies, generates migration reports, and creates Java implementation strategies. Use when working with mainframe migration, COBOL analysis, legacy system modernization, JCL workflows, or when users mention COBOL to Java conversion, analyzing .cbl/.CBL/.cob files, working with copybooks, or planning Java service implementations from COBOL programs.
-license: MIT
-metadata:
-  author: Dau Quang Thanh
-  version: "1.0"
-  category: development
 ---
 
 # COBOL Migration Analyzer
@@ -123,4 +118,4 @@ Provide: Program overview, dependencies, data structures, logic summary, Java de
 
 ## Integration
 
-Works with AST parsers, structure files, pseudocode rules (references/PSEUDOCODE-COBOL-RULES.md, PSEUDOCODE-JCL-RULES.md), version control, and modern IDEs.
+Works with AST parsers, structure files, pseudocode rules (references/pseudocode-cobol-rules.md, pseudocode-jcl-rules.md), version control, modern IDEs, and CI/CD pipelines.

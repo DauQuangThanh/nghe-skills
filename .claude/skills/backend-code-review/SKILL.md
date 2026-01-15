@@ -5,429 +5,389 @@ description: Conducts comprehensive backend code reviews including API design (R
 
 # Backend Code Review
 
-## Purpose
+Conduct systematic backend code reviews to identify security vulnerabilities, performance bottlenecks, code quality issues, and architectural concerns. Produces actionable reports with specific locations and fix recommendations.
 
-Conduct systematic and thorough reviews of backend codebases to identify issues, improve quality, ensure security, optimize performance, and validate architectural decisions. Produces actionable reports with specific recommendations.
+## Review Process
 
-## When to Use This Skill
+Follow this structured approach for comprehensive backend code analysis:
 
-Trigger this skill when:
-- Reviewing server-side code in Node.js, Python, Java, Go, C#, or other backend languages
-- Analyzing API implementations (REST, GraphQL, gRPC)
-- Checking database query patterns and optimizations
-- Validating authentication and authorization mechanisms
-- Assessing microservices architecture and design patterns
-- Conducting security audits of backend systems
-- Evaluating performance and scalability
-- Reviewing caching strategies and message queue implementations
-- User mentions backend code review, API review, server code analysis, or security audit
+### 1. Assess Technology Stack and Scope
 
-## Review Workflow
+Identify technologies and critical areas before starting:
 
-### Step 1: Initial Assessment
-
-**Gather Context:**
-- Technology stack (languages, frameworks, databases)
-- Architecture style (monolith, microservices, serverless)
-- Deployment environment (cloud provider, containerization)
-- Code scope (files, modules, services to review)
-
-**Read Project Structure:**
-```bash
-# Common patterns to identify
-- /src or /app - Application code
-- /tests - Test files
-- /config - Configuration
-- /docs - Documentation
-- package.json, requirements.txt, pom.xml - Dependencies
-- docker-compose.yml, Dockerfile - Containerization
+**Technology Inventory:**
+```
+Backend Language: Node.js/Python/Java/Go/C#
+Framework: Express/FastAPI/Spring Boot/Gin/ASP.NET
+Database: PostgreSQL/MySQL/MongoDB/Redis
+Architecture: Monolith/Microservices/Serverless
+Deployment: AWS/GCP/Azure/Docker/Kubernetes
 ```
 
-**Identify Critical Areas:**
-- Authentication/authorization flows
-- Payment processing
-- Data access layers
-- External API integrations
-- Background jobs/workers
+**Critical Review Areas (prioritize these):**
+- Authentication and authorization logic
+- Payment processing and financial transactions
+- Data access layers (ORM queries, raw SQL)
+- External API integrations and webhooks
+- Background jobs and async processing
+- File upload and download handlers
 
-### Step 2: Code Quality Analysis
+**Example Scope Definition:**
+```
+Review: User authentication service
+Files: src/auth/*.ts (15 files, ~2000 lines)
+Priority: High (handles user credentials and sessions)
+Focus: Security vulnerabilities, JWT implementation, session management
+```
 
-**Review Focus:**
-- Code organization and structure
-- Design patterns and principles (SOLID, DRY, KISS)
-- Error handling and logging
-- Type safety (TypeScript, type hints, generics)
-- Dependency injection and modularity
-- Code duplication and complexity
+### 2. Review Code Quality and Structure
 
-**Detailed guidance:** See [code-quality-checklist.md](references/code-quality-checklist.md)
+Evaluate code organization, design patterns, and maintainability:
 
-**Key Checks:**
-- [ ] Proper separation of concerns (controllers, services, repositories)
-- [ ] Consistent error handling patterns
-- [ ] Appropriate use of async/await or promises
-- [ ] No hardcoded secrets or credentials
-- [ ] Proper use of environment variables
-- [ ] Logging with appropriate levels (debug, info, warn, error)
+**Code Organization Checklist:**
+```
+☐ Proper layering (controllers → services → repositories → database)
+☐ Consistent file and folder naming (kebab-case, camelCase, etc.)
+☐ One class/function per file (or logically grouped)
+☐ No circular dependencies between modules
+☐ Clear separation of business logic and infrastructure code
+```
 
-### Step 3: API Design Review
+**SOLID Principles Validation:**
 
-**REST APIs:**
-- Resource naming and URI structure
-- HTTP method usage (GET, POST, PUT, PATCH, DELETE)
-- Status code appropriateness
-- Request/response formats
-- Pagination and filtering
-- API versioning strategy
+**Single Responsibility:** Each class/module has one reason to change
+```javascript
+// ❌ Bad: UserService does too much
+class UserService {
+  createUser() { }
+  sendEmail() { }       // Should be EmailService
+  processPayment() { }  // Should be PaymentService
+}
 
-**GraphQL:**
-- Schema design and type definitions
-- Query complexity and depth limiting
-- N+1 query prevention (DataLoader)
-- Error handling
-- Authentication/authorization per field
+// ✅ Good: Separated responsibilities
+class UserService {
+  createUser() { }
+}
+class EmailService {
+  sendEmail() { }
+}
+class PaymentService {
+  processPayment() { }
+}
+```
 
-**gRPC:**
-- Protocol buffer definitions
-- Service method design
-- Streaming patterns (unary, server, client, bidirectional)
-- Error handling with status codes
+**Dependency Injection:** Dependencies injected, not hardcoded
+```python
+# ❌ Bad: Hardcoded dependency
+class UserService:
+    def __init__(self):
+        self.db = PostgresDB()  # Hardcoded, hard to test
 
-**Detailed guidance:** See [api-design-checklist.md](references/api-design-checklist.md)
+# ✅ Good: Dependency injection
+class UserService:
+    def __init__(self, db: Database):
+        self.db = db  # Injected, easy to mock
+```
 
-### Step 4: Database Review
+**Error Handling Pattern:**
+```typescript
+// ❌ Bad: Silent failures
+async function getUser(id: string) {
+  try {
+    return await db.users.findOne(id);
+  } catch (err) {
+    return null;  // Swallows error
+  }
+}
 
-**Query Analysis:**
-- SQL injection prevention
-- Query optimization (indexes, joins, subqueries)
-- N+1 query problems
-- Connection pooling
-- Transaction handling
+// ✅ Good: Proper error handling
+async function getUser(id: string): Promise<User> {
+  try {
+    const user = await db.users.findOne(id);
+    if (!user) {
+      throw new NotFoundError(`User ${id} not found`);
+    }
+    return user;
+  } catch (err) {
+    logger.error('Failed to fetch user', { id, error: err });
+    throw new DatabaseError('User fetch failed', { cause: err });
+  }
+}
+```
 
-**Schema Review:**
-- Normalization vs denormalization decisions
-- Indexing strategy
-- Foreign key constraints
-- Data types and sizes
-- Migration strategy
+**Code Quality Issues to Flag:**
+- Functions > 50 lines (should be split)
+- Classes > 300 lines (too many responsibilities)
+- Cyclomatic complexity > 10 (simplify logic)
+- Code duplication > 5 lines (extract to function)
+- Missing type definitions (TypeScript, type hints)
+- Magic numbers (use named constants)
 
-**ORM/Query Builder Usage:**
-- Proper use of ORM features
-- Raw query safety
-- Lazy vs eager loading
-- Caching strategies
+**Load detailed checklist:** [code-quality-checklist.md](references/code-quality-checklist.md)
 
-**Detailed guidance:** See [database-checklist.md](references/database-checklist.md)
+### 3. Validate API Design
 
-### Step 5: Security Assessment
+Review API endpoints for REST, GraphQL, or gRPC implementations:
 
-**Authentication:**
-- Password hashing (bcrypt, argon2)
-- JWT implementation (signing, expiration, refresh)
-- OAuth/OIDC integration
-- Session management
+**REST API Review:**
 
-**Authorization:**
-- Role-Based Access Control (RBAC)
-- Attribute-Based Access Control (ABAC)
-- Permission checking
-- Resource ownership validation
+**Endpoint Structure:**
+```
+✅ Good REST Design:
+GET    /api/v1/users           - List users (paginated)
+GET    /api/v1/users/:id       - Get single user
+POST   /api/v1/users           - Create user
+PUT    /api/v1/users/:id       - Replace user
+PATCH  /api/v1/users/:id       - Update user
+DELETE /api/v1/users/:id       - Delete user
+
+❌ Poor REST Design:
+GET    /api/v1/getAllUsers     - Use plural nouns, not verbs
+POST   /api/v1/user/create     - POST implies creation
+GET    /api/v1/user/get/123    - Use path params, not verbs
+```
+
+**HTTP Status Codes:**
+```
+✅ Correct Usage:
+200 OK - Successful GET, PUT, PATCH
+201 Created - Successful POST (with Location header)
+204 No Content - Successful DELETE
+400 Bad Request - Invalid input
+401 Unauthorized - Missing/invalid authentication
+403 Forbidden - Authenticated but not authorized
+404 Not Found - Resource doesn't exist
+409 Conflict - Duplicate resource
+422 Unprocessable Entity - Validation failed
+500 Internal Server Error - Server error
+
+❌ Common Mistakes:
+200 for errors - Should use 4xx or 5xx
+500 for validation errors - Should use 400 or 422
+404 for unauthorized - Should use 403
+```
+
+**Pagination Implementation:**
+```javascript
+// ✅ Good: Cursor-based pagination for large datasets
+GET /api/v1/orders?cursor=eyJpZCI6MTIzfQ&limit=20
+Response: {
+  data: [...],
+  pagination: {
+    nextCursor: "eyJpZCI6MTQzfQ",
+    hasMore: true
+  }
+}
+
+// ✅ Good: Offset pagination for small/medium datasets
+GET /api/v1/users?page=2&pageSize=20
+Response: {
+  data: [...],
+  pagination: {
+    page: 2,
+    pageSize: 20,
+    totalPages: 15,
+    totalItems: 300
+  }
+}
+```
+
+**GraphQL Review:**
+
+**N+1 Query Detection:**
+```graphql
+# ❌ Bad: Causes N+1 queries
+query {
+  posts {
+    id
+    title
+    author {  # Separate query for each post
+      name
+    }
+  }
+}
+
+# ✅ Good: Use DataLoader to batch
+const authorLoader = new DataLoader(async (authorIds) => {
+  // Batch fetch all authors in one query
+  return await db.authors.findByIds(authorIds);
+});
+```
+
+**gRPC Review:**
+
+Check protocol buffer definitions and error handling:
+```protobuf
+// ✅ Good proto definition
+message GetUserRequest {
+  string user_id = 1 [(validate.rules).string.uuid = true];
+}
+
+message GetUserResponse {
+  User user = 1;
+}
+
+service UserService {
+  rpc GetUser(GetUserRequest) returns (GetUserResponse);
+}
+```
+
+**Load detailed checklist:** [api-design-checklist.md](references/api-design-checklist.md)
+
+### 4. Analyze Database Queries and Schema
+
+Review database patterns, query optimization, and data integrity:
+
+**SQL Injection Prevention:**
+```python
+# ❌ Critical: SQL injection vulnerability
+def get_user(username):
+    query = f"SELECT * FROM users WHERE username = '{username}'"
+    return db.execute(query)
+
+# ✅ Good: Parameterized queries
+def get_user(username):
+    query = "SELECT * FROM users WHERE username = ?"
+    return db.execute(query, (username,))
+```
+
+**N+1 Query Problem:**
+```javascript
+// ❌ Bad: N+1 queries (1 query + N queries for authors)
+const posts = await Post.findAll();
+for (const post of posts) {
+  post.author = await User.findById(post.authorId);  // N queries!
+}
+
+// ✅ Good: Join or eager load
+const posts = await Post.findAll({
+  include: [{ model: User, as: 'author' }]  // 1 query with join
+});
+```
+
+**Missing Indexes:**
+```sql
+-- ❌ Bad: Queries without indexes
+SELECT * FROM orders WHERE user_id = 123;  -- No index on user_id
+SELECT * FROM products WHERE status = 'active' AND category = 'electronics';
+
+-- ✅ Good: Add indexes for common queries
+CREATE INDEX idx_orders_user_id ON orders(user_id);
+CREATE INDEX idx_products_status_category ON products(status, category);
+```
+
+**Transaction Handling:**
+```java
+// ❌ Bad: No transaction for multi-step operation
+public void transferFunds(Long fromId, Long toId, BigDecimal amount) {
+    Account from = accountRepo.findById(fromId);
+    Account to = accountRepo.findById(toId);
+    from.setBalance(from.getBalance().subtract(amount));
+    to.setBalance(to.getBalance().add(amount));
+    accountRepo.save(from);  // What if this fails?
+    accountRepo.save(to);    // Money lost!
+}
+
+// ✅ Good: Atomic transaction
+@Transactional
+public void transferFunds(Long fromId, Long toId, BigDecimal amount) {
+    Account from = accountRepo.findById(fromId);
+    Account to = accountRepo.findById(toId);
+    from.setBalance(from.getBalance().subtract(amount));
+    to.setBalance(to.getBalance().add(amount));
+    accountRepo.save(from);
+    accountRepo.save(to);
+    // Both save or both rollback
+}
+```
+
+**Connection Pool Configuration:**
+```
+✅ Recommended Settings:
+- Pool size: 10-20 connections (not 100+)
+- Connection timeout: 30 seconds
+- Idle timeout: 10 minutes
+- Max lifetime: 30 minutes
+- Connection validation before use
+```
+
+**Load detailed checklist:** [database-checklist.md](references/database-checklist.md)
+
+### 5. Audit Security Vulnerabilities
+
+Identify authentication, authorization, and data protection issues:
+
+**Authentication Security:**
+
+**Password Hashing:**
+```javascript
+// ❌ Critical: Plain text or weak hashing
+const hashedPassword = md5(password);  // MD5 is broken
+
+// ✅ Good: Strong hashing with bcrypt or argon2
+const hashedPassword = await bcrypt.hash(password, 12);  // Cost factor 12+
+```
+
+**JWT Implementation:**
+```typescript
+// ❌ Bad: Weak JWT configuration
+const token = jwt.sign({ userId: user.id }, 'secret123');  // Weak secret, no expiry
+
+// ✅ Good: Secure JWT configuration
+const token = jwt.sign(
+  { userId: user.id, role: user.role },
+  process.env.JWT_SECRET,  // Strong secret from env
+  { 
+    expiresIn: '15m',       // Short-lived access token
+    algorithm: 'HS256',
+    issuer: 'api.example.com',
+    audience: 'app.example.com'
+  }
+);
+```
+
+**Authorization Validation:**
+```python
+# ❌ Bad: Missing authorization check
+@app.route('/api/users/<user_id>', methods=['DELETE'])
+def delete_user(user_id):
+    db.delete_user(user_id)  # Anyone can delete any user!
+    return {'success': True}
+
+# ✅ Good: Proper authorization
+@app.route('/api/users/<user_id>', methods=['DELETE'])
+@requires_auth
+def delete_user(user_id):
+    current_user = get_current_user()
+    if current_user.id != user_id and not current_user.is_admin:
+        raise ForbiddenError("Cannot delete other users")
+    db.delete_user(user_id)
+    return {'success': True}
+```
 
 **Input Validation:**
-- Request validation (schema, types, ranges)
-- SQL injection prevention
-- NoSQL injection prevention
-- Command injection prevention
-- Path traversal prevention
-
-**Data Protection:**
-- Encryption at rest and in transit
-- Sensitive data handling (PII, PCI)
-- Secret management
-- CORS configuration
-
-**Detailed guidance:** See [security-checklist.md](references/security-checklist.md)
-
-### Step 6: Performance Review
-
-**Application Performance:**
-- Response time analysis
-- Memory usage patterns
-- CPU utilization
-- Asynchronous processing
-- Caching strategies (Redis, Memcached)
-
-**Database Performance:**
-- Query execution plans
-- Index utilization
-- Connection pooling
-- Query caching
-- Database connection patterns
-
-**API Performance:**
-- Rate limiting
-- Request batching
-- Response compression
-- HTTP/2 or HTTP/3 usage
-- CDN integration
-
-**Scalability:**
-- Horizontal scaling readiness
-- Stateless design
-- Load balancing considerations
-- Background job processing
-- Message queue usage
-
-**Detailed guidance:** See [performance-checklist.md](references/performance-checklist.md)
-
-### Step 7: Architecture Review
-
-**Design Patterns:**
-- Repository pattern
-- Service layer pattern
-- Factory pattern
-- Strategy pattern
-- Dependency injection
-
-**Microservices (if applicable):**
-- Service boundaries and responsibilities
-- Inter-service communication
-- Data consistency patterns (Saga, Event Sourcing)
-- Service discovery
-- Circuit breakers and resilience
-
-**Code Organization:**
-- Layered architecture
-- Clean architecture
-- Hexagonal architecture
-- Domain-Driven Design (DDD)
-
-**Detailed guidance:** See [architecture-checklist.md](references/architecture-checklist.md)
-
-### Step 8: Testing Coverage
-
-**Unit Tests:**
-- Test coverage percentage
-- Critical path coverage
-- Edge case testing
-- Mock/stub usage
-- Test independence
-
-**Integration Tests:**
-- Database integration
-- External API integration
-- End-to-end flow testing
-- Contract testing
-
-**API Tests:**
-- Endpoint testing
-- Authentication/authorization testing
-- Error case testing
-- Load testing
-
-**Test Quality:**
-- Test readability
-- Test maintainability
-- Test performance
-- Flaky test identification
-
-### Step 9: Generate Review Report
-
-Use appropriate template from [report-templates.md](references/report-templates.md).
-
-**Report Structure:**
-1. **Executive Summary**
-   - Overall assessment
-   - Critical issues count
-   - Priority recommendations
-
-2. **Detailed Findings**
-   - Code quality issues
-   - Security vulnerabilities
-   - Performance bottlenecks
-   - Architecture concerns
-
-3. **Recommendations**
-   - Immediate actions (critical)
-   - Short-term improvements
-   - Long-term enhancements
-
-4. **Code Examples**
-   - Problematic code with location
-   - Recommended fixes
-   - Explanation of impact
-
-## Best Practices
-
-### Review Timing
-
-**Pre-commit Review:**
-- Focus on immediate issues
-- Quick feedback cycle
-- Automated checks
-
-**Pull Request Review:**
-- Comprehensive analysis
-- Feature-level assessment
-- Integration concerns
-
-**Periodic Audit:**
-- Codebase-wide patterns
-- Technical debt assessment
-- Architecture evolution
-
-### Review Techniques
-
-**Automated Scanning:**
-- Linters (ESLint, Pylint, Checkstyle)
-- Security scanners (Snyk, SonarQube)
-- Code coverage tools
-- Performance profilers
-
-**Manual Review:**
-- Business logic validation
-- Design pattern appropriateness
-- Edge case handling
-- Security-critical sections
-
-**Collaborative Review:**
-- Pair programming insights
-- Team knowledge sharing
-- Architecture discussions
-
-## Anti-Patterns to Flag
-
-### Code Smells
-
-- **God classes/functions** - Doing too much
-- **Shotgun surgery** - Changes affect many files
-- **Feature envy** - Classes using other classes' data excessively
-- **Dead code** - Unused functions or classes
-- **Magic numbers** - Hardcoded values without constants
-
-### Architecture Smells
-
-- **Circular dependencies** - Modules depending on each other
-- **Big ball of mud** - No clear structure
-- **Spaghetti code** - Complex control flow
-- **Tight coupling** - Components too dependent
-- **Hidden dependencies** - Implicit requirements
-
-### Security Smells
-
-- **Hardcoded credentials**
-- **Weak password policies**
-- **Missing input validation**
-- **Insufficient logging**
-- **Overly permissive CORS**
-
-## Quick Reference
-
-### Common Issues Checklist
-
-**Critical (Must Fix):**
-- [ ] SQL injection vulnerabilities
-- [ ] Hardcoded secrets
-- [ ] Authentication bypass
-- [ ] Data exposure
-- [ ] Memory leaks
-
-**High Priority (Should Fix):**
-- [ ] Missing input validation
-- [ ] Poor error handling
-- [ ] N+1 queries
-- [ ] Missing indexes
-- [ ] Insufficient logging
-
-**Medium Priority (Nice to Fix):**
-- [ ] Code duplication
-- [ ] Inconsistent naming
-- [ ] Missing tests
-- [ ] TODO comments
-- [ ] Unused imports
-
-### Technology-Specific Concerns
-
-**Node.js:**
-- Callback hell / promise chains
-- Unhandled promise rejections
-- Blocking event loop
-- Memory leaks in closures
-
-**Python:**
-- Global interpreter lock (GIL) awareness
-- Exception handling patterns
-- Generator usage
-- Type hints usage
-
-**Java:**
-- Exception handling (checked vs unchecked)
-- Resource management (try-with-resources)
-- Stream API usage
-- Null pointer handling
-
-**Go:**
-- Error handling patterns
-- Goroutine leaks
-- Channel usage
-- Context propagation
-
-**C#:**
-- Async/await patterns
-- IDisposable implementation
-- LINQ query optimization
-- Exception handling
-
-## Additional Resources
-
-**Detailed Checklists:**
-- [Code Quality Checklist](references/code-quality-checklist.md) - Design patterns, SOLID principles, error handling
-- [API Design Checklist](references/api-design-checklist.md) - REST, GraphQL, gRPC best practices
-- [Database Checklist](references/database-checklist.md) - Query optimization, schema design, transactions
-- [Security Checklist](references/security-checklist.md) - Authentication, authorization, input validation
-- [Performance Checklist](references/performance-checklist.md) - Optimization, caching, scalability
-- [Architecture Checklist](references/architecture-checklist.md) - Patterns, microservices, design principles
-
-**Report Templates:**
-- [Report Templates](references/report-templates.md) - Executive summaries, detailed reports, issue tracking
-
-## Output Format
-
-Structure findings as:
-
-```markdown
-# Backend Code Review Report
-
-## Executive Summary
-[Overall assessment and key findings]
-
-## Critical Issues (Must Fix)
-### Issue 1: [Title]
-- **Location:** file.js:123
-- **Severity:** Critical
-- **Description:** [What's wrong]
-- **Impact:** [Consequences]
-- **Recommendation:** [How to fix]
-
-## High Priority Issues
-[Similar structure]
-
-## Medium Priority Issues
-[Similar structure]
-
-## Code Quality Assessment
-[Scores and analysis]
-
-## Performance Analysis
-[Metrics and recommendations]
-
-## Security Assessment
-[Vulnerabilities and fixes]
-
-## Recommendations
-### Immediate Actions
-### Short-term Improvements
-### Long-term Enhancements
+```javascript
+// ❌ Bad: No validation
+app.post('/api/users', (req, res) => {
+  const user = req.body;  // Trust user input
+  db.createUser(user);
+});
+
+// ✅ Good: Schema validation
+const createUserSchema = z.object({
+  email: z.string().email().max(255),
+  password: z.string().min(12).max(128),
+  age: z.number().int().min(18).max(120),
+  role: z.enum(['user', 'admin'])
+});
+
+app.post('/api/users', (req, res) => {
+  const validatedData = createUserSchema.parse(req.body);  // Throws if invalid
+  db.createUser(validatedData);
+});
 ```
 
-Provide specific file locations, line numbers, code examples, and actionable recommendations for each finding.
+**Security Checklist:**
+```
+☐ Passwords hashed with bcrypt/argon2 (cost factor ≥12)
+☐ JWT tokens expire within 1 hour (15min recommended)

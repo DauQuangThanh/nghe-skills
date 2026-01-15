@@ -1,11 +1,6 @@
 ---
 name: jcl-migration-analyzer
 description: Analyzes legacy JCL (Job Control Language) scripts to assist with migration to modern workflow orchestration and batch processing systems. Extracts job flows, step sequences, data dependencies, conditional logic, and program invocations. Generates migration reports and creates implementation strategies for Spring Batch, Apache Airflow, or shell scripts. Use when working with mainframe job migration, JCL analysis, batch workflow modernization, or when users mention JCL conversion, analyzing .jcl/.JCL files, working with job steps, procedures, or planning workflow orchestration from JCL jobs.
-license: MIT
-metadata:
-  author: Dau Quang Thanh
-  version: "1.0"
-  category: development
 ---
 
 # JCL Migration Analyzer
@@ -181,4 +176,4 @@ Provide: Job overview, step sequence, data flow, conditional logic, migration ta
 
 ## Integration
 
-Works with job schedulers (Control-M, cron), workflow platforms (Spring Batch, Airflow, K8s), monitoring tools, pseudocode rules (references/PSEUDOCODE-JCL-RULES.md), version control, and CI/CD.
+Works with job schedulers (Control-M, cron), workflow platforms (Spring Batch, Airflow, K8s), monitoring tools, pseudocode rules (references/pseudocode-jcl-rules.md), version control, and CI/CD.
