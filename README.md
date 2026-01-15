@@ -1,6 +1,16 @@
-# Software Development Skills: ✅ Nghệ - Skills
+# Nghệ Skills - Software Development Skills Collection
 
-A comprehensive collection of Claude AI skills (and other compatible IDEs) for software development, covering the complete software development lifecycle from requirements gathering to deployment and migration.
+A comprehensive collection of AI agent skills for software development, covering the complete software development lifecycle from requirements gathering to deployment and migration. Works with multiple AI assistants including GitHub Copilot, Claude Code, Gemini CLI, Cursor, and more.
+
+## What is Nghệ Skills?
+
+**Nghệ Skills** is a curated collection of 39 specialized AI skills designed to enhance your software development workflow across any modern AI coding assistant. The project includes:
+
+- **39 Production-Ready Skills**: Covering cloud platforms, development, code review, testing, and legacy system migration
+- **Nghệ CLI Tool**: A command-line interface to bootstrap projects with agent skills tailored for your AI assistant
+- **Multi-Agent Support**: Compatible with 16+ AI assistants including GitHub Copilot, Claude Code, Gemini, Cursor, Windsurf, Amazon Q, and more
+- **Progressive Disclosure**: Modular reference files loaded on-demand to optimize context usage
+- **Agent Skills Compliant**: Following [agentskills.io specification](https://agentskills.io/specification) with all skills under 500 lines
 
 ## 🎉 Recent Update (January 2026)
 
@@ -16,8 +26,204 @@ A comprehensive collection of Claude AI skills (and other compatible IDEs) for s
 - ✅ **90% size reduction** - Average skill reduced from ~700 to ~176 lines
 - ✅ **328+ reference files** - Detailed content split into modular references
 - ✅ **Better organized** - Core concepts in SKILL.md, details in references/
+- ✅ **Nghệ CLI Tool** - Bootstrap projects with multi-agent support (16+ AI assistants)
 
-## Overview
+## Table of Contents
+
+- [What is Nghệ Skills?](#what-is-nghệ-skills)
+- [Quick Start](#quick-start)
+- [Nghệ CLI Tool](#nghệ-cli-tool)
+- [Skills Overview](#skills-overview)
+- [Compliance with Agent Skills Specification](#compliance-with-agent-skills-specification)
+- [Quick Stats](#quick-stats)
+- [Skills by Category](#skills-by-category)
+- [Getting Started](#getting-started)
+- [Key Features](#key-features)
+- [Technologies Supported](#technologies-supported)
+- [Project Structure](#project-structure)
+- [Use Cases](#use-cases)
+- [License](#license)
+- [Contributing](#contributing)
+
+## Quick Start
+
+### Installation
+
+Install the Nghệ CLI tool directly from GitHub using `uv`:
+
+```bash
+# Install from GitHub (recommended)
+uv tool install nghe-cli --force --from git+https://github.com/dauquangthanh/nghe-skills.git
+```
+
+### Initialize a New Project
+
+```bash
+# Interactive multi-agent selection (Copilot pre-selected)
+nghe init my-project
+
+# Specify AI assistant(s)
+nghe init my-project --ai claude
+nghe init my-project --ai claude,gemini,copilot
+
+# Initialize in current directory
+nghe init .
+nghe init --here
+
+# Upgrade existing project
+nghe init --upgrade
+```
+
+### Supported AI Assistants
+
+The CLI supports 16+ AI assistants:
+- **GitHub Copilot** (IDE-based)
+- **Claude Code** (requires CLI)
+- **Gemini CLI** (requires CLI)
+- **Cursor** (IDE-based)
+- **Windsurf** (IDE-based)
+- **Amazon Q Developer CLI** (requires CLI)
+- **Codex CLI** (requires CLI)
+- **Qwen Code** (requires CLI)
+- **Auggie CLI** (requires CLI)
+- **SHAI** (requires CLI)
+- **Amp** (requires CLI)
+- **CodeBuddy** (requires CLI)
+- **opencode** (requires CLI)
+- **Kilo Code** (IDE-based)
+- **Roo Code** (IDE-based)
+- **IBM Bob** (IDE-based)
+
+## Nghệ CLI Tool
+
+The Nghệ CLI (`nghe`) is a command-line tool for bootstrapping projects with AI agent skills.
+
+### Features
+
+- **Multi-Agent Support**: Install skills for multiple AI assistants in one project
+- **Flexible Installation**: Initialize new projects or add skills to existing projects
+- **Upgrade Capability**: Update existing skill installations with automatic backups
+- **Local Development**: Support for local template testing with `--local-templates`
+- **Smart Detection**: Auto-detects git, validates AI assistant tools, and checks for existing installations
+- **Interactive Selection**: Multi-select interface for choosing AI assistants (arrow keys + space)
+- **GitHub Integration**: Downloads latest templates from GitHub releases with optional token authentication
+
+### CLI Commands
+
+#### `nghe init`
+
+Initialize a new project or upgrade existing skills.
+
+**Basic Usage:**
+```bash
+# Interactive multi-agent selection
+nghe init my-project
+
+# Single AI assistant
+nghe init my-project --ai claude
+
+# Multiple AI assistants
+nghe init my-project --ai claude,gemini,copilot
+
+# Current directory
+nghe init --here
+nghe init .
+
+# Upgrade existing installation
+nghe init --upgrade
+nghe init my-project --upgrade
+```
+
+**Advanced Options:**
+```bash
+# Skip git initialization
+nghe init my-project --ai claude --no-git
+
+# Skip AI tool checks
+nghe init my-project --ai claude --ignore-agent-tools
+
+# Force merge into existing directory
+nghe init existing-project --force
+
+# Use local templates (development)
+nghe init demo --local-templates --template-path /path/to/nghe-skills
+
+# Skip TLS verification (not recommended)
+nghe init my-project --skip-tls
+
+# GitHub authentication
+nghe init my-project --github-token ghp_yourtoken
+export GITHUB_TOKEN=ghp_yourtoken
+nghe init my-project
+
+# Debug mode
+nghe init my-project --debug
+```
+
+#### `nghe check`
+
+Check installed tools and AI assistants.
+
+```bash
+nghe check
+```
+
+Output shows:
+- Git version control status
+- Installed AI assistant CLI tools
+- VS Code variants (code, code-insiders)
+
+#### `nghe version`
+
+Display version and system information.
+
+```bash
+nghe version
+```
+
+Shows:
+- CLI version
+- Latest template version
+- Python version
+- Platform and architecture
+
+### Environment Variables
+
+```bash
+# GitHub token for API access (increases rate limits)
+export GITHUB_TOKEN=ghp_yourtoken
+export GH_TOKEN=ghp_yourtoken
+
+# Use local templates instead of downloading
+export NGHE_USE_LOCAL_INSTALLATION=1
+export NGHE_SKILL_PATH=/path/to/nghe-skills/my-skills
+
+# Codex-specific (set before running Codex)
+export CODEX_HOME=/path/to/project/.codex
+```
+
+### Project Structure Created by CLI
+
+When you run `nghe init my-project --ai copilot,claude`, the CLI creates:
+
+```
+my-project/
+├── .github/               # GitHub Copilot configuration
+│   └── skills/           # 39 agent skills for Copilot
+│       ├── aws-cloud/
+│       ├── backend-coding/
+│       └── ... (39 skills total)
+├── .claude/              # Claude Code configuration
+│   └── skills/           # 39 agent skills for Claude
+│       ├── aws-cloud/
+│       ├── backend-coding/
+│       └── ... (39 skills total)
+└── .git/                 # Git repository (unless --no-git)
+```
+
+Each AI assistant gets its own folder with dedicated skill copies optimized for that platform.
+
+## Skills Overview
 
 This repository provides **39 specialized AI skills** organized into multiple categories:
 - **Cloud Platforms** (6 skills) - AWS, Azure, GCP, Alibaba, IBM, Oracle Cloud
@@ -28,6 +234,13 @@ This repository provides **39 specialized AI skills** organized into multiple ca
 - **Testing** (1 skill) - Integration and E2E testing
 - **Specialized** (4 skills) - Bug analysis, technical writing, KeyCloak administration
 
+Each skill follows the [Agent Skills specification](https://agentskills.io/specification) with:
+- Concise SKILL.md files (<500 lines)
+- Progressive disclosure with reference files
+- Concrete examples and quick starts
+- Clear trigger conditions
+- Modular and context-efficient design
+
 ## Compliance with Agent Skills Specification
 
 ✅ **Frontmatter** - Only standard fields (`name`, `description`)  
@@ -36,17 +249,6 @@ This repository provides **39 specialized AI skills** organized into multiple ca
 ✅ **Loading Conditions** - Explicit "when to load" for all references  
 ✅ **Structure** - Overview, Capabilities, Quick Start, Detailed Topics, Critical Tips  
 ✅ **Examples** - Concrete code examples in all skills
-
-## Quick Stats
-
-| Metric | Value |
-|--------|-------|
-| Total Skills | 39 |
-| Average Lines per Skill | ~176 (down from ~700) |
-| Reference Files | 328+ |
-| Total Documentation | 3.3MB |
-| Skills < 300 lines | 35/39 (90%) |
-| Skills < 500 lines | 39/39 (100%) |
 
 ## Skills by Category
 
@@ -643,17 +845,98 @@ Provides comprehensive KeyCloak administration guidance including realm manageme
 
 ## Getting Started
 
-### Installation
+### Prerequisites
 
-These skills are designed to be used with Claude AI assistants that support the Model Context Protocol (MCP) and skill loading.
+- Python 3.11 or higher
+- Git (optional but recommended)
+- Your preferred AI coding assistant
 
-1. Clone this repository:
+### Installation Methods
+
+#### Method 1: Install from GitHub via uv (Recommended)
+
 ```bash
-git clone https://github.com/yourusername/nghe-skills.git
-cd nghe-skills
+# Install directly from GitHub repository
+uv tool install nghe-cli --force --from git+https://github.com/dauquangthanh/nghe-skills.git
+
+# Run directly without installation (one-time use)
+uvx --from git+https://github.com/dauquangthanh/nghe-skills.git nghe-cli init my-project
 ```
 
-2. The skills are located in `.claude/skills/` and will be automatically loaded by compatible Claude environments.
+#### Method 2: Install from PyPI
+
+```bash
+# Install globally via pip
+pip install nghe-cli
+
+# Or using pipx for isolated installation
+pipx install nghe-cli
+
+# Or using uv
+uv tool install nghe-cli
+```
+
+#### Method 3: Install from Source
+
+```bash
+# Clone the repository
+git clone https://github.com/dauquangthanh/nghe-skills.git
+cd nghe-skills
+
+# Install in development mode
+pip install -e .
+
+# Or build and install
+pip install build
+python -m build
+pip install dist/nghe_cli-*.whl
+```
+
+### Quick Start Guide
+
+1. **Install the CLI**
+   ```bash
+   # Install from GitHub (recommended)
+   uv tool install nghe-cli --force --from git+https://github.com/dauquangthanh/nghe-skills.git
+   ```
+
+2. **Initialize a New Project**
+   ```bash
+   # Interactive mode (choose AI assistants)
+   nghe init my-awesome-project
+   
+   # Or specify directly
+   nghe init my-awesome-project --ai claude,copilot
+   ```
+
+3. **Navigate to Your Project**
+   ```bash
+   cd my-awesome-project
+   ```
+
+4. **Start Coding with AI**
+   
+   Open your project in your AI coding assistant (VS Code with Copilot, Claude Code, Cursor, etc.) and the skills will be automatically loaded.
+
+5. **Use Skills in Your Workflow**
+
+   The skills are automatically activated when you:
+   - Mention relevant tasks or technologies
+   - Request specific development activities
+   - Work with certain file types
+   - Ask about specific methodologies or patterns
+
+### Verifying Installation
+
+Check that everything is set up correctly:
+
+```bash
+# Check CLI version
+nghe version
+
+# Check installed tools
+nghe check
+```
 
 ### Using the Skills
 
@@ -662,6 +945,57 @@ Each skill is automatically activated when you:
 - Request specific development activities
 - Work with certain file types
 - Ask about specific methodologies or patterns
+
+The skills follow a progressive disclosure model:
+1. **Frontmatter (name + description)**: Always loaded for skill discovery (~100 tokens)
+2. **SKILL.md body**: Loaded when skill is triggered (<5000 tokens)
+3. **Reference files**: Loaded on-demand when detailed information is needed
+
+This design minimizes context usage while maximizing available information.
+
+### Development Workflow with Nghệ Skills
+
+The skills support a complete development workflow:
+
+```
+1. Project Setup
+   └─> nghe init my-project --ai claude,copilot
+
+2. Requirements Phase
+   ├─> /requirements-gathering - Elicit and document requirements
+   ├─> /requirement-review - Validate requirements quality
+   └─> /architecture-design - Design system architecture
+
+3. Design Phase
+   ├─> /backend-design - Design APIs and services
+   ├─> /frontend-ui-ux-design - Design user interfaces
+   ├─> /database-design - Design data models
+   └─> Design reviews (backend/frontend/architecture)
+
+4. Implementation Phase
+   ├─> /backend-coding - Implement backend services
+   ├─> /frontend-coding - Implement UI components
+   ├─> /devops - Set up CI/CD pipelines
+   └─> /code-refactoring - Improve code quality
+
+5. Review Phase
+   ├─> /code-quality-review - Assess code quality
+   ├─> /code-security-review - Security audit
+   ├─> /backend-code-review - Backend code review
+   └─> /frontend-code-review - Frontend code review
+
+6. Testing Phase
+   └─> /integration-testing - Design and implement tests
+
+7. Deployment Phase
+   ├─> Cloud skills (aws-cloud, azure-cloud, etc.)
+   └─> /devops - Deploy and monitor
+
+8. Maintenance Phase
+   ├─> /bug-analysis - Investigate and fix bugs
+   ├─> /code-refactoring - Technical debt reduction
+   └─> /technical-writing - Documentation updates
+```
 
 **Example Prompts by Category:**
 
@@ -787,41 +1121,61 @@ Complete software development lifecycle support from initial requirements gather
 
 ```
 nghe-skills/
-├── .claude/skills/              # 39 specialized AI skills
-│   ├── Cloud (6)                # AWS, Azure, GCP, Alibaba, IBM, Oracle
-│   ├── Requirements (3)         # Gathering, review, architecture design
-│   ├── Development (7)          # Backend, frontend, database, DevOps, refactoring
-│   ├── Review (8)               # Code, security, quality, design reviews
-│   ├── Testing (1)              # Integration testing
-│   ├── Migration (10)           # App, DB, platform, mainframe, analyzers
-│   └── Specialized (4)          # Bug analysis, git, docs, KeyCloak
-├── .gitignore
-├── LICENSE
-├── README.md                    # Complete documentation
-└── rules.md                     # Agent Skills guidelines
+├── src/
+│   └── nghe_cli/                # Nghệ CLI tool source code
+│       ├── __init__.py          # Package initialization and main entry
+│       ├── __main__.py          # CLI entry point script
+│       ├── commands.py          # CLI commands (init, check, version)
+│       ├── config.py            # Agent configurations and constants
+│       ├── github.py            # GitHub API utilities and releases
+│       ├── system_utils.py      # System utilities (git, file operations)
+│       ├── templates.py         # Template download and extraction
+│       └── ui.py                # Rich UI components and interactive menus
+├── my-skills/
+│   └── skills/                  # 39 specialized AI skills
+│       ├── Cloud (6)            # AWS, Azure, GCP, Alibaba, IBM, Oracle
+│       │   ├── aws-cloud/
+│       │   │   ├── SKILL.md
+│       │   │   └── references/
+│       │   ├── azure-cloud/
+│       │   └── ...
+│       ├── Requirements (3)     # Gathering, review, architecture design
+│       ├── Development (7)      # Backend, frontend, database, DevOps, refactoring
+│       ├── Review (8)           # Code, security, quality, design reviews
+│       ├── Testing (1)          # Integration testing
+│       ├── Migration (10)       # App, DB, platform, mainframe, analyzers
+│       │   ├── cobol-migration-analyzer/
+│       │   │   ├── SKILL.md
+│       │   │   ├── assets/
+│       │   │   ├── references/
+│       │   │   └── scripts/    # Python scripts for code analysis
+│       │   ├── jcl-migration-analyzer/
+│       │   └── ...
+│       └── Specialized (4)      # Bug analysis, git, docs, KeyCloak
+├── pyproject.toml               # Python package configuration
+├── cspell.json                  # Spell checker configuration
+├── LICENSE                      # MIT License
+├── README.md                    # This file - complete documentation
+└── rules.md                     # Agent Skills guidelines and best practices
 ```
 
-### Skill Categories in .claude/skills/
+### CLI Tool Architecture
 
-**Cloud Platforms (6):** `alibaba-cloud`, `aws-cloud`, `azure-cloud`, `google-cloud`, `ibm-cloud`, `oracle-cloud`
+The `nghe-cli` tool is built with:
+- **Typer**: Modern CLI framework with type hints
+- **Rich**: Beautiful terminal output with colors, panels, and progress bars
+- **httpx**: HTTP client for GitHub API with SSL/TLS support
+- **readchar**: Cross-platform keyboard input handling
+- **platformdirs**: Standard directory locations
+- **truststore**: Enhanced SSL certificate validation
 
-**Requirements & Planning (3):** `architecture-design`, `requirement-review`, `requirements-gathering`
-
-**Development (7):** `backend-coding`, `backend-design`, `code-refactoring`, `database-design`, `devops`, `frontend-coding`, `frontend-ui-ux-design`
-
-**Review & Quality (8):** `architecture-design-review`, `backend-code-review`, `backend-design-review`, `code-quality-review`, `code-security-review`, `frontend-code-review`, `frontend-design-review`, `project-planning`
-
-**Testing (1):** `integration-testing`
-
-**Migration & Legacy (10):** `application-migration`, `cobol-migration-analyzer`, `database-migration`, `fujitsu-mainframe`, `ibm-mainframe`, `jcl-migration-analyzer`, `platform-migration`, `pli-migration-analyzer`, `rpg-migration-analyzer`, `system-migration`
-
-**Specialized (4):** `bug-analysis`, `git-commit`, `keycloak-administration`, `technical-writing`
+### Skill Structure
 
 Each skill directory contains:
-- `SKILL.md` - Core skill documentation with capabilities and examples
+- `SKILL.md` - Core skill documentation with capabilities and examples (<500 lines)
 - `references/` - Detailed reference documentation loaded on demand
 - `assets/` - Templates and resources (where applicable)
-- `scripts/` - Helper scripts and utilities (where applicable)
+- `scripts/` - Helper scripts and utilities (migration analyzers only)
 
 ## Skill Categories Overview
 
@@ -951,18 +1305,89 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 Contributions are welcome! Please feel free to submit issues or pull requests to improve the skills or add new capabilities.
 
 ### How to Contribute
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/new-skill`)
-3. Commit your changes (`git commit -m 'Add new skill'`)
-4. Push to the branch (`git push origin feature/new-skill`)
-5. Open a Pull Request
+
+1. **Fork the Repository**
+   ```bash
+   git clone https://github.com/yourusername/nghe-skills.git
+   cd nghe-skills
+   ```
+
+2. **Set Up Development Environment**
+   ```bash
+   # Install in development mode
+   pip install -e .
+   
+   # Or using uv
+   uv pip install -e .
+   ```
+
+3. **Test Your Changes**
+   ```bash
+   # Test CLI commands
+   nghe check
+   nghe version
+   
+   # Test local templates
+   nghe init test-project --local-templates --template-path .
+   ```
+
+4. **Create a Feature Branch**
+   ```bash
+   git checkout -b feature/new-skill
+   git checkout -b fix/bug-description
+   ```
+
+5. **Make Your Changes**
+   - Add new skills in `my-skills/skills/`
+   - Update CLI code in `src/nghe_cli/`
+   - Follow existing patterns and structure
+
+6. **Commit Your Changes**
+   ```bash
+   git add .
+   git commit -m "feat: add new skill for X"
+   git commit -m "fix: resolve issue with Y"
+   ```
+
+7. **Push and Create Pull Request**
+   ```bash
+   git push origin feature/new-skill
+   ```
 
 ### Contribution Guidelines
-- Follow the existing skill structure and format
-- Include comprehensive documentation with examples
-- Add usage examples and best practices
-- Ensure all required metadata is present
-- Test the skill thoroughly before submitting
+
+**For New Skills:**
+- Follow the [Agent Skills specification](https://agentskills.io/specification)
+- Keep SKILL.md under 500 lines
+- Use progressive disclosure with reference files
+- Include concrete examples and quick starts
+- Add clear trigger conditions
+- Follow the structure in `rules.md`
+
+**For CLI Improvements:**
+- Maintain Python 3.11+ compatibility
+- Use type hints throughout
+- Follow existing code patterns
+- Update documentation
+- Test with multiple AI assistants
+
+**For Documentation:**
+- Keep README.md accurate and up-to-date
+- Update skill descriptions when adding/modifying skills
+- Include usage examples
+- Follow markdown best practices
+
+### Code Quality Standards
+
+- ✅ Comprehensive documentation with clear examples
+- ✅ Structured templates and checklists
+- ✅ Best practices and anti-patterns
+- ✅ Real-world use cases and scenarios
+- ✅ Industry standards compliance
+- ✅ Actionable recommendations
+- ✅ Proper metadata (name, description)
+- ✅ Type hints in Python code
+- ✅ Error handling and validation
 
 ## Skill Quality Standards
 
@@ -973,7 +1398,91 @@ All skills in this repository follow these quality standards:
 - ✅ Real-world use cases and scenarios
 - ✅ Industry standards compliance
 - ✅ Actionable recommendations
-- ✅ Proper metadata (name, description, author, version, category, license)
+- ✅ Proper metadata (name, description)
+- ✅ Under 500 lines per SKILL.md (Agent Skills spec)
+- ✅ Progressive disclosure with reference files
+- ✅ Concrete code examples and quick starts
+
+## Technical Architecture
+
+### CLI Tool Design
+
+The Nghệ CLI is built with a modular architecture:
+
+**commands.py** (661 lines): Core CLI commands
+- `init`: Project initialization with multi-agent support
+  - Interactive multi-select for agent selection
+  - Download templates from GitHub releases
+  - Merge into existing directories with `--force`
+  - Upgrade mode with automatic timestamped backups
+  - Local template support for development
+  - Git repository initialization
+  - Environment variable support
+- `check`: Tool detection and validation
+  - Checks for git availability
+  - Detects installed AI assistant CLI tools
+  - Validates VS Code installations
+- `version`: Display version and system information
+  - Shows CLI and template versions
+  - Fetches latest release from GitHub
+  - Displays system information
+  
+**config.py** (100 lines): Agent configurations
+- Defines 16+ AI assistant configurations
+- Maps agent keys to display names
+- Specifies agent folder structures
+- Identifies CLI tool requirements
+- Provides installation URLs
+- Configures GitHub repository details
+  
+**github.py** (229 lines): GitHub integration
+- GitHub API client with SSL/TLS support
+- Release fetching with rate limit handling
+- Download progress tracking
+- GitHub token authentication
+- Rate limit error messages with troubleshooting
+- Retry-After header parsing
+  
+**templates.py**: Template management
+- Template archive download and extraction
+- Multi-agent template support
+- Merge capability for existing directories
+- Local template mode for development
+- ZIP file handling with progress tracking
+- Skill folder copying and merging
+
+**ui.py** (322 lines): Rich terminal UI
+- `StepTracker`: Progress tracking with live updates
+- `select_with_arrows`: Single-select menu with arrow keys
+- `multi_select_with_arrows`: Multi-select with space/enter
+- `show_banner`: Display ASCII art banner
+- Rich console with colors, panels, tables
+- Cross-platform keyboard handling
+  
+**system_utils.py**: System utilities
+- Git repository detection with `.git` folder check
+- Git initialization with error handling
+- Tool availability checks via `shutil.which()`
+- Script permission management (`chmod +x`)
+- Cross-platform compatibility (Windows, macOS, Linux)
+
+### Dependencies
+
+```toml
+[project.dependencies]
+typer          # Modern CLI framework with type hints
+rich           # Beautiful terminal formatting
+httpx[socks]   # HTTP client with SSL support
+platformdirs   # Standard directory locations
+readchar       # Cross-platform keyboard input
+truststore     # Enhanced SSL/TLS certificate validation
+```
+
+### Build System
+
+- **Build Backend**: Hatchling (modern, fast, standards-compliant)
+- **Python Version**: 3.11+
+- **Entry Point**: `nghe` command registered via `project.scripts`
 
 ## Roadmap
 
@@ -1011,27 +1520,63 @@ All skills in this repository follow these quality standards:
 
 ## Acknowledgments
 
-These skills are designed to:
+Nghệ Skills is designed to:
 - **Accelerate Development**: Speed up software development lifecycle
 - **Improve Quality**: Ensure high-quality deliverables at each phase
-- **Share Knowledge**: Democratize expert-level guidance
+- **Share Knowledge**: Democratize expert-level guidance across teams
 - **Enable Migration**: Facilitate legacy system modernization
 - **Promote Best Practices**: Encourage industry standards and patterns
+- **Multi-Agent Support**: Work seamlessly across 16+ AI coding assistants
+
+### Why "Nghệ"?
+
+"Nghệ" (Vietnamese: /ŋe˦ˀ˥/) means "craft" or "skill" - representing the mastery and artistry in software development. This project embodies the philosophy that software development is both an engineering discipline and a craft requiring skill, practice, and continuous learning.
 
 ### Best Used With
+- Comprehensive project planning
 - Thorough testing and validation
 - Subject matter expert review
-- Comprehensive project planning
 - Proper quality assurance processes
 - Team collaboration and communication
+- Continuous integration and deployment
+- Code review and pair programming
 
 ## Support
 
 For issues, questions, or suggestions:
-- 📧 Open an issue in this repository
-- 💬 Start a discussion for questions
-- 🐛 Report bugs with detailed reproduction steps
-- 💡 Suggest new features or improvements
+- � **Report Bugs**: [Open an issue](https://github.com/dauquangthanh/nghe-skills/issues) with detailed reproduction steps
+- 💡 **Feature Requests**: [Start a discussion](https://github.com/dauquangthanh/nghe-skills/discussions) for new features or improvements
+- 💬 **Questions**: Use [GitHub Discussions](https://github.com/dauquangthanh/nghe-skills/discussions) for questions
+- 📧 **Contact**: Reach out via GitHub for other inquiries
+
+### Troubleshooting
+
+**GitHub Rate Limits:**
+```bash
+# Use GitHub token for higher rate limits (5000/hr vs 60/hr)
+export GITHUB_TOKEN=ghp_yourtoken
+nghe init my-project
+```
+
+**SSL/TLS Issues:**
+```bash
+# Skip SSL verification (not recommended for production)
+nghe init my-project --skip-tls
+```
+
+**Debug Mode:**
+```bash
+# Enable verbose diagnostic output
+nghe init my-project --debug
+```
+
+**Local Development:**
+```bash
+# Test with local templates
+export NGHE_USE_LOCAL_INSTALLATION=1
+export NGHE_SKILL_PATH=/path/to/nghe-skills/my-skills
+nghe init test-project
+```
 
 ## Related Resources
 
