@@ -331,13 +331,11 @@ def init(
 
     # Add steps for each AI assistant template download (only if not using local templates)
     if not local_installation:
+        # Single template download for all agents
+        tracker.add("fetch-release", "Fetch latest release")
+        tracker.add("download-template", "Download template")
         for selected_ai in selected_ais:
-            for key, label in [
-                (f"fetch-{selected_ai}", f"Fetch {selected_ai} release"),
-                (f"download-{selected_ai}", f"Download {selected_ai} template"),
-                (f"extract-{selected_ai}", f"Extract {selected_ai} template"),
-            ]:
-                tracker.add(key, label)
+            tracker.add(f"extract-{selected_ai}", f"Setup {selected_ai} skills")
     else:
         # For local templates, simpler steps
         for selected_ai in selected_ais:
@@ -380,16 +378,56 @@ def init(
                 backup_count = len(backup_paths)
                 tracker.complete("backup", f"{backup_count} folder{'s' if backup_count != 1 else ''} backed up")
 
-            # Download and extract templates for each selected AI agent
-            for idx, selected_ai in enumerate(selected_ais):
-                is_first = (idx == 0)
-                download_and_extract_template(
-                    project_path, selected_ai, here or merge_into_existing,
-                    verbose=False, tracker=tracker, client=local_client,
-                    debug=debug, github_token=github_token,
-                    local_installation=local_installation, nghe_skills_path=nghe_skills_path,
-                    is_first_agent=is_first
-                )
+            # Download and extract template once, then copy to each AI agent folder
+            zip_path_to_cleanup = None
+            if not local_installation:
+                # Download template once
+                from .github import download_template_from_github
+                
+                tracker.start("fetch-release", "contacting GitHub API")
+                try:
+                    current_dir = Path.cwd()
+                    zip_path, meta = download_template_from_github(
+                        current_dir,
+                        verbose=False,
+                        show_progress=False,
+                        client=local_client,
+                        debug=debug,
+                        github_token=github_token
+                    )
+                    zip_path_to_cleanup = zip_path  # Save for cleanup later
+                    tracker.complete("fetch-release", f"release {meta['release']}")
+                    tracker.add("download-template", "Download template")
+                    tracker.complete("download-template", f"{meta['size']:,} bytes")
+                except Exception as e:
+                    tracker.error("fetch-release", str(e))
+                    raise
+                
+                # Extract to each agent folder
+                for selected_ai in selected_ais:
+                    download_and_extract_template(
+                        project_path, selected_ai, here or merge_into_existing,
+                        verbose=False, tracker=tracker, client=local_client,
+                        debug=debug, github_token=github_token,
+                        local_installation=False, nghe_skills_path=None,
+                        is_first_agent=False, downloaded_zip_path=zip_path
+                    )
+                
+                # Cleanup downloaded ZIP after all agents processed
+                if zip_path_to_cleanup and zip_path_to_cleanup.exists():
+                    tracker.start("cleanup")
+                    zip_path_to_cleanup.unlink()
+                    tracker.complete("cleanup", "removed archive")
+            else:
+                # Local installation - copy for each agent
+                for selected_ai in selected_ais:
+                    download_and_extract_template(
+                        project_path, selected_ai, here or merge_into_existing,
+                        verbose=False, tracker=tracker, client=local_client,
+                        debug=debug, github_token=github_token,
+                        local_installation=True, nghe_skills_path=nghe_skills_path,
+                        is_first_agent=False
+                    )
 
             ensure_executable_scripts(project_path, tracker=tracker)
 
@@ -500,45 +538,38 @@ def init(
         steps_lines.append(f"{step_num}. Set [cyan]CODEX_HOME[/cyan] environment variable before running Codex: [cyan]{cmd}[/cyan]")
         step_num += 1
 
-    steps_lines.append(f"{step_num}. Start using slash commands with your AI agent (in order):")
+    steps_lines.append(f"{step_num}. Start using the installed skills with your AI agent:")
     steps_lines.append("")
-    steps_lines.append("   [bold cyan]Core Workflow:[/bold cyan]")
-    steps_lines.append("   • [cyan]/nghe.regulate[/] - Establish project principles (ground rules)")
-    steps_lines.append("   • [cyan]/nghe.specify[/] - Create feature specification")
-    steps_lines.append("   • [cyan]/nghe.architect[/] [dim](optional, product-level)[/dim] - Define system architecture")
-    steps_lines.append("   • [cyan]/nghe.standardize[/] [dim](optional, product-level)[/dim] - Establish coding standards")
-    steps_lines.append("   • [cyan]/nghe.design[/] - Create technical implementation plan")
-    steps_lines.append("   • [cyan]/nghe.taskify[/] - Generate actionable tasks")
-    steps_lines.append("   • [cyan]/nghe.implement[/] - Execute implementation")
+    steps_lines.append("   [bold cyan]Available Skills (39 total):[/bold cyan]")
+    steps_lines.append("")
+    steps_lines.append("   [cyan]Cloud Platforms (6):[/cyan] AWS, Azure, GCP, Alibaba, IBM, Oracle Cloud")
+    steps_lines.append("   [cyan]Development (7):[/cyan] Backend, Frontend, Database, DevOps, Refactoring")
+    steps_lines.append("   [cyan]Review & Quality (8):[/cyan] Code quality, Security, Architecture reviews")
+    steps_lines.append("   [cyan]Requirements (3):[/cyan] Gathering, Review, Architecture design")
+    steps_lines.append("   [cyan]Migration & Legacy (10):[/cyan] COBOL, JCL, PL/I, RPG analyzers, Mainframes")
+    steps_lines.append("   [cyan]Testing (1):[/cyan] Integration testing strategies")
+    steps_lines.append("   [cyan]Specialized (4):[/cyan] Bug analysis, Git commits, Technical writing, KeyCloak")
+    steps_lines.append("")
+    steps_lines.append("   [dim]Skills are automatically activated based on your requests and file context.[/dim]")
 
     steps_panel = Panel("\n".join(steps_lines), title="Next Steps", border_style="cyan", padding=(1,2))
     console.print()
     console.print(steps_panel)
 
-    enhancement_lines = [
-        "Optional commands for quality & validation [bright_black](use as needed)[/bright_black]",
+    usage_lines = [
+        "The skills will automatically activate when you:",
         "",
-        f"○ [cyan]/nghe.clarify[/] - Ask structured questions before planning (run before [cyan]/nghe.design[/])",
-        f"○ [cyan]/nghe.analyze[/] - Cross-artifact consistency report (after [cyan]/nghe.taskify[/], before [cyan]/nghe.implement[/])",
-        f"○ [cyan]/nghe.checklist[/] - Generate quality checklists (after [cyan]/nghe.design[/])",
-        f"○ [cyan]/nghe.design-e2e-test[/] - Design end-to-end test specs (product-level)",
-        f"○ [cyan]/nghe.perform-e2e-test[/] - Execute E2E tests and generate reports"
-    ]
-    enhancements_panel = Panel("\n".join(enhancement_lines), title="Quality & Enhancement Commands", border_style="cyan", padding=(1,2))
-    console.print()
-    console.print(enhancements_panel)
-
-    agent_lines = [
-        "Use role-based agents for specialized tasks [bright_black](invoke as needed)[/bright_black]",
+        "  • Mention specific technologies (AWS, React, PostgreSQL, etc.)",
+        "  • Request development activities (design API, review code, etc.)",
+        "  • Work with certain file types (.cobol, .jcl, .rpg, etc.)",
+        "  • Ask about cloud platforms, migrations, or best practices",
         "",
-        "○ [cyan]/hanoi.business-analyst[/], [cyan]/hanoi.product-owner[/], [cyan]/hanoi.system-architect[/]",
-        "○ [cyan]/hanoi.technical-leader[/], [cyan]/hanoi.software-engineer[/], [cyan]/hanoi.qa-engineer[/]",
-        "○ [cyan]/hanoi.devops-engineer[/], [cyan]/hanoi.security-engineer[/], [cyan]/hanoi.ux-ui-designer[/]",
-        "○ [cyan]/hanoi.technical-writer[/], [cyan]/hanoi.scrum-master[/]"
+        "[dim]Example: \"Design a REST API for user management\" will activate backend-design skill[/dim]",
+        "[dim]Example: \"Review this React component\" will activate frontend-code-review skill[/dim]"
     ]
-    agent_panel = Panel("\n".join(agent_lines), title="Role-Based Agent Commands", border_style="cyan", padding=(1,2))
+    usage_panel = Panel("\n".join(usage_lines), title="How to Use Skills", border_style="cyan", padding=(1,2))
     console.print()
-    console.print(agent_panel)
+    console.print(usage_panel)
 
 
 @app.command()

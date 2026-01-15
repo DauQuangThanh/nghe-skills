@@ -92,7 +92,6 @@ def _format_rate_limit_error(status_code: int, headers: httpx.Headers, url: str)
 
 
 def download_template_from_github(
-    ai_assistant: str,
     download_dir: Path,
     *,
     verbose: bool = True,
@@ -103,8 +102,10 @@ def download_template_from_github(
 ) -> Tuple[Path, dict]:
     """Download the latest release template from GitHub.
 
+    Downloads a single common template package (nghe-skills.zip) that contains
+    all skills. The skills will be copied to appropriate agent folders by the caller.
+
     Args:
-        ai_assistant: The AI assistant type (e.g., 'claude', 'copilot')
         download_dir: Directory to download the file to
         verbose: Whether to print detailed progress
         show_progress: Whether to show progress bar
@@ -146,17 +147,17 @@ def download_template_from_github(
         raise typer.Exit(1)
 
     assets = release_data.get("assets", [])
-    # Pattern now matches: nghe-skills-{ai_assistant}.zip (no script type)
-    pattern = f"nghe-skills-{ai_assistant}"
+    # Look for single common template package
+    pattern = "nghe-skills.zip"
     matching_assets = [
         asset for asset in assets
-        if pattern in asset["name"] and asset["name"].endswith(".zip")
+        if asset["name"] == pattern
     ]
 
     asset = matching_assets[0] if matching_assets else None
 
     if asset is None:
-        console.print(f"[red]No matching release asset found[/red] for [bold]{ai_assistant}[/bold] (expected pattern: [bold]{pattern}[/bold])")
+        console.print(f"[red]No matching release asset found[/red] (expected: [bold]{pattern}[/bold])")
         asset_names = [a.get('name', '?') for a in assets]
         console.print(Panel("\n".join(asset_names) or "(no assets)", title="Available Assets", border_style="yellow"))
         raise typer.Exit(1)
