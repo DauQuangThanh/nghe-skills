@@ -3,23 +3,19 @@ name: database-design
 description: Designs comprehensive database schemas including relational and NoSQL models, normalization, indexing strategies, relationship modeling, data types, constraints, and performance optimization. Covers entity-relationship diagrams, schema migrations, partitioning, and best practices for PostgreSQL, MySQL, MongoDB, and other databases. Use when designing databases, creating schemas, modeling data, optimizing queries, or when users mention "database design", "schema design", "data modeling", "ERD", "normalization", "indexing", or "database architecture".
 ---
 
-
 # Database Design
 
 ## Overview
 
-Designs comprehensive database schemas including relational and NoSQL models, normalization, indexing strategies, relationship modeling, data types, constraints, and performance optimization.
+Provides comprehensive guidance for designing robust, scalable, and maintainable database schemas for both relational (SQL) and NoSQL databases, from conceptual modeling to physical implementation.
 
+## Design Workflow
 
-## Core Capabilities
-
-1. **Schema Design** - Relational and NoSQL data modeling
-2. **Normalization** - 1NF, 2NF, 3NF, BCNF design
-3. **Relationship Modeling** - One-to-one, one-to-many, many-to-many
-4. **Indexing Strategy** - Performance optimization
-5. **Constraints** - Primary keys, foreign keys, unique, check
-6. **Data Types** - Appropriate type selection
-
+1. **Requirements Analysis** - Gather data requirements and usage patterns
+2. **Conceptual Modeling** - Create entity-relationship diagrams (ERD)
+3. **Logical Modeling** - Define normalized schema with relationships
+4. **Physical Modeling** - Select data types, indexes, and constraints
+5. **Validation** - Review design against requirements and best practices
 
 ## Quick Start
 
@@ -56,61 +52,29 @@ CREATE TABLE orders (
 );
 ```
 
+## Core Principles
 
-## Critical Tips
+- **Start normalized, denormalize only when proven necessary**
+- **Index strategically based on actual query patterns**
+- **Use constraints to enforce data integrity at database level**
+- **Choose appropriate data types to optimize storage and performance**
+- **Plan for growth with partitioning and sharding strategies**
+- **Document design decisions and their rationale**
+- **Test with realistic data volumes**
 
-1. **Normalize appropriately** - Balance normalization with performance
-2. **Index strategically** - Cover common queries, avoid over-indexing
-3. **Use constraints** - Enforce data integrity at database level
-4. **Choose right types** - Optimize storage and performance
-5. **Plan for growth** - Partitioning, sharding strategies
+## When to Load References
 
-## Detailed Topics
+- **Design Workflow**: See [database-design-workflow.md](references/database-design-workflow.md) for step-by-step design process including requirements analysis, conceptual/logical/physical modeling, normalization steps, and relationship patterns
 
-Load reference files based on specific needs:
+- **Advanced Patterns**: See [advanced-design-patterns.md](references/advanced-design-patterns.md) for many-to-many relationships, inheritance/polymorphism, temporal data, soft deletes, audit trails, and hierarchical data
 
-- **Advanced Design Patterns**: See [advanced-design-patterns.md](references/advanced-design-patterns.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+- **NoSQL Design**: See [nosql-database-design.md](references/nosql-database-design.md) when designing MongoDB documents, Cassandra column families, or Redis data structures
 
-- **Common Anti Patterns To Avoid**: See [common-anti-patterns-to-avoid.md](references/common-anti-patterns-to-avoid.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+- **Anti-Patterns**: See [common-anti-patterns-to-avoid.md](references/common-anti-patterns-to-avoid.md) to identify EAV pattern issues, generic tables, redundant data, multi-value columns, and other problematic designs
 
-- **Database Design Checklist**: See [database-design-checklist.md](references/database-design-checklist.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+- **Performance**: See [performance-optimization.md](references/performance-optimization.md) for query optimization, partitioning strategies, caching patterns, and index tuning
 
-- **Database Design Workflow**: See [database-design-workflow.md](references/database-design-workflow.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+- **Migration**: See [schema-migration-best-practices.md](references/schema-migration-best-practices.md) for zero-downtime migrations, backward compatibility, and rollback strategies
 
-- **Nosql Database Design**: See [nosql-database-design.md](references/nosql-database-design.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Notes**: See [notes.md](references/notes.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Overview**: See [overview.md](references/overview.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Performance Optimization**: See [performance-optimization.md](references/performance-optimization.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Schema Migration Best Practices**: See [schema-migration-best-practices.md](references/schema-migration-best-practices.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+- **Checklist**: See [database-design-checklist.md](references/database-design-checklist.md) for comprehensive validation before implementation
 

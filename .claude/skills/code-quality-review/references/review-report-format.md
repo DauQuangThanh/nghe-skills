@@ -1,5 +1,28 @@
 # Review Report Format
 
+## Output Guidelines
+
+**Be Specific:**
+- Reference exact line numbers and file paths
+- Quote problematic code snippets
+- Provide concrete examples and metrics
+
+**Be Constructive:**
+- Explain WHY something is an issue (impact on maintainability, performance, security)
+- Suggest HOW to fix it with specific recommendations
+- Provide improved code examples showing the solution
+
+**Be Balanced:**
+- Acknowledge good practices and strengths
+- Prioritize issues appropriately (P0-P3)
+- Consider effort vs. benefit in recommendations
+
+**Be Professional:**
+- Focus on code quality, not developers
+- Use objective criteria and metrics
+- Provide educational context where helpful
+
+## Report Structure
 
 ### Executive Summary
 ```
@@ -84,12 +107,34 @@ For each issue, provide:
 
 ### Positive Observations
 
-Acknowledge good practices:
-- Well-structured modules
-- Excellent test coverage in module X
-- Clear naming conventions
-- Good error handling in component Y
-- Effective use of design patterns
+Always acknowledge good practices found in the code:
+
+**Examples:**
+- ✅ **Excellent Test Coverage:** 87% overall coverage with quality assertions
+- ✅ **Clear Naming:** Consistent and descriptive naming throughout
+- ✅ **Good Package Structure:** Clean separation of concerns
+- ✅ **Effective Logging:** Comprehensive logging at appropriate levels
+- ✅ **Modern Language Features:** Good use of modern patterns and idioms
+- ✅ **Proper Error Handling:** Comprehensive exception handling and validation
+- ✅ **Good Documentation:** Clear comments and API documentation
+
+### Recommendations by Priority
+
+**P0 - Critical (Fix Immediately):**
+1. [Issue with major impact on security, correctness, or stability]
+2. [Issue causing immediate problems]
+
+**P1 - High (Fix Soon):**
+1. [Important maintainability or performance issue]
+2. [Significant code quality problem]
+
+**P2 - Medium (Plan for Next Sprint):**
+1. [Moderate improvement opportunity]
+2. [Technical debt item]
+
+**P3 - Low (Technical Debt Backlog):**
+1. [Minor improvement]
+2. [Nice-to-have enhancement]
 
 ### Technical Debt Summary
 

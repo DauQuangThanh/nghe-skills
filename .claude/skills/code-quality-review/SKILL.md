@@ -3,97 +3,95 @@ name: code-quality-review
 description: Conducts comprehensive code quality reviews including code smells detection, maintainability assessment, complexity analysis, design pattern evaluation, naming conventions, code duplication, technical debt identification, and best practices validation. Produces detailed review reports with specific issues, severity ratings, metrics analysis, and actionable improvement recommendations. Use when reviewing code quality, analyzing code maintainability, detecting code smells, checking coding standards, measuring code complexity, identifying technical debt, or when users mention "code quality review", "code quality check", "maintainability analysis", "code smells", "clean code", "refactoring candidates", or "technical debt assessment".
 ---
 
-
 # Code Quality Review
 
 ## Overview
 
-Conducts comprehensive code quality reviews including code smells detection, maintainability assessment, complexity analysis, design pattern evaluation, naming conventions, code duplication, technical debt identification, and best practices validation
-
+Conducts systematic code quality analysis across multiple dimensions: maintainability, readability, complexity, design patterns, naming conventions, code duplication, and adherence to best practices. Produces actionable feedback with severity ratings and specific improvement recommendations.
 
 ## Core Capabilities
 
-1. **Core Capability 1** - Description
-2. **Core Capability 2** - Description
-3. **Core Capability 3** - Description
+1. **Code Smells Detection** - Identifies bloaters, object-orientation abusers, change preventers, dispensables, and couplers
+2. **Complexity Analysis** - Measures cyclomatic and cognitive complexity with risk assessment
+3. **Maintainability Assessment** - Evaluates code maintainability index and technical debt
+4. **Design Pattern Evaluation** - Reviews architectural patterns and SOLID principles
+5. **Best Practices Validation** - Checks adherence to language-specific standards and conventions
 
+## Review Workflow
 
-## Quick Start
+### Step 1: Scope Assessment
 
-**Basic Workflow:**
+Determine review scope based on change size:
+- **Small (<100 lines)**: Quick correctness check, 15-30 minutes
+- **Medium (100-500 lines)**: Full quality analysis, 1-2 hours  
+- **Large (>500 lines)**: Architectural review, break into smaller reviews if possible, 2-4 hours
 
-1. Analyze requirements and context
-2. Apply appropriate patterns
-3. Validate and test results
-4. Document findings and recommendations
+For scope-specific guidance, see [review-scope-guidelines.md](references/review-scope-guidelines.md)
 
+### Step 2: Initial Assessment
 
-## Detailed Topics
+**Gather Context:**
+- Identify programming language and framework
+- Understand project type (web app, API, library, CLI, etc.)
+- Note existing coding standards or style guides
+- Check for linter configuration files (.eslintrc, .pylintrc, checkstyle.xml, etc.)
 
-Load reference files based on specific needs:
+**Read the Code:**
+- Start with entry points (main files, index files)
+- Review module/package organization
+- Check dependency management
+- Examine test files if available
 
-- **Best Practices Checklist**: See [best-practices-checklist.md](references/best-practices-checklist.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+### Step 3: Quality Analysis
 
-- **Common Pitfalls To Avoid**: See [common-pitfalls-to-avoid.md](references/common-pitfalls-to-avoid.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+Analyze code across key dimensions:
+- **Code Smells**: Long methods, large classes, duplicate code, dead code, etc.
+- **Complexity**: Cyclomatic complexity (target <15), cognitive complexity, nesting depth
+- **Maintainability**: Clear naming, proper abstraction, separation of concerns
+- **Design Patterns**: Appropriate pattern usage, SOLID principles adherence
+- **Best Practices**: Language idioms, error handling, resource management
 
-- **Critical Issues**: See [critical-issues.md](references/critical-issues.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+For detailed analysis criteria and thresholds, see [review-workflow.md](references/review-workflow.md)
 
-- **Example Review Output**: See [example-review-output.md](references/example-review-output.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+For quality metrics and thresholds, see [quality-metrics-reference.md](references/quality-metrics-reference.md)
 
-- **Executive Summary**: See [executive-summary.md](references/executive-summary.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+### Step 4: Document Findings
 
-- **Output Guidelines**: See [output-guidelines.md](references/output-guidelines.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+Structure the review report with:
+- Executive summary with scores and top priorities
+- Detailed findings with severity, location, description, and recommendations
+- Metrics summary with current vs. target values
+- Prioritized recommendations (P0-P3)
+- Positive observations acknowledging good practices
+- Technical debt summary with effort estimates
 
-- **Overview**: See [overview.md](references/overview.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+For complete report structure and output guidelines, see [review-report-format.md](references/review-report-format.md)
 
-- **Positive Observations**: See [positive-observations.md](references/positive-observations.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+## Quality Assurance
 
-- **Quality Metrics Reference**: See [quality-metrics-reference.md](references/quality-metrics-reference.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+Use the checklist to ensure comprehensive reviews:
+- Code organization and structure
+- Naming conventions and clarity
+- Complexity thresholds
+- Error handling patterns
+- Testing and documentation
+- Security considerations
+- Performance implications
 
-- **Recommendations Summary**: See [recommendations-summary.md](references/recommendations-summary.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+For complete checklist, see [best-practices-checklist.md](references/best-practices-checklist.md)
 
-- **Review Report Format**: See [review-report-format.md](references/review-report-format.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+## Common Pitfalls
 
-- **Review Scope Guidelines**: See [review-scope-guidelines.md](references/review-scope-guidelines.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+Avoid these common review mistakes:
+- Focusing only on style issues instead of substantive problems
+- Being overly critical without actionable suggestions
+- Ignoring context and business constraints
+- Overwhelming with too many issues at once
+- Using vague terms without explanation
+- Forgetting to acknowledge good practices
 
-- **Review Workflow**: See [review-workflow.md](references/review-workflow.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+For detailed guidance, see [common-pitfalls-to-avoid.md](references/common-pitfalls-to-avoid.md)
 
+## Example Patterns
+
+For reference when identifying critical issues in your review, see examples of common high-severity problems in [critical-issues.md](references/critical-issues.md)

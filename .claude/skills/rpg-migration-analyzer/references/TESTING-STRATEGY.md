@@ -1,6 +1,6 @@
-# Testing Strategy for COBOL to Java Migration
+# Testing Strategy for RPG to Java Migration
 
-Comprehensive testing approach to ensure functional equivalence and quality during migration.
+Comprehensive testing approach to ensure functional equivalence and quality during RPG to Java migration.
 
 ## Testing Pyramid for Migration
 
@@ -19,7 +19,7 @@ Comprehensive testing approach to ensure functional equivalence and quality duri
 
 ### Testing Converted Business Logic
 
-**Goal**: Verify each Java method matches COBOL paragraph behavior
+**Goal**: Verify each Java method matches RPG procedure/subroutine behavior
 
 ```java
 @Test

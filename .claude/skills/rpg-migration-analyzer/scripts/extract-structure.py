@@ -4,11 +4,19 @@ Extract structure from RPG/RPG IV/ILE source files.
 
 This script analyzes RPG source code and extracts:
 - Specification structure (H, F, D, C, P)
-- Variable definitions
-- File definitions
-- Subroutine structure
-- Program calls
-- Program dependencies
+- Variable definitions (D-specs)
+- File definitions (F-specs)
+- Subroutine structure (BEGSR/ENDSR)
+- Procedure definitions (P-specs)
+- Program calls (CALLB/CALLP)
+- Program dependencies (/COPY, /INCLUDE)
+
+Usage:
+    extract-structure.py <rpg_source_file> [--output output.json]
+
+Example:
+    extract-structure.py ORDPROC.rpgle --output structure.json
+    extract-structure.py CUSTMAINT.rpg
 """
 
 import argparse
@@ -18,8 +26,8 @@ from pathlib import Path
 from typing import Dict, List, Any
 
 
-class LegacyStructureExtractor:
-    """Extract structural information from legacy source programs."""
+class RPGStructureExtractor:
+    """Extract structural information from RPG source programs."""
     
     def __init__(self, source_file: Path):
         self.source_file = source_file
@@ -30,22 +38,25 @@ class LegacyStructureExtractor:
         """Extract all structural information."""
         return {
             'program_name': self.extract_program_name(),
-            'divisions': self.extract_divisions(),
-            'working_storage': self.extract_working_storage(),
+            'specifications': self.extract_specifications(),
+            'data_structures': self.extract_data_structures(),
             'file_definitions': self.extract_file_definitions(),
-            'paragraphs': self.extract_paragraphs(),
+            'subroutines': self.extract_subroutines(),
+            'procedures': self.extract_procedures(),
             'calls': self.extract_calls(),
-            'copybooks': self.extract_copybooks(),
-            'sql_operations': self.extract_sql_operations(),
+            'copy_members': self.extract_copy_members(),
             'statistics': self.calculate_statistics()
         }
     
     def extract_program_name(self) -> str:
-        """Extract program name from PROGRAM-ID."""
+        """Extract program name from file or H-spec."""
+        # Try to find in H-spec comments or use filename
         for line in self.lines:
-            match = re.search(r'PROGRAM-ID\.\s+(\S+)', line, re.IGNORECASE)
-            if match:
-                return match.group(1).rstrip('.')
+            if line.strip().startswith('H') or line.strip().startswith('h'):
+                # Look for program name in comments
+                match = re.search(r'(PROGRAM|PGM):\s*(\S+)', line, re.IGNORECASE)
+                if match:
+                    return match.group(2)
         return self.source_file.stem
     
     def extract_divisions(self) -> Dict[str, int]:

@@ -114,6 +114,28 @@ public class Employee {
 
 Provide: Program overview, dependencies, data structures, logic summary, Java design, migration estimate, action items.
 
+## Automation Scripts
+
+The `scripts/` directory contains automation tools for RPG analysis:
+
+- **analyze-dependencies.sh/.ps1** - Scans RPG source files and generates dependency graph in JSON format
+- **extract-structure.py** - Extracts structural information from RPG source files (specifications, variables, subroutines, dependencies)
+- **generate-java-classes.py** - Generates Java POJO classes from RPG data structures
+- **estimate-complexity.py** - Estimates migration complexity based on program analysis
+
+Run scripts directly when analyzing large codebases or automating migration tasks. Scripts include usage documentation in their headers.
+
+## Reference Materials
+
+Load these references when specific guidance is needed:
+
+- **pseudocode-common-rules.md** - General pseudocode syntax and conventions
+- **pseudocode-rpg-rules.md** - RPG-specific translation patterns and rules
+- **testing-strategy.md** - Testing approach for RPG to Java migration
+- **transaction-handling.md** - AS/400 transaction to Java transaction patterns
+- **performance-patterns.md** - Performance optimization patterns
+- **messaging-integration.md** - Message queue and integration patterns
+
 ## Integration
 
-Works with AS/400 analysis tools, structure files, pseudocode rules (references/pseudocode-rpg-rules.md), version control, and modern IDEs.
+Works with AS/400 analysis tools, DB2 for i schemas, version control, and modern IDEs (IntelliJ IDEA, Eclipse, VS Code).

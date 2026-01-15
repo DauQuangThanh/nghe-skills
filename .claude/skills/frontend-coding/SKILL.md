@@ -68,62 +68,61 @@ export const UserList: React.FC = () => {
 4. **Accessibility first** - WCAG compliance from the start
 5. **Test thoroughly** - Unit, integration, E2E testing
 
-## Detailed Topics
+## Framework-Specific Guidance
 
-Load reference files based on specific needs:
+**React Development** - See [react-development.md](references/react-development.md) for:
+- Functional components and hooks (useState, useEffect, useCallback, useMemo)
+- Custom hooks and composition patterns
+- Context API and prop drilling solutions
+- React Server Components and Next.js
 
-- **Activation Guidelines**: See [activation-guidelines.md](references/activation-guidelines.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**React Advanced Patterns** - See [react-patterns.md](references/react-patterns.md) for:
+- Custom hooks patterns (data fetching, form handling, debouncing)
+- Higher-order components (HOC) and render props
+- Compound components and controlled/uncontrolled patterns
+- Error boundaries and suspense
 
-- **Best Practices**: See [best-practices.md](references/best-practices.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**Vue.js Development** - See [vuejs-development.md](references/vuejs-development.md) for:
+- Composition API and Options API
+- Composables and reactivity system
+- Vue Router, Pinia state management
+- Nuxt.js and server-side rendering
 
-- **Component Patterns**: See [component-patterns.md](references/component-patterns.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**Vue Advanced Patterns** - See [vue-patterns.md](references/vue-patterns.md) for:
+- Composables organization and reusability
+- Provide/inject pattern and plugin development
+- Custom directives and render functions
+- Advanced reactivity patterns
 
-- **Core Capabilities**: See [core-capabilities.md](references/core-capabilities.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+## Cross-Framework Topics
 
-- **Performance Testing**: See [performance-testing.md](references/performance-testing.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**Component Patterns** - See [component-patterns.md](references/component-patterns.md) for:
+- Compound components (tabs, accordions, modals)
+- Render props and slots patterns
+- Controlled vs uncontrolled components
+- Container/presentational component separation
 
-- **React Development**: See [react-development.md](references/react-development.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**State Management** - See [state-management.md](references/state-management.md) for:
+- Redux, Zustand, Jotai (React)
+- Pinia, Vuex (Vue)
+- NgRx, Akita (Angular)
+- Server state management (React Query, SWR, TanStack Query)
 
-- **React Patterns**: See [react-patterns.md](references/react-patterns.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**TypeScript Best Practices** - See [typescript-best-practices.md](references/typescript-best-practices.md) for:
+- Type safety, inference, and utility types
+- Generics and advanced type patterns
+- Type guards and narrowing
+- Framework-specific TypeScript patterns
 
-- **State Management**: See [state-management.md](references/state-management.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**Best Practices** - See [best-practices.md](references/best-practices.md) for:
+- Project structure and code organization
+- Naming conventions and file naming
+- Testing strategies (unit, integration, E2E)
+- Security best practices (XSS, CSRF, input validation)
 
-- **Typescript Best Practices**: See [typescript-best-practices.md](references/typescript-best-practices.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Vue Patterns**: See [vue-patterns.md](references/vue-patterns.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Vuejs Development**: See [vuejs-development.md](references/vuejs-development.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**Performance & Accessibility** - See [performance-testing.md](references/performance-testing.md) for:
+- Code splitting and lazy loading
+- Bundle optimization and tree shaking
+- Performance monitoring and profiling
+- WCAG compliance and accessibility testing
 

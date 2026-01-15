@@ -3,99 +3,114 @@ name: code-refactoring
 description: Guides systematic code refactoring to improve code quality, maintainability, and design. Identifies code smells, applies refactoring patterns, ensures test coverage, and follows safe refactoring practices. Produces cleaner, more maintainable code while preserving functionality. Use when improving code quality, eliminating technical debt, preparing for feature additions, addressing code smells, or when users mention refactoring, code cleanup, improving design, reducing complexity, or modernizing legacy code.
 ---
 
-
 # Code Refactoring
 
 ## Overview
 
-Guides systematic code refactoring to improve code quality, maintainability, and design. Identifies code smells, applies refactoring patterns, ensures test coverage, and follows safe refactoring practices.
+This skill guides systematic code refactoring to improve code quality, maintainability, and design while preserving functionality. Follow the safe refactoring workflow with comprehensive test coverage and incremental changes.
 
+## Refactoring Workflow
 
-## Core Capabilities
+### Step 1: Analyze Code and Identify Issues
 
-1. **Code Smell Detection** - Long methods, large classes, duplicated code
-2. **Refactoring Patterns** - Extract method, move method, rename
-3. **Test Coverage** - Ensure tests before refactoring
-4. **Safe Refactoring** - Incremental changes, continuous testing
-5. **Design Improvement** - SOLID principles, design patterns
+Examine the codebase to identify code smells and quality issues:
+- Long methods (>20-30 lines) or large classes (>300-500 lines)
+- Duplicated code blocks or similar logic in multiple places
+- Unclear or misleading names for variables, methods, or classes
+- Complex conditional logic or deeply nested structures
+- Poor separation of concerns or tight coupling between components
 
+**For detailed code smell catalog**: See [code-smells.md](references/code-smells.md)
 
-## Quick Start
+### Step 2: Verify Test Coverage
 
-**Refactoring Process:**
+Before refactoring ANY code:
+1. Check existing test coverage for the code to be refactored
+2. If tests are missing or inadequate, write tests FIRST
+3. Run all tests to establish baseline (all should pass)
+4. Never proceed without adequate test coverage
 
-1. **Identify** → Find code smells (long methods, duplication)
-2. **Test** → Ensure comprehensive test coverage
-3. **Refactor** → Apply small, incremental improvements
-4. **Verify** → Run tests after each change
-5. **Commit** → Commit each successful refactoring
+**For test coverage strategies**: See [testing-strategies.md](references/testing-strategies.md)
 
-**Common Patterns:**
-- **Extract Method** - Break long methods into smaller ones
-- **Extract Class** - Split large classes into cohesive units
-- **Rename** - Improve variable/method names for clarity
-- **Remove Duplication** - DRY principle
+### Step 3: Choose Refactoring Technique
 
+Select the appropriate refactoring pattern based on the issue:
+- **Extract Method/Function**: Break down long methods into smaller, focused ones
+- **Extract Class**: Split large classes with multiple responsibilities
+- **Rename**: Improve clarity with better names
+- **Move Method/Field**: Relocate functionality to more appropriate classes
+- **Replace Conditional with Polymorphism**: Simplify complex conditionals
+- **Introduce Parameter Object**: Group related parameters
+- **Inline Method/Variable**: Remove unnecessary indirection
 
-## Critical Tips
+**For complete pattern catalog**: See [refactoring-patterns.md](references/refactoring-patterns.md)
 
-1. **Test first** - Never refactor without tests
-2. **Small steps** - One refactoring at a time
-3. **Commit often** - Easy rollback if something breaks
-4. **Preserve behavior** - Don't change functionality while refactoring
-5. **Use IDE tools** - Automated refactorings are safer
+### Step 4: Apply Refactoring Incrementally
 
-## Detailed Topics
+Make ONE small change at a time:
+1. Apply a single refactoring technique
+2. Run all tests immediately after the change
+3. If tests pass, commit the change
+4. If tests fail, revert and try a different approach
+5. Repeat for each refactoring needed
 
-Load reference files based on specific needs:
+**Critical Rules:**
+- Never change behavior while refactoring
+- Never refactor and add features simultaneously
+- Use IDE automated refactoring tools when available
+- Keep each refactoring commit small and focused
 
-- **Activation Guidelines**: See [activation-guidelines.md](references/activation-guidelines.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**For detailed process guidance**: See [refactoring-process.md](references/refactoring-process.md)
 
-- **Code Smells**: See [code-smells.md](references/code-smells.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+### Step 5: Verify and Document
 
-- **Common Refactoring Scenarios**: See [common-refactoring-scenarios.md](references/common-refactoring-scenarios.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+After completing refactorings:
+1. Run full test suite to ensure all tests pass
+2. Check that code quality metrics improved
+3. Review code to confirm readability enhanced
+4. Document significant architectural changes if needed
+5. Create clear commit messages describing refactorings
 
-- **Core Capabilities**: See [core-capabilities.md](references/core-capabilities.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+## Common Refactoring Scenarios
 
-- **Output Format**: See [output-format.md](references/output-format.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**Scenario-specific guidance** is available for:
+- Legacy code modernization
+- Preparing code for new features
+- Performance optimization through refactoring
+- Reducing technical debt systematically
+- Extracting reusable components
 
-- **Refactoring Best Practices**: See [refactoring-best-practices.md](references/refactoring-best-practices.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+See [common-refactoring-scenarios.md](references/common-refactoring-scenarios.md) for detailed examples and approaches.
 
-- **Refactoring Patterns**: See [refactoring-patterns.md](references/refactoring-patterns.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+## Best Practices and Quality Guidelines
 
-- **Refactoring Process**: See [refactoring-process.md](references/refactoring-process.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+Follow established principles for high-quality refactoring:
+- Apply SOLID principles (Single Responsibility, Open/Closed, etc.)
+- Reduce coupling between components
+- Increase cohesion within components
+- Eliminate duplication (DRY principle)
+- Maintain consistent coding standards
 
-- **Testing Strategies**: See [testing-strategies.md](references/testing-strategies.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**For comprehensive best practices**: See [refactoring-best-practices.md](references/refactoring-best-practices.md)
 
-- **Tools And Automation**: See [tools-and-automation.md](references/tools-and-automation.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+## Tools and Automation
+
+Modern IDEs and tools can automate many refactorings safely:
+- IDE refactoring features (IntelliJ, VS Code, Visual Studio)
+- Static analysis tools for code smell detection
+- Test coverage tools
+- Automated code formatting and linting
+
+**For tool recommendations and usage**: See [tools-and-automation.md](references/tools-and-automation.md)
+
+## Output Format
+
+When presenting refactoring recommendations:
+1. Identify the code smell or quality issue
+2. Explain why it's problematic
+3. Propose specific refactoring approach
+4. Show before/after code examples
+5. List tests to verify behavior preservation
+
+**For detailed output templates**: See [output-format.md](references/output-format.md)
 

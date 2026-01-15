@@ -1,29 +1,41 @@
-# Transaction Handling in Migrated Applications
+# Transaction Handling in RPG to Java Migration
 
-This document explains how to handle transactions when migrating from CICS/mainframe environments to Java.
+This document explains how to handle transactions when migrating from AS/400 (IBM i) environments to Java.
 
 ## Overview
 
-COBOL programs running under CICS or IMS use implicit transaction management. In Java, transactions must be explicitly managed using appropriate frameworks and patterns.
+RPG programs running on AS/400 (IBM i) use commitment control for transaction management. In Java, transactions must be explicitly managed using appropriate frameworks and patterns.
 
-## CICS Transaction Concepts
+## AS/400 Commitment Control Concepts
 
-### CICS Transaction Model
+### Commitment Control Model
 
 **Key Characteristics**:
-- Implicit transaction boundaries
-- SYNCPOINT for explicit commits
-- Automatic rollback on ABEND
-- Resource coordination (files, databases, queues)
-- Conversational vs. pseudo-conversational
+- File-level commitment control (COMMIT keyword in F-specs)
+- COMMIT/ROLLBACK operations
+- Journaling requirement for commitment control
+- Automatic rollback on abnormal program termination
+- Resource coordination (DB2 files, data queues)
 
-### Common CICS Commands
+### Common RPG Commitment Control Operations
 
-```cobol
-EXEC CICS SYNCPOINT END-EXEC.
-EXEC CICS SYNCPOINT ROLLBACK END-EXEC.
-EXEC CICS LINK PROGRAM(name) END-EXEC.
-EXEC CICS RETURN END-EXEC.
+```rpg
+H COMMIT(*ALL)
+
+// File with commitment control
+FCustomer UF   E           K DISK    COMMIT
+
+// Commit changes
+C                   COMMIT
+C                   IF        %ERROR
+C                   // Handle error
+C                   ENDIF
+
+// Rollback changes
+C                   ROLBK
+C                   IF        %ERROR
+C                   // Handle error
+C                   ENDIF
 ```
 
 ## Java Transaction Patterns

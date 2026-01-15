@@ -174,6 +174,30 @@ with DAG('job', schedule_interval='@daily') as dag:
 
 Provide: Job overview, step sequence, data flow, conditional logic, migration target, workflow definition, migration estimate, action items.
 
+## Bundled Resources
+
+### Scripts (scripts/)
+Available automation tools for JCL analysis:
+- **analyze-dependencies.sh/.ps1**: Generate dependency graphs in JSON format
+- **extract-structure.py**: Extract structural information from JCL files  
+- **generate-java-classes.py**: Generate Java POJOs from data structures
+- **estimate-complexity.py**: Estimate migration complexity and effort
+
+Use these scripts when detailed structural analysis is needed or for batch processing multiple JCL files.
+
+### References (references/)
+Load these on-demand for detailed guidance:
+- **pseudocode-common-rules.md**: General pseudocode syntax and conventions
+- **pseudocode-jcl-rules.md**: JCL-specific translation rules and patterns (load when generating pseudocode)
+- **testing-strategy.md**: Comprehensive testing approach for migrated workflows (load when planning testing)
+- **transaction-handling.md**: Transaction patterns and ACID compliance (load when dealing with transactional jobs)
+- **messaging-integration.md**: Message queue integration patterns (load when jobs involve messaging)
+- **performance-patterns.md**: Performance optimization strategies (load when optimizing workflows)
+
+### Templates (assets/)
+- **migration-report-template.md**: Standard format for migration analysis reports
+- **java-class-template.java**: Template for generating Java classes from data structures
+
 ## Integration
 
-Works with job schedulers (Control-M, cron), workflow platforms (Spring Batch, Airflow, K8s), monitoring tools, pseudocode rules (references/pseudocode-jcl-rules.md), version control, and CI/CD.
+Works with job schedulers (Control-M, cron), workflow platforms (Spring Batch, Airflow, K8s), monitoring tools, version control, and CI/CD pipelines.

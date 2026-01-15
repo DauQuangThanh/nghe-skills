@@ -3,107 +3,111 @@ name: git-commit
 description: Generates well-structured git commit messages following conventional commit standards and best practices. Creates clear, descriptive commits with proper type prefixes (feat, fix, docs, refactor, etc.), concise subjects, and detailed bodies when needed. Use when committing code changes, creating git commits, writing commit messages, or when users mention "commit", "git commit", "commit message", "conventional commits", "changelog", or need help structuring version control messages. Ensures commits are atomic, descriptive, and follow team conventions.
 ---
 
-
 # Git Commit
 
-## Overview
+Generates well-structured git commit messages following conventional commit standards and best practices.
 
-Generates well-structured git commit messages following conventional commit standards and best practices
+## Key Principles
 
+1. **Be specific**: Describe exactly what changed
+2. **Be consistent**: Follow conventional commit format
+3. **Be atomic**: One logical change per commit
+4. **Be clear**: Write for others (including future you)
+5. **Be complete**: Include why and context when needed
+6. **Be conventional**: Follow standard format for automation
 
-## Core Capabilities
+## Standard Format
 
-1. **Core Capability 1** - Description
-2. **Core Capability 2** - Description
-3. **Core Capability 3** - Description
+```
+<type>(<scope>): <subject>
 
+<body>
 
-## Quick Start
+<footer>
+```
 
-**Basic Workflow:**
+**Components:**
+- **type**: Category of change (required) - feat, fix, docs, refactor, perf, test, build, ci, chore, style, revert
+- **scope**: Area affected (optional) - auth, api, ui, db, etc.
+- **subject**: Brief description (required, ≤50 chars)
+- **body**: Detailed explanation (optional, wrap at 72 chars)
+- **footer**: Breaking changes, issue refs (optional)
 
-1. Analyze requirements and context
-2. Apply appropriate patterns
-3. Validate and test results
-4. Document findings and recommendations
+## Basic Workflow
 
+1. **Choose the commit type**:
+   - `feat`: New user-facing functionality
+   - `fix`: Bug fix for users
+   - `docs`: Documentation only
+   - `refactor`: Code restructuring without behavior change
+   - `perf`: Performance improvement
+   - `test`: Adding/updating tests
+   - `build`: Dependency/build system changes
+   - `ci`: CI/CD configuration changes
+   - `chore`: Maintenance tasks
+   - `style`: Code formatting
+   - `revert`: Reverting previous commit
 
-## Detailed Topics
+2. **Write subject line** (imperative mood, ≤50 chars):
+   ```
+   ✅ feat(auth): add OAuth2 authentication
+   ✅ fix(api): resolve race condition in user updates
+   ❌ feat: added some stuff
+   ❌ fix: bug fix
+   ```
 
-Load reference files based on specific needs:
+3. **Add body if needed** (explain why, not just what):
+   - Required for breaking changes
+   - Recommended for complex changes
+   - Wrap lines at 72 characters
 
-- **Advanced Patterns**: See [advanced-patterns.md](references/advanced-patterns.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+4. **Include footer**:
+   - Breaking changes: `BREAKING CHANGE: description`
+   - Issue references: `Closes #123`, `Fixes #456`
 
-- **Best Practices**: See [best-practices.md](references/best-practices.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+## Quick Examples
 
-- **Commit Message Convention**: See [commit-message-convention.md](references/commit-message-convention.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**Simple feature:**
+```
+feat(auth): add password reset endpoint
+```
 
-- **Commit Message Structure**: See [commit-message-structure.md](references/commit-message-structure.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**Bug fix with context:**
+```
+fix(api): prevent null pointer in user preferences
 
-- **Commit Message Templates**: See [commit-message-templates.md](references/commit-message-templates.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+User preferences API crashed when optional fields were null.
+Added null checks and default values.
 
-- **Commit Types**: See [commit-types.md](references/commit-types.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+Closes #456
+```
 
-- **Commit Workflow**: See [commit-workflow.md](references/commit-workflow.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**Breaking change:**
+```
+feat(api)!: change response format to JSON:API spec
 
-- **Common Mistakes To Avoid**: See [common-mistakes-to-avoid.md](references/common-mistakes-to-avoid.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+BREAKING CHANGE: API responses now follow JSON:API format.
+Update client code to parse data from `data` key instead
+of root level.
 
-- **Common Scenarios**: See [common-scenarios.md](references/common-scenarios.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+Closes #789
+```
 
-- **Examples By Project Type**: See [examples-by-project-type.md](references/examples-by-project-type.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+## Reference Documentation
 
-- **Key Principles**: See [key-principles.md](references/key-principles.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+For detailed guidance, load these reference files as needed:
 
-- **Overview**: See [overview.md](references/overview.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Quick Reference**: See [quick-reference.md](references/quick-reference.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Team Conventions**: See [team-conventions.md](references/team-conventions.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Writing Guidelines**: See [writing-guidelines.md](references/writing-guidelines.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+- **[commit-types.md](references/commit-types.md)**: Complete list of commit types with examples
+- **[quick-reference.md](references/quick-reference.md)**: Decision trees and checklists
+- **[best-practices.md](references/best-practices.md)**: Atomic commits, meaningful messages, issue references
+- **[writing-guidelines.md](references/writing-guidelines.md)**: Subject line rules, scope selection, body formatting
+- **[common-scenarios.md](references/common-scenarios.md)**: Examples for typical development situations
+- **[common-mistakes-to-avoid.md](references/common-mistakes-to-avoid.md)**: Anti-patterns and how to fix them
+- **[team-conventions.md](references/team-conventions.md)**: Customizing conventions for teams
+- **[commit-message-structure.md](references/commit-message-structure.md)**: Detailed format specifications
+- **[commit-message-templates.md](references/commit-message-templates.md)**: Ready-to-use templates
+- **[commit-workflow.md](references/commit-workflow.md)**: Integration with git workflows
+- **[examples-by-project-type.md](references/examples-by-project-type.md)**: Examples for web apps, libraries, mobile, microservices
+- **[advanced-patterns.md](references/advanced-patterns.md)**: Complex scenarios and edge cases
+- **[commit-message-convention.md](references/commit-message-convention.md)**: Enforcement tools and configurations
 

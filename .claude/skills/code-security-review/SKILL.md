@@ -3,132 +3,215 @@ name: code-security-review
 description: Conducts comprehensive security code reviews including vulnerability detection (OWASP Top 10, CWE), authentication/authorization flaws, injection attacks, cryptography issues, sensitive data exposure, API security, dependency vulnerabilities, security misconfigurations, and compliance validation (PCI-DSS, GDPR, HIPAA). Produces detailed security assessment reports with CVE references, CVSS scores, exploit scenarios, and remediation guidance. Use when reviewing code security, performing security audits, checking for vulnerabilities, validating security controls, assessing security risks, or when users mention "security review", "vulnerability scan", "security audit", "penetration test", "OWASP", "security assessment", "secure coding", or "security compliance".
 ---
 
-
 # Code Security Review
 
 ## Overview
 
-Conducts comprehensive security code reviews including vulnerability detection (OWASP Top 10, CWE), authentication/authorization flaws, injection attacks, cryptography issues, sensitive data exposure, API security, dependency vulnerabilities, security misconfigurations, and compliance validation (PCI-DSS, GDPR, HIPAA)
+Performs comprehensive security code reviews to identify vulnerabilities, assess security risks, and provide actionable remediation guidance. Covers OWASP Top 10, CWE classifications, compliance requirements, and security best practices.
 
+## Security Review Workflow
 
-## Core Capabilities
+### 1. Initial Assessment
 
-1. **Core Capability 1** - Description
-2. **Core Capability 2** - Description
-3. **Core Capability 3** - Description
+Gather context about the application:
+- **Application type**: Web app, API, mobile, desktop, embedded
+- **Data sensitivity**: PII, financial data, healthcare records, proprietary information
+- **Compliance requirements**: PCI-DSS, GDPR, HIPAA, SOC 2, ISO 27001
+- **Authentication mechanisms**: OAuth, JWT, session-based, API keys
+- **Technology stack**: Languages, frameworks, libraries, databases
+- **External integrations**: Third-party APIs, cloud services, payment processors
 
+Perform threat modeling:
+- Identify critical assets (data, functions, resources)
+- Map attack surfaces (user inputs, APIs, file uploads, network interfaces)
+- Determine threat actors (external attackers, malicious insiders, automated bots)
+- Assess existing security controls
 
-## Quick Start
+### 2. Code Analysis
 
-**Basic Workflow:**
+Systematically review code for security vulnerabilities:
 
-1. Analyze requirements and context
-2. Apply appropriate patterns
-3. Validate and test results
-4. Document findings and recommendations
+**Priority Areas:**
+1. **Authentication & Authorization** - Login flows, session management, access controls
+2. **Input Validation** - All user inputs, API parameters, file uploads
+3. **Data Protection** - Encryption at rest and in transit, sensitive data handling
+4. **API Security** - Rate limiting, authentication, input validation
+5. **Dependency Security** - Third-party libraries, outdated packages, known CVEs
+6. **Configuration** - Security headers, CORS, environment variables, secrets management
+7. **Error Handling** - Information disclosure, stack traces, error messages
+8. **Business Logic** - Race conditions, workflow bypasses, state manipulation
 
+### 3. Vulnerability Classification
 
-## Detailed Topics
+Classify each finding:
+- **Severity**: Critical, High, Medium, Low, Informational
+- **CWE ID**: Common Weakness Enumeration identifier
+- **OWASP Category**: Map to OWASP Top 10 if applicable
+- **CVSS Score**: Calculate if applicable (use CVSS 3.1)
+- **Exploitability**: How easy to exploit
+- **Impact**: Data loss, privilege escalation, DoS, data breach
 
-Load reference files based on specific needs:
+### 4. Documentation
 
-- **Best Practices**: See [best-practices.md](references/best-practices.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+Produce comprehensive security report:
+- **Executive Summary** - High-level findings and risk overview
+- **Detailed Findings** - Each vulnerability with code examples and exploit scenarios
+- **Remediation Guidance** - Specific fixes with secure code examples
+- **Compliance Assessment** - Status against required standards
+- **Remediation Timeline** - Prioritized action plan
+- **Security Metrics** - Vulnerability counts by severity and category
 
-- **Common Vulnerability Patterns**: See [common-vulnerability-patterns.md](references/common-vulnerability-patterns.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+## Severity Classification
 
-- **Compliance Status**: See [compliance-status.md](references/compliance-status.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**Critical (CVSS 9.0-10.0):**
+- Remote code execution
+- Authentication bypass
+- SQL injection with data access
+- Hardcoded credentials for production systems
+- Complete access control bypass
 
-- **Critical Findings**: See [critical-findings.md](references/critical-findings.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**High (CVSS 7.0-8.9):**
+- Privilege escalation
+- Sensitive data exposure (PII, financial)
+- Cross-site scripting (XSS) with session theft
+- Insecure deserialization
+- XML external entity (XXE) injection
 
-- **Example Security Report**: See [example-security-report.md](references/example-security-report.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**Medium (CVSS 4.0-6.9):**
+- Information disclosure
+- Cross-site request forgery (CSRF)
+- Weak cryptography
+- Security misconfiguration
+- Missing security headers
 
-- **Executive Summary**: See [executive-summary.md](references/executive-summary.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**Low (CVSS 0.1-3.9):**
+- Version disclosure
+- Verbose error messages
+- Missing best practices
+- Security through obscurity
 
-- **Existing Security Controls**: See [existing-security-controls.md](references/existing-security-controls.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**Informational:**
+- Recommendations for defense in depth
+- Future-proofing suggestions
+- Security hygiene improvements
 
-- **Overview**: See [overview.md](references/overview.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+## Report Structure
 
-- **Pci Dss Compliance**: See [pci-dss-compliance.md](references/pci-dss-compliance.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+Generate security reports in this format:
 
-- **Phase 1 Critical Issues Week 1**: See [phase-1-critical-issues-week-1.md](references/phase-1-critical-issues-week-1.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+### Executive Summary
+- Total vulnerabilities by severity
+- Critical risk areas
+- Compliance status summary
+- Overall security posture rating
+- Recommended immediate actions
 
-- **Phase 2 High Priority Weeks 2 3**: See [phase-2-high-priority-weeks-2-3.md](references/phase-2-high-priority-weeks-2-3.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+### Detailed Findings
+For each vulnerability:
+```
+## [SEVERITY] Finding Title (CWE-XXX)
 
-- **Phase 3 Medium Priority Month 2**: See [phase-3-medium-priority-month-2.md](references/phase-3-medium-priority-month-2.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**Severity**: Critical/High/Medium/Low
+**CWE ID**: CWE-XXX
+**OWASP**: A0X:YYYY
+**CVSS Score**: X.X (if applicable)
 
-- **Phase 4 Low Priority Month 3**: See [phase-4-low-priority-month-3.md](references/phase-4-low-priority-month-3.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**Description**:
+[Clear explanation of the vulnerability]
 
-- **Remediation Summary**: See [remediation-summary.md](references/remediation-summary.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**Location**:
+- File: path/to/file.ext
+- Lines: XX-XX
+- Function/Class: function_name()
 
-- **Risk Assessment**: See [risk-assessment.md](references/risk-assessment.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**Vulnerable Code**:
+```language
+[Actual vulnerable code snippet]
+```
 
-- **Security Improvements Achieved**: See [security-improvements-achieved.md](references/security-improvements-achieved.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**Exploit Scenario**:
+[Step-by-step demonstration of how an attacker could exploit this]
 
-- **Security Report Format**: See [security-report-format.md](references/security-report-format.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**Impact**:
+[What could happen if exploited - data breach, privilege escalation, etc.]
 
-- **Security Review Workflow**: See [security-review-workflow.md](references/security-review-workflow.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**Remediation**:
+[Specific steps to fix the vulnerability]
 
-- **Security Testing Checklist**: See [security-testing-checklist.md](references/security-testing-checklist.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**Secure Code Example**:
+```language
+[Working secure implementation]
+```
 
-- **Security Tools Reference**: See [security-tools-reference.md](references/security-tools-reference.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**References**:
+- [Relevant CWE, CVE, or documentation links]
+```
+
+### Remediation Timeline
+- **Phase 1 (Critical - Week 1)**: List of critical issues
+- **Phase 2 (High - Weeks 2-3)**: List of high severity issues
+- **Phase 3 (Medium - Month 2)**: List of medium severity issues
+- **Phase 4 (Low - Month 3)**: List of low severity issues
+
+### Compliance Assessment
+For each applicable standard, document:
+- Requirements checked
+- Compliance status (Compliant/Non-Compliant/Partially Compliant)
+- Specific gaps identified
+- Remediation needed for compliance
+
+## Detailed References
+
+For comprehensive vulnerability patterns, testing procedures, and compliance details:
+
+- **OWASP Top 10 & CWE Patterns**: See [security-review-workflow.md](references/security-review-workflow.md) for:
+  - Detailed vulnerability patterns for each OWASP Top 10 category
+  - Code examples of vulnerable and secure implementations
+  - Testing procedures and detection methods
+  - Complete CWE mappings and classifications
+
+- **Security Testing Procedures**: See [security-testing-checklist.md](references/security-testing-checklist.md) for:
+  - Comprehensive testing checklist by category
+  - Manual and automated testing techniques
+  - Security testing tools and configurations
+  - API security testing procedures
+
+- **Compliance Requirements**: See [compliance-requirements.md](references/compliance-requirements.md) for:
+  - PCI-DSS requirements and validation
+  - GDPR data protection requirements
+  - HIPAA security and privacy rules
+  - SOC 2 security controls
+
+- **Report Examples**: See [report-example.md](references/report-example.md) for:
+  - Complete security report template
+  - Example findings with remediation guidance
+  - Executive summary examples
+  - Remediation timeline structures
+
+## Best Practices
+
+**Be Thorough:**
+- Review ALL user input points
+- Check ALL database queries
+- Verify ALL authentication and authorization checks
+- Test ALL file operations and uploads
+- Examine ALL external integrations
+
+**Be Practical:**
+- Prioritize by risk (likelihood × impact)
+- Consider exploitability and business context
+- Account for compensating controls
+- Balance security with usability
+
+**Be Clear:**
+- Provide step-by-step exploit scenarios
+- Show exact vulnerable code locations
+- Give specific, actionable remediation steps
+- Include working secure code examples
+
+**Be Professional:**
+- Focus on code issues, not developers
+- Use industry-standard classifications (CWE, OWASP, CVSS)
+- Provide credible references (NIST, OWASP, vendor documentation)
+- Document assumptions and testing limitations
 

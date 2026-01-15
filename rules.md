@@ -27,7 +27,7 @@ This document provides comprehensive guidelines and rules for creating high-qual
 - **Critical: Keep SKILL.md under 500 lines** as a hard target
 - **Critical: Frontmatter (name + description) should be ~100 tokens** - always loaded for all skills
 - **Critical: SKILL.md body should be < 5000 tokens** - loaded when skill triggers
-- **Critical: Move detailed content to reference files** - loaded only when needed
+- **Critical: Move detailed content to reference files** - loaded only when needed with clearly defined conditions
 
 **Why this matters:**
 - Skills are loaded alongside user requests, code, and other context

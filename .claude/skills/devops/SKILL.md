@@ -5,11 +5,9 @@ description: Provides comprehensive DevOps guidance including CI/CD pipeline des
 
 # DevOps
 
-## Overview
-
-Expert guidance on DevOps practices, tools, and automation. Covers the entire software delivery lifecycle from code commit to production deployment, including infrastructure provisioning, container orchestration, monitoring, and incident response.
-
 ## Core Capabilities
+
+Provides expert guidance covering the entire software delivery lifecycle:
 
 1. **CI/CD Pipeline Design** - Automated build, test, and deployment workflows
 2. **Infrastructure as Code** - Cloud resource provisioning with Terraform, CloudFormation, Bicep
@@ -19,59 +17,93 @@ Expert guidance on DevOps practices, tools, and automation. Covers the entire so
 6. **Configuration Management** - Ansible, Chef, Puppet automation
 7. **Security & Compliance** - DevSecOps practices and container security
 
-## Quick Decision Guide
+## Best Practices
 
-- **CI/CD Pipeline** → Design automated build, test, and deployment workflows
-- **Infrastructure as Code** → Provision and manage cloud resources with code
-- **Container Orchestration** → Deploy and manage containerized applications
-- **Deployment Strategy** → Implement safe deployment patterns
-- **Monitoring & Observability** → Set up metrics, logging, and alerting
-- **Configuration Management** → Automate server configuration and management
-- **Security & Compliance** → Implement DevSecOps practices
+### CI/CD
+- Keep pipelines fast (< 10 minutes for feedback)
+- Fail fast with quick tests first
+- Use pipeline as code (version controlled)
+- Implement proper secret management
+- Enable artifact caching and parallelize independent jobs
 
-## Detailed Topics
+### Infrastructure as Code
+- Use remote state with locking
+- Create reusable modules and pin versions
+- Always review plan before apply
+- Implement proper tagging strategy
+- Document resource dependencies
+
+### Container Orchestration
+- Set resource requests and limits
+- Implement health checks (liveness/readiness probes)
+- Use pod anti-affinity for high availability
+- Enable horizontal pod autoscaling
+- Implement proper logging and monitoring
+
+### Deployment
+- Use rolling updates with zero downtime
+- Implement proper health checks and rollback capabilities
+- Use canary/blue-green for critical applications
+- Test thoroughly in staging environments
+- Monitor post-deployment metrics
+
+### Security
+- Run containers as non-root with read-only root filesystems
+- Scan images for vulnerabilities regularly
+- Implement network policies and secrets management
+- Enable pod security standards and least privilege access
+
+### Monitoring
+- Collect metrics using RED/USE methods
+- Implement structured logging with meaningful alerts
+- Create actionable dashboards and monitor SLIs/SLOs
+- Set up distributed tracing for microservices
+
+## Detailed References
 
 Load reference files based on specific needs:
 
-- **CI/CD Pipeline Design**: See [cicd-pipeline-design.md](references/cicd-pipeline-design.md) when:
-  - Designing GitHub Actions, GitLab CI, or Jenkins pipelines
-  - Setting up automated build, test, deploy workflows
-  - Need pipeline configuration examples
+- **CI/CD Pipeline Design**: See [cicd-pipeline-design.md](references/cicd-pipeline-design.md) for:
+  - GitHub Actions, GitLab CI, Jenkins pipeline examples
+  - Automated build, test, deploy workflow patterns
+  - Pipeline optimization and caching strategies
 
-- **Infrastructure as Code**: See [infrastructure-as-code.md](references/infrastructure-as-code.md) when:
-  - Working with Terraform, CloudFormation, or Bicep
-  - Provisioning cloud resources (AWS, GCP, Azure)
-  - Need IaC patterns and module examples
+- **Infrastructure as Code**: See [infrastructure-as-code.md](references/infrastructure-as-code.md) for:
+  - Terraform, CloudFormation, Bicep patterns
+  - AWS, GCP, Azure resource provisioning
+  - Module design and state management
 
-- **Container Orchestration**: See [container-orchestration.md](references/container-orchestration.md) when:
-  - Deploying applications to Kubernetes
-  - Creating Docker containers
-  - Need K8s manifests, Helm charts
+- **Container Orchestration**: See [container-orchestration.md](references/container-orchestration.md) for:
+  - Kubernetes manifests, Helm charts, Kustomize
+  - Docker best practices and multi-stage builds
+  - Service mesh and networking patterns
 
-- **Deployment Strategies**: See [deployment-strategies.md](references/deployment-strategies.md) when:
-  - Implementing blue-green deployments
-  - Setting up canary releases
-  - Need rolling update patterns
+- **Deployment Strategies**: See [deployment-strategies.md](references/deployment-strategies.md) for:
+  - Blue-green deployment implementation
+  - Canary release patterns with traffic splitting
+  - Rolling update strategies and rollback procedures
 
-- **Monitoring & Observability**: See [monitoring-and-observability.md](references/monitoring-and-observability.md) when:
-  - Setting up Prometheus, Grafana
-  - Configuring ELK stack for logging
-  - Need monitoring dashboards and alerts
+- **Monitoring & Observability**: See [monitoring-and-observability.md](references/monitoring-and-observability.md) for:
+  - Prometheus, Grafana setup and configuration
+  - ELK stack deployment and log aggregation
+  - Alert rules, dashboards, and SLO definitions
 
-- **Security Best Practices**: See [security-best-practices.md](references/security-best-practices.md) when:
-  - Implementing DevSecOps
-  - Securing containers and pipelines
-  - Need security scanning and compliance
+- **Security Best Practices**: See [security-best-practices.md](references/security-best-practices.md) for:
+  - DevSecOps pipeline integration
+  - Container security scanning and hardening
+  - Secret management and compliance validation
 
-- **Configuration Management**: See [configuration-management.md](references/configuration-management.md) when:
-  - Using Ansible, Chef, or Puppet
-  - Automating server configuration
-  - Need infrastructure automation patterns
+- **Configuration Management**: See [configuration-management.md](references/configuration-management.md) for:
+  - Ansible playbooks, Chef recipes, Puppet manifests
+  - Server configuration automation patterns
+  - Infrastructure drift detection
 
-## Critical Tips
+- **Common Commands**: See [common-commands.md](references/common-commands.md) for:
+  - Kubernetes kubectl command reference
+  - Docker CLI operations
+  - Terraform and cloud provider CLI commands
 
-1. **Automate everything** - Infrastructure, testing, deployment, monitoring
-2. **Version control all configurations** - IaC, pipelines, configs
-3. **Implement proper security** - Secrets management, scanning, least privilege
-4. **Monitor continuously** - Metrics, logs, traces, alerts
-5. **Plan for failure** - Rollback strategies, disaster recovery, backups
+- **Troubleshooting**: See [troubleshooting-guide.md](references/troubleshooting-guide.md) for:
+  - Common issues and resolution steps
+  - Debugging techniques for containers and orchestration
+  - Performance optimization strategies

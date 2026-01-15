@@ -1,9 +1,16 @@
 #!/usr/bin/env python3
 """
-Generate Java POJO classes from legacy data structures.
+Generate Java POJO classes from RPG data structures.
 
-This script parses legacy data structure definitions and generates corresponding
-Java classes with appropriate data types, getters, setters, and validation.
+This script parses RPG data structure definitions (D-specs) and generates 
+corresponding Java classes with appropriate data types, getters, setters, 
+and validation annotations.
+
+Usage:
+    generate-java-classes.py <rpg_source_file> [--output-dir ./output] [--package com.example]
+
+Example:
+    generate-java-classes.py CUSTOMER.rpgle --output-dir src/main/java --package com.example.model
 """
 
 import argparse
@@ -12,42 +19,47 @@ from pathlib import Path
 from typing import List, Dict, Optional, Tuple
 
 
-class FieldDefinition:
-    """Represents a COBOL field definition."""
+class RPGFieldDefinition:
+    """Represents an RPG D-spec field definition."""
     
-    def __init__(self, level: int, name: str, picture: Optional[str], occurs: Optional[int] = None):
-        self.level = level
+    def __init__(self, name: str, data_type: str, length: int, decimals: int = 0, 
+                 is_array: bool = False, array_size: int = 0):
         self.name = name
-        self.picture = picture
-        self.occurs = occurs
-        self.children: List[FieldDefinition] = []
+        self.data_type = data_type
+        self.length = length
+        self.decimals = decimals
+        self.is_array = is_array
+        self.array_size = array_size
+        self.children: List[RPGFieldDefinition] = []
     
-    def is_group(self) -> bool:
-        """Check if this is a group item (no picture clause)."""
-        return self.picture is None
+    def is_data_structure(self) -> bool:
+        """Check if this is a data structure (has children)."""
+        return len(self.children) > 0
     
     def to_java_type(self) -> str:
-        """Convert COBOL picture to Java type."""
-        if self.picture is None:
-            # Group item - will be a nested class
-            return self.to_java_class_name()
+        """Convert RPG data type to Java type."""
+        # Packed decimal
+        if self.data_type == 'P':
+            return 'BigDecimal'
         
-        pic = self.picture.upper()
+        # Zoned decimal
+        if self.data_type == 'S':
+            return 'BigDecimal'
         
-        # Numeric types
-        if re.match(r'^S?9+V?9*$', pic.replace('(', '').replace(')', '')):
-            if 'V' in pic or 'COMP-3' in pic:
-                return 'BigDecimal'
-            digit_count = pic.count('9')
-            if digit_count <= 9:
-                return 'int' if pic.startswith('S') or pic.startswith('9') else 'long'
-            elif digit_count <= 18:
-                return 'long'
+        # Character/Alphanumeric
+        if self.data_type == 'A' or self.data_type == '':
+            return 'String'
+        
+        # Date
+        if self.data_type == 'D':
+            return 'LocalDate'
+        
+        # Integer
+        if self.data_type == 'I':
+            if self.length <= 4:
+                return 'int'
             else:
-                return 'BigInteger'
-        
-        # Alphanumeric
-        if pic.startswith('X'):
+                return 'long'
             return 'String'
         
         # Default to String for unknown patterns

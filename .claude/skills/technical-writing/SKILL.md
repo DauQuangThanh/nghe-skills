@@ -3,337 +3,167 @@ name: technical-writing
 description: Creates high-quality technical documentation including API documentation, user guides, tutorials, architecture documents, README files, release notes, and technical specifications. Produces clear, structured, and comprehensive documentation following industry best practices. Use when writing technical documentation, creating API docs, developing user guides, documenting architecture, writing tutorials, preparing release notes, or when users mention "technical writing", "documentation", "API docs", "user guide", "tutorial", "README", "technical specification", "architecture document", or "developer documentation".
 ---
 
-
 # Technical Writing
 
-## Overview
+Creates professional technical documentation with clear structure, appropriate detail level, and user-focused content.
 
-Creates high-quality technical documentation including API documentation, user guides, tutorials, architecture documents, README files, release notes, and technical specifications
+## Workflow
 
+### 1. Identify Documentation Type
 
-## Core Capabilities
+**Common types:**
+- API Documentation (REST, GraphQL, webhooks)
+- User Guides (features, how-tos, troubleshooting)
+- Tutorials (learning-focused with hands-on examples)
+- Architecture Documents (system design, technical decisions)
+- README Files (project overview, quick start)
+- Release Notes (changes, migrations, breaking changes)
+- Technical Specifications (requirements, constraints)
 
-1. **Core Capability 1** - Description
-2. **Core Capability 2** - Description
-3. **Core Capability 3** - Description
+**Load reference:** For detailed patterns, structure, and examples for each type, see [documentation-types-and-workflows.md](references/documentation-types-and-workflows.md)
 
+### 2. Gather Context
+
+**Essential information:**
+- Target audience (developers, end-users, managers)
+- Technical depth (beginner, intermediate, advanced)
+- Existing codebase/APIs/systems to document
+- Style guides or organizational standards
+- Related documentation
+
+### 3. Structure Content
+
+**Organization principles:**
+- Start with overview/introduction
+- Use descriptive heading hierarchy (H1 → H2 → H3)
+- Add table of contents for documents >3 sections
+- Group related information logically
+- Place examples immediately after explanations
+
+### 4. Write Clear Content
+
+**Core principles:**
+- Use active voice: "The API returns..." not "The response is returned..."
+- Be specific: "Response time < 200ms" not "Fast response"
+- Define acronyms on first use: "API (Application Programming Interface)"
+- Use consistent terminology throughout
+- Write imperative instructions: "Run the command" not "You should run..."
+- Show examples for every concept
+
+**Load reference:** For comprehensive writing guidelines, see [writing-guidelines.md](references/writing-guidelines.md)
+
+### 5. Add Code Examples
+
+**Requirements:**
+- Specify language in code blocks (```python, ```javascript, etc.)
+- Show complete, runnable examples
+- Include input/output pairs
+- Add comments for complex logic
+- Test all code before publishing
+
+### 6. Review and Validate
+
+**Quality checks:**
+- Verify technical accuracy
+- Test all code examples
+- Check clarity and completeness
+- Ensure consistent terminology
+- Validate all links
+
+## Quick Reference by Type
+
+### API Documentation
+**When to load reference:** [documentation-types-and-workflows.md](references/documentation-types-and-workflows.md) for REST, GraphQL, webhooks, authentication flows
+
+**Key components:** Authentication, endpoints, parameters, responses, errors, rate limits
+
+### User Guides
+**When to load reference:** [documentation-types-and-workflows.md](references/documentation-types-and-workflows.md) for feature docs, how-tos, troubleshooting
+
+**Key components:** Overview, prerequisites, step-by-step instructions, configuration, troubleshooting
+
+### Tutorials
+**When to load reference:** [documentation-types-and-workflows.md](references/documentation-types-and-workflows.md) for learning-focused content
+
+**Key components:** Learning objectives, time estimate, prerequisites, progressive steps, working examples, next steps
+
+### README Files
+**Key components:** Description, features, installation, quick start, configuration, license
+
+**Template:**
+```markdown
+# Project Name
+Brief description
+
+## Features
+- Feature 1
+- Feature 2
+
+## Installation
+[commands]
 
 ## Quick Start
+[working example]
 
-**Basic Workflow:**
-
-1. Analyze requirements and context
-2. Apply appropriate patterns
-3. Validate and test results
-4. Document findings and recommendations
-
-
-## Detailed Topics
-
-Load reference files based on specific needs:
-
-- **Alternatives Considered**: See [alternatives-considered.md](references/alternatives-considered.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Architecture Overview**: See [architecture-overview.md](references/architecture-overview.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Authentication**: See [authentication.md](references/authentication.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Background**: See [background.md](references/background.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Changelog**: See [changelog.md](references/changelog.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Choosing The Right Approach**: See [choosing-the-right-approach.md](references/choosing-the-right-approach.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Common Patterns**: See [common-patterns.md](references/common-patterns.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Complete Code**: See [complete-code.md](references/complete-code.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Component Details**: See [component-details.md](references/component-details.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Configuration**: See [configuration.md](references/configuration.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Core Principles**: See [core-principles.md](references/core-principles.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Data Flow**: See [data-flow.md](references/data-flow.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Deployment Architecture**: See [deployment-architecture.md](references/deployment-architecture.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Development**: See [development.md](references/development.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Disaster Recovery**: See [disaster-recovery.md](references/disaster-recovery.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Documentation**: See [documentation.md](references/documentation.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Documentation Types And Workflows**: See [documentation-types-and-workflows.md](references/documentation-types-and-workflows.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Endpoints**: See [endpoints.md](references/endpoints.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Error Handling**: See [error-handling.md](references/error-handling.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Examples Repository**: See [examples-repository.md](references/examples-repository.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Executive Summary**: See [executive-summary.md](references/executive-summary.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Faq**: See [faq.md](references/faq.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Features**: See [features.md](references/features.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Future Considerations**: See [future-considerations.md](references/future-considerations.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Glossary**: See [glossary.md](references/glossary.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Implementation Plan**: See [implementation-plan.md](references/implementation-plan.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Introduction**: See [introduction.md](references/introduction.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Key Design Decisions**: See [key-design-decisions.md](references/key-design-decisions.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **License**: See [license.md](references/license.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Maintenance**: See [maintenance.md](references/maintenance.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Metadata**: See [metadata.md](references/metadata.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Next Steps**: See [next-steps.md](references/next-steps.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Open Questions**: See [open-questions.md](references/open-questions.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Overview**: See [overview.md](references/overview.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Pagination**: See [pagination.md](references/pagination.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Performance Considerations**: See [performance-considerations.md](references/performance-considerations.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Prerequisites**: See [prerequisites.md](references/prerequisites.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Proposal**: See [proposal.md](references/proposal.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Quality Checklist**: See [quality-checklist.md](references/quality-checklist.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Quick Start**: See [quick-start.md](references/quick-start.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Rate Limits**: See [rate-limits.md](references/rate-limits.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **References**: See [references.md](references/references.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Related Resources**: See [related-resources.md](references/related-resources.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Requirements**: See [requirements.md](references/requirements.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Risks And Mitigations**: See [risks-and-mitigations.md](references/risks-and-mitigations.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Security Architecture**: See [security-architecture.md](references/security-architecture.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Step 1 Setup**: See [step-1-setup.md](references/step-1-setup.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Step 2 Milestone Title**: See [step-2-milestone-title.md](references/step-2-milestone-title.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Step 3 Next Milestone**: See [step-3-next-milestone.md](references/step-3-next-milestone.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Step By Step Instructions**: See [step-by-step-instructions.md](references/step-by-step-instructions.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Support**: See [support.md](references/support.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **System Context**: See [system-context.md](references/system-context.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Testing Your Work**: See [testing-your-work.md](references/testing-your-work.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Tips And Best Practices**: See [tips-and-best-practices.md](references/tips-and-best-practices.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Tools And Resources**: See [tools-and-resources.md](references/tools-and-resources.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Troubleshooting**: See [troubleshooting.md](references/troubleshooting.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Version 200 2025 12 01**: See [version-200-2025-12-01.md](references/version-200-2025-12-01.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Version 210 2026 01 14**: See [version-210-2026-01-14.md](references/version-210-2026-01-14.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **What Youll Build**: See [what-youll-build.md](references/what-youll-build.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **What Youll Learn**: See [what-youll-learn.md](references/what-youll-learn.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
-
-- **Writing Guidelines**: See [writing-guidelines.md](references/writing-guidelines.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+## License
+[license]
+```
+
+### Release Notes
+**Key components:** Version/date, summary, new features, bug fixes, breaking changes, migration guide
+
+**Template:**
+```markdown
+# vX.X.X - Date
+
+## Summary
+[overview]
+
+## New Features
+- Feature (#issue)
+
+## Bug Fixes
+- Fix (#issue)
+
+## Breaking Changes
+⚠️ **Change description**
+Migration: [steps]
+```
+
+### Architecture Documents
+**When to load reference:** [documentation-types-and-workflows.md](references/documentation-types-and-workflows.md) for system design, technical decisions
+
+**Key components:** Executive summary, system context, diagrams, components, data flow, technology stack, design decisions
+
+## Quality Checklist
+
+Before publishing documentation:
+
+- [ ] Accuracy: All technical details correct
+- [ ] Completeness: All necessary topics covered
+- [ ] Clarity: Target audience can understand
+- [ ] Examples: Working code included and tested
+- [ ] Structure: Logical organization with clear headings
+- [ ] Consistency: Terminology and formatting consistent
+- [ ] Links: All hyperlinks valid
+- [ ] Grammar: No spelling/grammatical errors
+- [ ] Current: Version numbers and dates up-to-date
+
+## Common Pitfalls
+
+1. Assuming knowledge - Define acronyms and technical terms
+2. Vague instructions - Be specific with examples
+3. Missing error scenarios - Document errors and solutions
+4. Outdated code - Test and update examples regularly
+5. Inconsistent terms - Use same terminology throughout
+6. Missing prerequisites - List all requirements upfront
+7. Poor formatting - Use headings, lists, code blocks properly
+8. No examples - Always include working code samples
+9. Wrong audience level - Match technical depth to readers
+10. Dense text - Break into scannable sections with headings
+
+## References
+
+- **[documentation-types-and-workflows.md](references/documentation-types-and-workflows.md)** - Comprehensive patterns and templates for API docs, user guides, tutorials, architecture docs, and technical specifications
+- **[writing-guidelines.md](references/writing-guidelines.md)** - Detailed style rules for clarity, active voice, specificity, consistency, heading hierarchy, code formatting, and lists
 

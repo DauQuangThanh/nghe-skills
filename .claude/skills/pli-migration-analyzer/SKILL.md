@@ -5,113 +5,154 @@ description: Analyzes legacy PL/I (Programming Language One) programs to assist 
 
 # PL/I Migration Analyzer
 
-Analyzes legacy PL/I programs for migration to Java, extracting business logic, data structures, procedures, and generating actionable migration strategies.
+Analyzes legacy PL/I programs and generates Java migration strategies. Extracts business logic, data structures, procedures, and dependencies to produce actionable migration plans.
 
-## Core Capabilities
+## Workflow
 
-### 1. Program Analysis
-Extract program structure (PROCEDURE OPTIONS(MAIN), nested procedures), data declarations (DCL statements, FIXED DECIMAL, FIXED BINARY, CHARACTER, BIT, POINTER), file operations, business logic, exception handling (ON conditions), and built-in functions.
+### 1. Discover PL/I Programs
 
-### 2. Data Structure Mapping
-Convert structures (level-numbered), arrays, pointers, based variables, controlled storage, and picture specifications to Java classes/collections.
+Find PL/I source files in the workspace:
 
-### 3. Java Migration
-Generate POJOs, service methods, JDBC/JPA patterns, Bean Validation, and exception handling (try-catch from ON conditions).
-
-### 4. Dependency Analysis
-Map procedure calls, file dependencies, %INCLUDE directives, external references, and SQL operations.
-
-## Quick Usage Guide
-
-### Find Programs
 ```bash
 find . -name "*.pli" -o -name "*.PLI" -o -name "*.pl1"
 ```
 
-### Type Mapping
+### 2. Analyze Program Structure
 
-| PL/I Type | Java Type | Notes |
-|-----------|-----------|-------|
-| `FIXED DECIMAL(n,m)` | `BigDecimal` | **Preserve precision!** |
-| `FIXED BINARY(n)` | `int`, `long` | Binary integer |
-| `CHARACTER(n)` | `String` | Fixed/variable length |
-| `BIT(1)` | `boolean` | Boolean flag |
-| `POINTER` | Reference | Object reference |
-| Arrays `(n)` | `List<T>` or `T[]` | 1-based → 0-based |
+For each PL/I program, extract:
 
-### Code Patterns
+- **Entry points**: PROCEDURE OPTIONS(MAIN)
+- **Declarations**: DCL statements (FIXED DECIMAL, FIXED BINARY, CHARACTER, BIT, structures)
+- **Procedures**: Nested procedures and functions
+- **File operations**: OPEN, READ, WRITE, CLOSE statements
+- **Exception handling**: ON conditions (ENDFILE, ERROR, etc.)
+- **Dependencies**: CALL statements, %INCLUDE directives
 
-**Procedure → Method:**
+Use scripts for automation:
+- `extract-structure.py <source_file>` - Extract structural information
+- `analyze-dependencies.sh <directory>` - Generate dependency graph
+- `estimate-complexity.py <source_file>` - Estimate migration effort
+
+### 3. Map to Java Design
+
+Convert PL/I elements to Java:
+
+- **Structures** → POJOs with appropriate types
+- **Procedures** → Service methods
+- **File operations** → Java I/O or database operations
+- **ON conditions** → try-catch exception handling
+- **Arrays** → Lists or arrays (adjust 1-based to 0-based indexing)
+
+**Critical Type Mapping:**
+- `FIXED DECIMAL(n,m)` → `BigDecimal` (**NEVER float/double**)
+- `FIXED BINARY(n)` → `int`, `long`
+- `CHARACTER(n)` → `String`
+- `BIT(1)` → `boolean`
+
+### 4. Generate Java Implementation
+
+Create Java classes using:
+- `generate-java-classes.py <data_structure_file>` - Generate POJOs from structures
+
+Ensure:
+- BigDecimal for all financial calculations
+- Proper exception handling (no GO TO)
+- Array bounds adjustment (1-based → 0-based)
+- String operations adjustment (SUBSTR is 1-based, substring is 0-based)
+
+### 5. Produce Migration Report
+
+Generate comprehensive report with:
+
+1. **Program Overview**: Purpose, entry points, complexity estimate
+2. **Dependencies**: Called procedures, included files, external references
+3. **Data Structures**: Tables with PL/I types and Java equivalents
+4. **Business Logic Summary**: Key algorithms and rules
+5. **Java Design**: Proposed classes, methods, packages
+6. **Migration Estimate**: Effort in person-days, risk assessment
+7. **Action Items**: Prioritized tasks with owners
+
+Use template: `assets/migration-report-template.md`
+
+## Quick Reference
+
+### Common Conversions
+
+**Procedure to Method:**
 ```pli
 CALC_TOTAL: PROCEDURE(qty, price) RETURNS(FIXED DECIMAL(15,2));
     result = qty * price;
-    IF result > 1000 THEN result = result * 0.90;
     RETURN(result);
 END CALC_TOTAL;
 ```
+→
 ```java
 public BigDecimal calcTotal(BigDecimal qty, BigDecimal price) {
-    BigDecimal result = qty.multiply(price);
-    return result.compareTo(new BigDecimal("1000")) > 0 
-        ? result.multiply(new BigDecimal("0.90")) : result;
+    return qty.multiply(price);
 }
 ```
 
-**File I/O → Java:**
+**File I/O to Streams:**
 ```pli
-ON ENDFILE(infile) eof = '1'B;
 DO WHILE(¬eof);
     READ FILE(infile) INTO(rec);
     CALL process_record(rec);
 END;
 ```
+→
 ```java
 try (BufferedReader reader = Files.newBufferedReader(path)) {
     reader.lines().forEach(this::processRecord);
 }
 ```
 
-**Structure → Class:**
-```pli
-DCL 1 EMPLOYEE,
-      2 ID CHARACTER(10),
-      2 SALARY FIXED DECIMAL(9,2);
+### Critical Rules
+
+1. **Use BigDecimal for FIXED DECIMAL** - Float/double lose precision
+2. **Arrays are 1-based in PL/I, 0-based in Java** - Adjust loops and indices
+3. **Refactor GO TO statements** - Use structured control flow
+4. **ON conditions map to try-catch** - Exception handling strategy required
+5. **SUBSTR is 1-based** - Java substring is 0-based and end-exclusive
+
+## Detailed References
+
+For comprehensive information:
+
+- **Type mapping & patterns**: [pli-reference.md](references/pli-reference.md) - Complete data type conversions, code patterns, migration checklist, common pitfalls
+- **Pseudocode translation**: [pseudocode-pli-rules.md](references/pseudocode-pli-rules.md) - Rules for converting PL/I to pseudocode
+- **Transaction handling**: [transaction-handling.md](references/transaction-handling.md) - Database transaction patterns
+- **Performance**: [performance-patterns.md](references/performance-patterns.md) - Optimization strategies
+- **Messaging**: [messaging-integration.md](references/messaging-integration.md) - Event-driven patterns
+- **Testing**: [testing-strategy.md](references/testing-strategy.md) - Test approach and validation
+
+## Output Format
+
+Structure migration reports with these sections:
+
+```markdown
+# [Program Name] Migration Analysis
+
+## Executive Summary
+High-level overview and recommendations
+
+## Program Overview
+Purpose, functionality, complexity metrics
+
+## Dependencies
+Procedure calls, file dependencies, external references
+
+## Data Structures
+Tables mapping PL/I structures to Java classes
+
+## Business Logic Analysis
+Key algorithms, rules, calculations
+
+## Java Design Proposal
+Package structure, class design, API interfaces
+
+## Migration Estimate
+Effort (person-days), risk level, timeline
+
+## Action Items
+Prioritized tasks with acceptance criteria
 ```
-```java
-public class Employee {
-    private String id;
-    private BigDecimal salary;
-}
-```
-
-## Key Patterns
-
-**Loops:** `DO i = 1 TO n` → `for (int i = 0; i < n; i++)`
-**Strings:** `SUBSTR(s,10,20)` → `s.substring(9,29)` (0-based!)
-**SELECT:** PL/I `SELECT/WHEN` → Java `switch/case`
-**ON Conditions:** → `try-catch` blocks
-
-## Migration Checklist
-
-- [ ] Identify entry points, declarations, procedures, file operations
-- [ ] Convert structures to Java classes with BigDecimal for FIXED DECIMAL
-- [ ] Convert procedures to methods, ON conditions to exceptions, refactor GO TO
-- [ ] Map file operations to I/O/database with transaction boundaries
-- [ ] Create unit tests, validate precision
-- [ ] Document business rules and assumptions
-
-## Critical Tips
-
-1. **Always use BigDecimal** for FIXED DECIMAL - never float/double
-2. **ON Conditions** map to try-catch systematically
-3. **Arrays** are 1-based in PL/I, 0-based in Java
-4. **GO TO** must be refactored to structured control flow
-5. **Pointers/based variables** redesign with object references
-
-## Output Structure
-
-Provide: Program overview, dependencies, data structures, logic summary, Java design, migration estimate, action items.
-
-## Integration
-
-Works with source analysis tools, structure files, pseudocode rules (references/pseudocode-pli-rules.md), version control, and modern IDEs.

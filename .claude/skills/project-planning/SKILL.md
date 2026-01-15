@@ -3,102 +3,101 @@ name: project-planning
 description: Guides comprehensive software project planning including task breakdown, estimation, sprint planning, backlog management, resource allocation, milestone tracking, and risk management. Creates user stories, acceptance criteria, project roadmaps, and work breakdown structures. Use when planning software projects, organizing sprints, breaking down features into tasks, estimating effort, managing backlogs, or when users mention "project planning", "sprint planning", "task breakdown", "roadmap", "backlog management", "user stories", or "project estimation".
 ---
 
-
 # Project Planning
 
 ## Overview
 
-Guides comprehensive software project planning including task breakdown, estimation, sprint planning, backlog management, resource allocation, milestone tracking, and risk management
+This skill provides comprehensive guidance for planning and managing software projects using industry best practices. It covers breaking down requirements into manageable tasks, estimating effort, organizing sprints, managing backlogs, and tracking progress effectively.
 
+**Key Principles:**
+- Adapt practices to team size and project complexity
+- Start simple, add complexity as needed
+- Focus on delivering value, not following process
+- Regular inspection and adaptation are key
+- Maintain sustainable pace, avoid burnout
 
-## Core Capabilities
+## Planning Workflow
 
-1. **Core Capability 1** - Description
-2. **Core Capability 2** - Description
-3. **Core Capability 3** - Description
+Follow this workflow when planning software projects:
 
+### 1. Define Project Scope
+- **Vision Statement**: Clear project purpose and objectives
+- **Success Criteria**: Measurable outcomes that define success
+- **Stakeholders**: Identify all stakeholders and their roles
+- **Constraints**: Budget, timeline, resources, technical limitations
+- **Deliverables**: Core features, documentation, training materials
 
-## Quick Start
+### 2. Break Down Requirements
+- Transform requirements into epics (large bodies of work)
+- Break epics into user stories: "As a [role], I want [feature] so that [benefit]"
+- Create technical tasks from user stories
+- Define acceptance criteria for each story
 
-**Basic Workflow:**
+### 3. Estimate Effort
+- Use story points (Fibonacci: 1, 2, 3, 5, 8, 13) for relative sizing
+- Conduct planning poker for team consensus
+- Apply three-point estimation for critical/uncertain tasks
 
-1. Analyze requirements and context
-2. Apply appropriate patterns
-3. Validate and test results
-4. Document findings and recommendations
+### 4. Organize and Prioritize
+- Group work into sprints (1-4 weeks)
+- Prioritize using MoSCoW (Must/Should/Could/Won't) or Value vs. Effort
+- Manage backlog with clear prioritization tiers: Now, Next, Later, Backlog
 
+### 5. Track and Adjust
+- Monitor sprint progress and velocity
+- Identify and manage risks (technical, schedule, resource, external)
+- Conduct regular retrospectives and adapt practices
 
-## Detailed Topics
+## User Story Format
 
-Load reference files based on specific needs:
+```markdown
+**Title**: [Action] as [Role]
 
-- **Anti Patterns To Avoid**: See [anti-patterns-to-avoid.md](references/anti-patterns-to-avoid.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**As a** [user type]
+**I want** [goal/feature]
+**So that** [business value/benefit]
 
-- **Backlog Not Prioritized**: See [backlog-not-prioritized.md](references/backlog-not-prioritized.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**Acceptance Criteria:**
+- [ ] [Testable criterion 1]
+- [ ] [Testable criterion 2]
+- [ ] [Testable criterion 3]
 
-- **Core Planning Workflow**: See [core-planning-workflow.md](references/core-planning-workflow.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+**Priority**: [High/Medium/Low]
+**Estimated Effort**: [X story points]
+**Dependencies**: [List any dependencies]
+```
 
-- **External Dependencies**: See [external-dependencies.md](references/external-dependencies.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+## Story Point Sizing Guide
 
-- **Integration With Development Workflow**: See [integration-with-development-workflow.md](references/integration-with-development-workflow.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+- **1 point**: Trivial change, < 2 hours, no complexity
+- **2 points**: Simple task, 2-4 hours, well understood
+- **3 points**: Small feature, 4-8 hours, some complexity
+- **5 points**: Medium feature, 1-2 days, moderate complexity
+- **8 points**: Large feature, 2-3 days, significant complexity
+- **13+ points**: Too large - must be broken down
 
-- **Later Future**: See [later-future.md](references/later-future.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+## Bundled Resources
 
-- **Next 2 3 Sprints**: See [next-2-3-sprints.md](references/next-2-3-sprints.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+### References (references/)
+Load these on-demand for detailed guidance:
 
-- **Notes**: See [notes.md](references/notes.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+- **core-planning-workflow.md**: Complete project setup process, requirements breakdown techniques, estimation methods, sprint planning procedures, and velocity tracking (load when planning new projects or setting up processes)
 
-- **Now Sprint Ready**: See [now-sprint-ready.md](references/now-sprint-ready.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+- **backlog-not-prioritized.md**: Backlog organization (Now/Next/Later/Backlog), Definition of Ready/Done, prioritization frameworks (MoSCoW, RICE, Value vs. Effort), and refinement practices (load when organizing or refining backlogs)
 
-- **Overview**: See [overview.md](references/overview.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+- **now-sprint-ready.md**, **next-2-3-sprints.md**, **later-future.md**: Criteria for different backlog tiers and work item organization strategies (load when categorizing backlog items by timeline)
 
-- **Schedule Risks**: See [schedule-risks.md](references/schedule-risks.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+- **task-management-best-practices.md**: Task attributes, dependency management, critical path analysis, status updates, and decision logging (load when managing task execution and tracking)
 
-- **Task Management Best Practices**: See [task-management-best-practices.md](references/task-management-best-practices.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+- **schedule-risks.md**: Schedule risk identification, assessment, and mitigation strategies (load when dealing with timeline concerns or delays)
 
-- **Technical Risks**: See [technical-risks.md](references/technical-risks.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+- **technical-risks.md**: Technical risk identification, assessment, and handling strategies (load when dealing with technical uncertainties or architecture decisions)
 
-- **Templates And Checklists**: See [templates-and-checklists.md](references/templates-and-checklists.md) when:
-  - Working with related functionality
-  - Need specific patterns or examples
-  - Require detailed guidance
+- **external-dependencies.md**: Managing third-party dependencies, tracking, communication, and mitigation strategies for external blockers (load when dealing with vendor or partner dependencies)
+
+- **templates-and-checklists.md**: Project kickoff checklist, user story templates, sprint planning templates, task breakdown templates, and status report formats (load when creating deliverables or standardizing artifacts)
+
+- **anti-patterns-to-avoid.md**: Common planning mistakes, warning signs of project issues, and best practices (load when troubleshooting project problems or conducting retrospectives)
+
+- **integration-with-development-workflow.md**: Integrating planning with development processes and CI/CD considerations (load when connecting planning to technical workflows)
 

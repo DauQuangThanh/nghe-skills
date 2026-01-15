@@ -1,14 +1,22 @@
 #!/usr/bin/env python3
 """
-Estimate migration complexity for COBOL programs.
+Estimate migration complexity for RPG programs.
 
 Calculates a complexity score based on various factors:
 - Lines of code
-- Number of paragraphs
-- Control flow complexity
-- External dependencies
-- File operations
-- SQL operations
+- Number of subroutines and procedures
+- Control flow complexity (DOW, DOU, FOR, IF, SELECT)
+- External dependencies (CALLB, CALLP)
+- File operations (READ, CHAIN, SETLL, UPDATE, DELETE)
+- SQL operations (EXEC SQL)
+- Built-in function usage
+- Indicators complexity
+
+Usage:
+    estimate-complexity.py <rpg_source_file> [--output output.json]
+
+Example:
+    estimate-complexity.py ORDPROC.rpgle --output complexity.json
 """
 
 import argparse
@@ -18,25 +26,28 @@ from pathlib import Path
 from typing import Dict, Any
 
 
-class ComplexityEstimator:
-    """Estimate migration complexity for COBOL programs."""
+class RPGComplexityEstimator:
+    """Estimate migration complexity for RPG programs."""
     
     # Complexity weights
     WEIGHTS = {
         'loc_per_point': 100,      # Lines per complexity point
-        'paragraph_weight': 2,      # Each paragraph adds complexity
-        'call_weight': 5,           # Each external call
+        'subroutine_weight': 3,     # Each subroutine adds complexity
+        'procedure_weight': 4,      # Each procedure
+        'call_weight': 5,           # Each external call (CALLB/CALLP)
         'file_weight': 3,           # Each file operation
         'sql_weight': 4,            # Each SQL statement
-        'goto_weight': 10,          # GO TO statements
-        'alter_weight': 15,         # ALTER statements (very complex)
-        'perform_varying_weight': 3, # Complex loops
+        'indicator_weight': 2,      # Indicator complexity
+        'dow_dou_weight': 3,        # Complex loops
+        'chain_weight': 2,          # Keyed access
+        'bif_weight': 1,            # Built-in function usage
     }
     
-    def __init__(self, cobol_file: Path):
-        self.cobol_file = cobol_file
-        self.content = cobol_file.read_text(encoding='utf-8', errors='ignore')
-        self.lines = [line for line in self.content.split('\n') if line.strip() and not line.strip().startswith('*')]
+    def __init__(self, rpg_file: Path):
+        self.rpg_file = rpg_file
+        self.content = rpg_file.read_text(encoding='utf-8', errors='ignore')
+        self.lines = [line for line in self.content.split('\n') 
+                     if line.strip() and not (line.strip().startswith('*') or line.strip().startswith('//'))]
         
     def estimate(self) -> Dict[str, Any]:
         """Calculate complexity estimate."""
@@ -44,7 +55,7 @@ class ComplexityEstimator:
         score = self._calculate_score(metrics)
         
         return {
-            'program': self.cobol_file.name,
+            'program': self.rpg_file.name,
             'metrics': metrics,
             'complexity_score': score,
             'complexity_level': self._get_complexity_level(score),
@@ -56,26 +67,40 @@ class ComplexityEstimator:
         """Collect various code metrics."""
         return {
             'total_lines': len(self.lines),
-            'paragraphs': self._count_paragraphs(),
-            'calls': self._count_pattern(r'CALL\s+'),
-            'files': self._count_pattern(r'SELECT\s+'),
+            'subroutines': self._count_pattern(r'BEGSR'),
+            'procedures': self._count_pattern(r'P\s+\S+\s+B'),
+            'callb_calls': self._count_pattern(r'CALLB'),
+            'callp_calls': self._count_pattern(r'CALLP'),
+            'file_specs': self._count_file_specs(),
             'sql_statements': self._count_pattern(r'EXEC\s+SQL'),
-            'goto_statements': self._count_pattern(r'GO\s+TO\s+'),
-            'alter_statements': self._count_pattern(r'ALTER\s+'),
-            'perform_varying': self._count_pattern(r'PERFORM\s+.*VARYING'),
-            'copybooks': self._count_pattern(r'COPY\s+'),
-            'if_statements': self._count_pattern(r'IF\s+'),
-            'evaluate_statements': self._count_pattern(r'EVALUATE\s+'),
+            'indicators': self._count_indicators(),
+            'dow_loops': self._count_pattern(r'DOW'),
+            'dou_loops': self._count_pattern(r'DOU'),
+            'for_loops': self._count_pattern(r'FOR'),
+            'chain_operations': self._count_pattern(r'CHAIN'),
+            'setll_operations': self._count_pattern(r'SETLL'),
+            'copy_members': self._count_pattern(r'/COPY'),
+            'if_statements': self._count_pattern(r'\bIF\b'),
+            'select_statements': self._count_pattern(r'\bSELECT\b'),
+            'built_in_functions': self._count_bifs(),
         }
     
-    def _count_paragraphs(self) -> int:
-        """Count paragraph definitions."""
+    def _count_file_specs(self) -> int:
+        """Count F-spec file definitions."""
         count = 0
         for line in self.lines:
-            # Paragraph name followed by period at start of line
-            if re.match(r'^[A-Z0-9\-]+\.\s*$', line.strip()):
+            if line.strip().upper().startswith('F'):
                 count += 1
         return count
+    
+    def _count_indicators(self) -> int:
+        """Count indicator usage (*IN, *INxx)."""
+        return self._count_pattern(r'\*IN\d{2}|\*IN\(')
+    
+    def _count_bifs(self) -> int:
+        """Count built-in function usage."""
+        bif_pattern = r'%\w+'
+        return self._count_pattern(bif_pattern)
     
     def _count_pattern(self, pattern: str) -> int:
         """Count occurrences of a regex pattern."""

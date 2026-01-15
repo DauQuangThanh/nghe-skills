@@ -5,316 +5,198 @@ description: Conducts comprehensive frontend code reviews including React/Vue/An
 
 # Frontend Code Review
 
-Systematically review frontend code to identify issues, ensure quality, and provide actionable improvement recommendations.
-
-## Purpose
-
-Evaluate frontend code for quality, maintainability, performance, accessibility, and security. Identify code smells, anti-patterns, and potential bugs before they reach production.
-
-## When to Use This Skill
-
-- Review React, Vue, Angular, or vanilla JavaScript code
-- Assess component architecture and design patterns
-- Validate TypeScript types and JavaScript code quality
-- Review CSS/SCSS/styled-components/Tailwind implementations
-- Check accessibility compliance (WCAG 2.1 AA/AAA)
-- Identify performance bottlenecks and optimization opportunities
-- Detect security vulnerabilities (XSS, CSRF, injection attacks)
-- Pre-merge PR reviews and code quality gates
+Systematically review frontend code to identify issues, ensure quality, and provide actionable improvement recommendations across code quality, performance, accessibility, and security dimensions.
 
 ## Review Workflow
 
 ### 1. Initial Assessment
 
-**Gather Context:**
-- Project type (React, Vue, Angular, vanilla JS)
-- Framework versions and dependencies
-- Build tools (Webpack, Vite, Rollup)
-- Target browsers and devices
-- Accessibility requirements (WCAG level)
-- Performance targets (LCP, FID, CLS)
+Gather context about the project and identify review scope:
 
-**Identify Review Scope:**
-- New features vs. refactoring
-- Component complexity (simple, medium, complex)
+**Project Context:**
+- Framework and version (React, Vue, Angular, vanilla JS)
+- Build tools and dependencies
+- Target browsers/devices
+- Accessibility requirements (WCAG level)
+- Performance targets (Core Web Vitals)
+
+**Review Scope:**
+- New features vs. refactoring vs. bug fixes
+- Component complexity level
 - Critical user paths
 - Security-sensitive areas
 
 ### 2. Code Quality Analysis
 
-**Component Structure:**
-- Single Responsibility Principle adherence
-- Component composition vs. inheritance
-- Props/state management appropriateness
-- Lifecycle methods usage (React) or hooks pattern
-- Computed properties and watchers (Vue)
-- Component communication patterns
+Evaluate component structure, code patterns, and maintainability:
 
-**JavaScript/TypeScript Quality:**
-- Type safety and inference (TypeScript)
-- ESLint/Prettier compliance
-- Variable naming conventions
-- Function complexity (cyclomatic complexity < 10)
+**Key Areas:**
+- Component architecture (single responsibility, composition patterns)
+- JavaScript/TypeScript quality (type safety, naming, complexity)
+- State management decisions (local vs. global, immutability)
 - Error handling and edge cases
-- Code duplication (DRY principle)
+- Code duplication and DRY violations
 
-**State Management:**
-- Local vs. global state decisions
-- Redux/Vuex/Pinia/Context API usage
-- Immutability patterns
-- Side effect handling
-- State normalization
-
-> **See references/code-quality-checklist.md** for detailed quality criteria and common issues
+> **Load references/code-quality-checklist.md** for detailed quality criteria, common issues, and fixes with code examples
 
 ### 3. Performance Review
 
-**Rendering Performance:**
-- Unnecessary re-renders (React.memo, useMemo, useCallback)
-- Virtual DOM optimization
-- List rendering with keys
-- Lazy loading and code splitting
-- Bundle size analysis
+Assess rendering efficiency, resource loading, and Core Web Vitals:
 
-**Resource Loading:**
-- Image optimization (format, size, lazy loading)
-- Font loading strategies
-- Third-party script impact
-- Asset compression
-- CDN usage
+**Focus Areas:**
+- Rendering optimization (React.memo, useMemo, useCallback, keys)
+- Resource loading (images, fonts, scripts, lazy loading)
+- Bundle size and code splitting
+- Core Web Vitals: LCP < 2.5s, FID < 100ms, CLS < 0.1
+- Memory leaks and cleanup
 
-**Web Vitals:**
-- Largest Contentful Paint (LCP < 2.5s)
-- First Input Delay (FID < 100ms)
-- Cumulative Layout Shift (CLS < 0.1)
-
-> **See references/performance-checklist.md** for detailed performance optimization guidelines
+> **Load references/performance-checklist.md** for detailed optimization techniques and Web Vitals guidelines with code examples
 
 ### 4. Accessibility Assessment
 
-**Semantic HTML:**
-- Proper heading hierarchy (h1-h6)
-- Landmark elements (header, nav, main, footer)
-- Lists for list content
-- Buttons vs. links usage
+Evaluate WCAG 2.1 compliance and inclusive design:
 
-**ARIA Implementation:**
-- ARIA labels and descriptions
-- Role attributes
-- Live regions
-- Focus management
+**Key Areas:**
+- Semantic HTML (proper headings, landmarks, lists)
+- ARIA implementation (labels, roles, live regions)
+- Keyboard navigation and focus management
+- Screen reader support (alt text, labels, announcements)
+- Color contrast ratios
 
-**Keyboard Navigation:**
-- Tab order logical
-- Focus indicators visible
-- Skip links present
-- Keyboard shortcuts
-
-**Screen Reader Support:**
-- Alt text for images
-- Form labels associated
-- Error messages announced
-- Dynamic content updates
-
-> **See references/accessibility-checklist.md** for WCAG 2.1 AA/AAA compliance criteria
+> **Load references/accessibility-checklist.md** for WCAG 2.1 AA/AAA compliance criteria with detailed examples
 
 ### 5. Security Review
 
+Identify vulnerabilities and security best practices:
+
 **Common Vulnerabilities:**
-- XSS prevention (sanitize user input)
+- XSS (input sanitization, safe HTML rendering)
 - CSRF protection
 - Authentication token handling
 - Sensitive data exposure
-- Third-party dependency vulnerabilities
+- Dependency vulnerabilities
 
-**Best Practices:**
+**Security Controls:**
 - Content Security Policy (CSP)
 - HTTPS enforcement
-- Secure cookie attributes
-- Input validation
-- Output encoding
+- Secure cookies
+- Input validation and output encoding
 
-> **See references/security-checklist.md** for frontend security guidelines
+> **Load references/security-checklist.md** for comprehensive frontend security guidelines and vulnerability prevention
 
 ### 6. CSS/Styling Review
 
-**Architecture:**
-- CSS methodology (BEM, OOCSS, SMACSS)
-- Naming conventions consistency
+Assess architecture, responsiveness, and maintainability:
+
+**Key Areas:**
+- CSS methodology (BEM, OOCSS, CSS-in-JS, Tailwind)
+- Responsive design (mobile-first, breakpoints, flexible layouts)
+- Design tokens and variables
 - Specificity management
-- CSS-in-JS best practices (styled-components, Emotion)
-- Utility-first frameworks (Tailwind CSS)
-
-**Responsive Design:**
-- Mobile-first approach
-- Breakpoint strategy
-- Flexible layouts (Flexbox, Grid)
-- Media queries organization
-- Responsive images
-
-**Maintainability:**
-- Variable/token usage for colors, spacing
-- Avoid magic numbers
-- Reusable utility classes
-- CSS selector performance
 - Unused CSS detection
 
 ### 7. Testing Coverage
 
-**Unit Tests:**
-- Component logic testing
-- Utility function coverage
-- Edge case handling
-- Mock strategy
+Evaluate test completeness and quality:
 
-**Integration Tests:**
-- Component interaction
-- API integration
-- State management flows
-- Routing behavior
-
-**E2E Tests:**
-- Critical user journeys
-- Cross-browser compatibility
+**Test Types:**
+- Unit tests (component logic, utilities, edge cases)
+- Integration tests (component interaction, API integration, state flows)
+- E2E tests (critical user journeys, cross-browser compatibility)
 - Accessibility automated tests
 
 ### 8. Generate Review Report
 
-Create structured report containing:
+Create structured report with findings and recommendations:
 
-**Executive Summary:**
-- Overall code quality rating (Excellent/Good/Fair/Poor)
-- Critical issues count
-- Recommendation (Approve/Approve with Changes/Major Revision Needed)
+**Report Structure:**
+- Executive Summary (quality rating, critical issues, recommendation)
+- Detailed Findings (by category with severity: Critical/Major/Minor)
+- Action Items (prioritized with file/line references and specific fixes)
 
-**Detailed Findings by Category:**
-- Code Quality (issues with severity: Critical/Major/Minor)
-- Performance (specific metrics and recommendations)
-- Accessibility (WCAG violations)
-- Security (vulnerabilities identified)
-- Styling (CSS/design issues)
-- Testing (coverage gaps)
+> **Load references/report-templates.md** for full review report formats and examples
 
-**Action Items:**
-- Prioritized list with file/line references
-- Specific fix recommendations
-- Estimated effort
-
-> **See references/report-templates.md** for full review report formats
-
-## Best Practices
+## Review Process Guidelines
 
 **Review Timing:**
 - **Pre-Commit**: Automated linting and formatting
-- **Pre-PR**: Self-review using this checklist
-- **PR Review**: Peer review with this skill
+- **Pre-PR**: Self-review using this workflow
+- **PR Review**: Peer review with comprehensive analysis
 - **Pre-Deployment**: Final quality gate
-
-**Review Techniques:**
-- **Line-by-Line**: Thorough examination of changes
-- **Checklist-Based**: Systematic quality verification
-- **Automated Tools**: ESLint, Prettier, Lighthouse, axe DevTools
-- **Manual Testing**: Run code locally, test user flows
 
 **Severity Definitions:**
 - **Critical**: Blocks deployment (security issues, breaking bugs, accessibility blockers)
 - **Major**: Should fix before merge (performance issues, poor patterns, maintainability concerns)
 - **Minor**: Nice to improve (style suggestions, micro-optimizations, documentation)
 
-## Anti-Patterns to Flag
+## Common Anti-Patterns
 
 **React/Component Patterns:**
-- Prop drilling (pass props through multiple levels)
-- God components (components doing too much)
-- Premature optimization
+- Prop drilling through multiple levels
+- God components doing too much
 - Missing error boundaries
 - Mutating state directly
-- Inline functions in JSX causing re-renders
+- Inline functions causing unnecessary re-renders
 
 **JavaScript/TypeScript:**
-- Any types in TypeScript
+- Using `any` type in TypeScript
 - Console.log in production code
-- Deeply nested callbacks (callback hell)
+- Deeply nested callbacks
 - Global variables
-- Ignoring promises (not awaiting or catching)
+- Unhandled promises
 
 **CSS/Styling:**
 - !important overuse
 - Inline styles instead of classes
-- Fixed pixel values instead of relative units
-- No design system/tokens
-- CSS specificity wars
+- Fixed pixels instead of relative units
+- High specificity wars
 
 **Performance:**
 - Synchronous expensive operations in render
-- Large bundle sizes (>500KB uncompressed)
-- No code splitting
+- Large unoptimized bundles (>500KB)
+- Missing code splitting and lazy loading
 - Unoptimized images
-- Missing lazy loading
 
 **Accessibility:**
-- Div/span buttons
+- Non-semantic div/span buttons
 - Missing alt attributes
-- Color-only information conveyance
+- Color-only information
 - Keyboard traps
-- No focus management in modals/dialogs
+- Missing focus management in modals
 
-## Quick Reference
+## Key Review Checkpoints
 
-### Code Quality Checklist
+**Code Quality:**
 - [ ] Components follow single responsibility
-- [ ] Functions < 50 lines, cyclomatic complexity < 10
+- [ ] Functions < 50 lines, complexity < 10
 - [ ] TypeScript strict mode enabled
-- [ ] No ESLint warnings
-- [ ] Meaningful variable/function names
+- [ ] Meaningful naming conventions
 - [ ] Error handling present
-- [ ] No code duplication
-- [ ] Comments for complex logic only
 
-### Performance Checklist
-- [ ] React.memo/useMemo/useCallback used appropriately
-- [ ] Images optimized (WebP/AVIF, proper sizing)
+**Performance:**
+- [ ] Appropriate use of React.memo/useMemo/useCallback
+- [ ] Images optimized (WebP/AVIF)
 - [ ] Code splitting implemented
-- [ ] Lazy loading for routes/components
-- [ ] Bundle size analyzed
-- [ ] Web Vitals within targets
-- [ ] No memory leaks (cleanup in useEffect)
+- [ ] Core Web Vitals within targets
 
-### Accessibility Checklist
+**Accessibility:**
 - [ ] Semantic HTML used
 - [ ] All images have alt text
-- [ ] Form inputs have labels
 - [ ] Keyboard navigable
-- [ ] Focus indicators visible
-- [ ] Color contrast ratio ≥ 4.5:1 (AA) or 7:1 (AAA)
-- [ ] ARIA used correctly (or not at all if semantic HTML sufficient)
+- [ ] Color contrast compliant (≥4.5:1)
 
-### Security Checklist
+**Security:**
 - [ ] User input sanitized
-- [ ] XSS prevention (DOMPurify for dangerous HTML)
-- [ ] Authentication tokens secure
+- [ ] XSS prevention in place
 - [ ] No sensitive data in localStorage
-- [ ] Dependencies up to date (no critical vulnerabilities)
-- [ ] CSP headers configured
+- [ ] Dependencies up to date
 
-## Additional Resources
+## Reference Files
 
-- **references/code-quality-checklist.md**: Comprehensive quality criteria, common issues, and fixes
-- **references/performance-checklist.md**: Performance optimization techniques and Web Vitals guidelines
-- **references/accessibility-checklist.md**: WCAG 2.1 compliance criteria with examples
-- **references/security-checklist.md**: Frontend security best practices and vulnerability prevention
-- **references/report-templates.md**: Review report templates and examples
+Load these files when detailed guidance is needed:
 
-## Output Format
-
-Generate review reports with:
-
-1. **Executive Summary** (0.5 page): Overall assessment, critical issues, recommendation
-2. **Code Quality Analysis** (1-2 pages): Component structure, JavaScript/TypeScript issues, patterns
-3. **Performance Review** (0.5-1 page): Metrics, bottlenecks, optimization recommendations
-4. **Accessibility Assessment** (0.5-1 page): WCAG violations, keyboard navigation, screen reader issues
-5. **Security Analysis** (0.5 page): Vulnerabilities identified, risk level, remediation steps
-6. **CSS/Styling Review** (0.5 page): Architecture issues, responsiveness, maintainability
-7. **Action Items** (1 page): Prioritized list with file references and specific fixes
-
-Keep findings specific with file names, line numbers, and code examples. Provide actionable recommendations with concrete fixes.
+- **references/code-quality-checklist.md**: Component patterns, code smells, fixes with examples (693 lines)
+- **references/performance-checklist.md**: Web Vitals optimization, rendering performance (891 lines)
+- **references/accessibility-checklist.md**: WCAG 2.1 compliance with detailed examples (1045 lines)
+- **references/security-checklist.md**: XSS, CSRF, authentication, CSP guidelines (969 lines)
+- **references/report-templates.md**: Review report formats and examples (1203 lines)
