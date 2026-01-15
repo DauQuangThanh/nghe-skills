@@ -11,159 +11,149 @@ Creates professional technical documentation with clear structure, appropriate d
 
 ### 1. Identify Documentation Type
 
-**Common types:**
-- API Documentation (REST, GraphQL, webhooks)
-- User Guides (features, how-tos, troubleshooting)
-- Tutorials (learning-focused with hands-on examples)
-- Architecture Documents (system design, technical decisions)
-- README Files (project overview, quick start)
-- Release Notes (changes, migrations, breaking changes)
-- Technical Specifications (requirements, constraints)
+Determine which type of documentation is needed:
+- **API Documentation** - REST, GraphQL, webhooks, authentication
+- **User Guides** - Features, how-tos, troubleshooting
+- **Tutorials** - Learning-focused with hands-on examples
+- **Architecture Documents** - System design, technical decisions
+- **README Files** - Project overview, quick start
+- **Release Notes** - Changes, migrations, breaking changes
+- **Technical Specifications** - Requirements, constraints
 
-**Load reference:** For detailed patterns, structure, and examples for each type, see [documentation-types-and-workflows.md](references/documentation-types-and-workflows.md)
+**For detailed templates and patterns:** Load [documentation-types-and-workflows.md](references/documentation-types-and-workflows.md)
 
 ### 2. Gather Context
 
-**Essential information:**
-- Target audience (developers, end-users, managers)
-- Technical depth (beginner, intermediate, advanced)
-- Existing codebase/APIs/systems to document
-- Style guides or organizational standards
-- Related documentation
+Collect essential information before writing:
+- **Audience** - Developers, end-users, managers, administrators
+- **Technical depth** - Beginner, intermediate, advanced
+- **Scope** - Codebase/APIs/systems to document
+- **Standards** - Style guides or organizational requirements
+- **Related docs** - Existing documentation to reference or integrate with
 
 ### 3. Structure Content
 
-**Organization principles:**
-- Start with overview/introduction
+Apply clear organization principles:
+- Lead with overview/introduction
 - Use descriptive heading hierarchy (H1 → H2 → H3)
-- Add table of contents for documents >3 sections
+- Include table of contents for documents with >3 sections
 - Group related information logically
-- Place examples immediately after explanations
+- Place examples immediately after concepts
+- Add diagrams/visuals for complex workflows
 
 ### 4. Write Clear Content
 
-**Core principles:**
-- Use active voice: "The API returns..." not "The response is returned..."
-- Be specific: "Response time < 200ms" not "Fast response"
-- Define acronyms on first use: "API (Application Programming Interface)"
-- Use consistent terminology throughout
-- Write imperative instructions: "Run the command" not "You should run..."
-- Show examples for every concept
+Follow core writing principles:
+- **Active voice** - "The API returns..." not "The response is returned..."
+- **Specificity** - "Response time < 200ms" not "Fast response"
+- **Define acronyms** - "API (Application Programming Interface)" on first use
+- **Consistent terminology** - Same terms throughout document
+- **Imperative instructions** - "Run the command" not "You should run..."
+- **Show examples** - Provide code/output for every concept
 
-**Load reference:** For comprehensive writing guidelines, see [writing-guidelines.md](references/writing-guidelines.md)
+**For comprehensive style guidance:** Load [writing-guidelines.md](references/writing-guidelines.md)
 
 ### 5. Add Code Examples
 
-**Requirements:**
-- Specify language in code blocks (```python, ```javascript, etc.)
-- Show complete, runnable examples
+Code example requirements:
+- Specify language in code blocks: ```python, ```javascript
+- Show complete, runnable examples (not fragments)
 - Include input/output pairs
-- Add comments for complex logic
+- Add explanatory comments for complex logic
 - Test all code before publishing
 
 ### 6. Review and Validate
 
-**Quality checks:**
-- Verify technical accuracy
-- Test all code examples
-- Check clarity and completeness
-- Ensure consistent terminology
-- Validate all links
+Quality assurance checklist:
+- ✓ Verify technical accuracy
+- ✓ Test all code examples
+- ✓ Check clarity and completeness
+- ✓ Ensure consistent terminology
+- ✓ Validate all links and references
 
-## Quick Reference by Type
-
-### API Documentation
-**When to load reference:** [documentation-types-and-workflows.md](references/documentation-types-and-workflows.md) for REST, GraphQL, webhooks, authentication flows
-
-**Key components:** Authentication, endpoints, parameters, responses, errors, rate limits
-
-### User Guides
-**When to load reference:** [documentation-types-and-workflows.md](references/documentation-types-and-workflows.md) for feature docs, how-tos, troubleshooting
-
-**Key components:** Overview, prerequisites, step-by-step instructions, configuration, troubleshooting
-
-### Tutorials
-**When to load reference:** [documentation-types-and-workflows.md](references/documentation-types-and-workflows.md) for learning-focused content
-
-**Key components:** Learning objectives, time estimate, prerequisites, progressive steps, working examples, next steps
+## Documentation Templates
 
 ### README Files
-**Key components:** Description, features, installation, quick start, configuration, license
 
-**Template:**
+Essential components for project documentation:
+
 ```markdown
 # Project Name
-Brief description
+Brief description of what the project does
 
 ## Features
-- Feature 1
-- Feature 2
+- Key feature 1
+- Key feature 2
+- Key feature 3
 
 ## Installation
-[commands]
+[step-by-step installation commands]
 
 ## Quick Start
-[working example]
+[minimal working example]
+
+## Configuration
+[environment variables or config options]
 
 ## License
-[license]
+[license type]
 ```
 
 ### Release Notes
-**Key components:** Version/date, summary, new features, bug fixes, breaking changes, migration guide
 
-**Template:**
+Structure for version releases:
+
 ```markdown
-# vX.X.X - Date
+# Version X.X.X - YYYY-MM-DD
 
 ## Summary
-[overview]
+[High-level overview of this release]
 
 ## New Features
-- Feature (#issue)
+- Feature description (#issue-number)
+- Feature description (#issue-number)
 
 ## Bug Fixes
-- Fix (#issue)
+- Fix description (#issue-number)
+- Fix description (#issue-number)
 
 ## Breaking Changes
-⚠️ **Change description**
-Migration: [steps]
+⚠️ **Change that breaks compatibility**
+Migration guide: [step-by-step migration instructions]
+
+## Deprecations
+- Deprecated feature (will be removed in vX.X)
 ```
 
-### Architecture Documents
-**When to load reference:** [documentation-types-and-workflows.md](references/documentation-types-and-workflows.md) for system design, technical decisions
+## Quality Standards
 
-**Key components:** Executive summary, system context, diagrams, components, data flow, technology stack, design decisions
+Documentation quality checklist before publishing:
 
-## Quality Checklist
+- [ ] **Accuracy** - All technical details are correct
+- [ ] **Completeness** - All necessary topics covered
+- [ ] **Clarity** - Target audience can understand content
+- [ ] **Examples** - Working code included and tested
+- [ ] **Structure** - Logical organization with clear headings
+- [ ] **Consistency** - Terminology and formatting consistent
+- [ ] **Links** - All hyperlinks are valid
+- [ ] **Grammar** - No spelling or grammatical errors
+- [ ] **Current** - Version numbers and dates up-to-date
 
-Before publishing documentation:
+## Common Pitfalls to Avoid
 
-- [ ] Accuracy: All technical details correct
-- [ ] Completeness: All necessary topics covered
-- [ ] Clarity: Target audience can understand
-- [ ] Examples: Working code included and tested
-- [ ] Structure: Logical organization with clear headings
-- [ ] Consistency: Terminology and formatting consistent
-- [ ] Links: All hyperlinks valid
-- [ ] Grammar: No spelling/grammatical errors
-- [ ] Current: Version numbers and dates up-to-date
+1. **Assuming knowledge** - Define all acronyms and technical terms
+2. **Vague instructions** - Be specific with concrete examples
+3. **Missing error scenarios** - Document errors and solutions
+4. **Outdated examples** - Test and update code regularly
+5. **Inconsistent terminology** - Use identical terms throughout
+6. **Missing prerequisites** - List all requirements upfront
+7. **Poor formatting** - Use headings, lists, code blocks properly
+8. **No examples** - Always include working code samples
+9. **Wrong audience level** - Match technical depth to readers
+10. **Dense text** - Break into scannable sections with clear headings
 
-## Common Pitfalls
+## Reference Files
 
-1. Assuming knowledge - Define acronyms and technical terms
-2. Vague instructions - Be specific with examples
-3. Missing error scenarios - Document errors and solutions
-4. Outdated code - Test and update examples regularly
-5. Inconsistent terms - Use same terminology throughout
-6. Missing prerequisites - List all requirements upfront
-7. Poor formatting - Use headings, lists, code blocks properly
-8. No examples - Always include working code samples
-9. Wrong audience level - Match technical depth to readers
-10. Dense text - Break into scannable sections with headings
-
-## References
-
-- **[documentation-types-and-workflows.md](references/documentation-types-and-workflows.md)** - Comprehensive patterns and templates for API docs, user guides, tutorials, architecture docs, and technical specifications
+- **[documentation-types-and-workflows.md](references/documentation-types-and-workflows.md)** - Complete templates and patterns for API docs, user guides, tutorials, architecture docs, and technical specifications
 - **[writing-guidelines.md](references/writing-guidelines.md)** - Detailed style rules for clarity, active voice, specificity, consistency, heading hierarchy, code formatting, and lists
 

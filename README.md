@@ -4,7 +4,7 @@ A comprehensive collection of Claude AI skills (and other compatible IDEs) for s
 
 ## 🎉 Recent Update (January 2026)
 
-**All 30 skills fully optimized and Agent Skills compliant!**
+**All 39 skills fully optimized and Agent Skills compliant!**
 
 ### Latest Improvements (January 15, 2026)
 - ✅ **Specification Compliant** - Removed non-standard frontmatter fields (license, metadata)
@@ -13,21 +13,20 @@ A comprehensive collection of Claude AI skills (and other compatible IDEs) for s
 - ✅ **Critical Tips** - Added best practice tips for development skills
 - ✅ **Improved Overviews** - Replaced placeholders with actual content
 - ✅ **100% compliant** - All skills under 500-line hard limit
-- ✅ **90% size reduction** - Average skill reduced from ~700 to ~110 lines
-- ✅ **300+ reference files** - Detailed content split into modular references
+- ✅ **90% size reduction** - Average skill reduced from ~700 to ~176 lines
+- ✅ **328+ reference files** - Detailed content split into modular references
 - ✅ **Better organized** - Core concepts in SKILL.md, details in references/
-
-See [SKILLS_CATALOG.md](SKILLS_CATALOG.md) for complete details and [BEST_PRACTICES_ANALYSIS.md](BEST_PRACTICES_ANALYSIS.md) for detailed analysis of improvements.
 
 ## Overview
 
-This repository provides **30 specialized AI skills** organized into six categories:
-- **Migration** (8 skills) - Legacy code and system migrations
-- **Development** (8 skills) - Backend, frontend, database, DevOps
-- **Review** (9 skills) - Code quality, security, architecture, design  
-- **Requirements** (3 skills) - Gathering, review, planning
+This repository provides **39 specialized AI skills** organized into multiple categories:
+- **Cloud Platforms** (6 skills) - AWS, Azure, GCP, Alibaba, IBM, Oracle Cloud
+- **Migration & Legacy** (10 skills) - Application, database, platform, system migrations, COBOL, JCL, PL/I, RPG analyzers, mainframe systems
+- **Development** (7 skills) - Backend, frontend, database, DevOps, refactoring, git commits
+- **Review & Quality** (8 skills) - Code quality, security, architecture, design reviews
+- **Requirements & Planning** (3 skills) - Gathering, review, planning
 - **Testing** (1 skill) - Integration and E2E testing
-- **Documentation** (1 skill) - Technical writing
+- **Specialized** (4 skills) - Bug analysis, technical writing, KeyCloak administration
 
 ## Compliance with Agent Skills Specification
 
@@ -42,17 +41,77 @@ This repository provides **30 specialized AI skills** organized into six categor
 
 | Metric | Value |
 |--------|-------|
-| Total Skills | 30 |
-| Average Lines per Skill | ~110 (down from ~700) |
-| Reference Files | 300+ |
-| Skills < 300 lines | 28/30 (93%) |
-| Skills < 500 lines | 30/30 (100%) |
+| Total Skills | 39 |
+| Average Lines per Skill | ~176 (down from ~700) |
+| Reference Files | 328+ |
+| Total Documentation | 3.3MB |
+| Skills < 300 lines | 35/39 (90%) |
+| Skills < 500 lines | 39/39 (100%) |
 
 ## Skills by Category
 
+### ☁️ Cloud Platforms (6 skills)
+
+#### 1. AWS Cloud
+Provides comprehensive Amazon Web Services (AWS) guidance including EC2, S3, RDS, Lambda, ECS/EKS, CloudFormation, API Gateway, VPC, IAM, security configuration, cost optimization, and infrastructure as code.
+
+**Use Cases:**
+- Deploying to AWS and designing AWS infrastructure
+- Setting up EC2 instances, S3 buckets, RDS databases
+- Building serverless applications with Lambda
+- Container orchestration with ECS/EKS
+- Infrastructure as code with Terraform/CloudFormation/CDK
+
+#### 2. Azure Cloud
+Provides comprehensive Microsoft Azure guidance including Virtual Machines, Azure Storage, Azure SQL Database, App Service, Functions, AKS, Azure DevOps, ARM templates, Bicep, security configuration, and cost optimization.
+
+**Use Cases:**
+- Deploying to Azure and designing Azure infrastructure
+- Setting up VMs, Storage accounts, Azure SQL
+- Kubernetes orchestration with AKS
+- Infrastructure as code with Bicep/ARM/Terraform
+- Azure DevOps and CI/CD pipelines
+
+#### 3. Google Cloud Platform
+Provides comprehensive GCP guidance including Compute Engine, Cloud Storage, Cloud SQL, BigQuery, GKE, Cloud Functions, Cloud Run, VPC networking, IAM, security configuration, and infrastructure as code.
+
+**Use Cases:**
+- Deploying to Google Cloud and designing GCP infrastructure
+- Setting up GCE instances, Cloud Storage, Cloud SQL
+- Data analytics with BigQuery
+- Kubernetes with GKE
+- Infrastructure as code with Terraform
+
+#### 4. Alibaba Cloud
+Provides comprehensive Alibaba Cloud (Aliyun) guidance including ECS, ApsaraDB, OSS, SLB, VPC, RAM, ACK (Kubernetes), Function Compute, API Gateway, CDN, and monitoring services.
+
+**Use Cases:**
+- Working with Alibaba Cloud services
+- Designing cloud architecture on Aliyun
+- Setting up Chinese cloud infrastructure
+- Multi-region deployments in China
+
+#### 5. IBM Cloud
+Provides comprehensive IBM Cloud platform guidance including compute services (VPC, IKS, Code Engine), storage, databases (Db2, Cloudant, PostgreSQL), AI/ML services (Watson), IAM security, and monitoring.
+
+**Use Cases:**
+- Working with IBM Cloud infrastructure
+- Deploying applications to IBM Cloud
+- Managing cloud resources and services
+- Integration with Watson AI services
+
+#### 6. Oracle Cloud Infrastructure
+Provides comprehensive OCI guidance including compute instances, networking (VCN, load balancers, VPN), storage, database services (Autonomous Database, MySQL, NoSQL), OKE, IAM, and infrastructure as code.
+
+**Use Cases:**
+- Designing OCI architecture
+- Provisioning cloud resources
+- Setting up Autonomous Database
+- Container orchestration with OKE
+
 ### 📋 Requirements & Architecture (3 skills)
 
-#### 1. Requirements Gathering
+#### 7. Requirements Gathering
 Guides comprehensive requirements gathering and analysis including stakeholder interviews, user story creation, use case documentation, acceptance criteria, requirements prioritization, and traceability.
 
 **Capabilities:**
@@ -70,7 +129,7 @@ Guides comprehensive requirements gathering and analysis including stakeholder i
 - Requirements prioritization and traceability
 - Business analysis and stakeholder management
 
-#### 2. Requirement Review
+#### 8. Requirement Review
 Conducts comprehensive requirements review including completeness validation, clarity assessment, consistency checking, testability evaluation, and standards compliance.
 
 **Capabilities:**
@@ -88,7 +147,7 @@ Conducts comprehensive requirements review including completeness validation, cl
 - Identifying gaps, conflicts, and ambiguities
 - Ensuring standards compliance
 
-#### 3. Software Solution Architecture
+#### 9. Architecture Design
 Designs comprehensive software solution architectures including system components, technology stacks, integration patterns, scalability strategies, and deployment models.
 
 **Capabilities:**
@@ -106,9 +165,9 @@ Designs comprehensive software solution architectures including system component
 - Evaluating technology choices
 - Creating architecture documentation
 
-### 🛠️ Design & Implementation (5 skills)
+### 🛠️ Design & Implementation (7 skills)
 
-#### 4. Backend Design
+#### 10. Backend Design
 Designs comprehensive backend systems including RESTful APIs, microservices, database architecture, authentication/authorization, caching strategies, message queues, and scalability patterns.
 
 **Capabilities:**
@@ -126,7 +185,7 @@ Designs comprehensive backend systems including RESTful APIs, microservices, dat
 - Designing authentication flows
 - Integration patterns and messaging systems
 
-#### 5. Backend Coding
+#### 11. Backend Coding
 Expert backend development guidance covering Node.js, Python, Java, Go, API design, database patterns, authentication, caching, message queues, microservices, and testing.
 
 **Capabilities:**
@@ -144,7 +203,7 @@ Expert backend development guidance covering Node.js, Python, Java, Go, API desi
 - Authentication and security implementation
 - Performance optimization
 
-#### 6. Frontend UI/UX Design
+#### 12. Frontend UI/UX Design
 Creates comprehensive frontend UI/UX designs including user interfaces, design systems, component libraries, responsive layouts, and accessibility implementations.
 
 **Capabilities:**
@@ -162,7 +221,7 @@ Creates comprehensive frontend UI/UX designs including user interfaces, design s
 - Ensuring accessibility compliance
 - Design specification and prototyping
 
-#### 7. Frontend Coding
+#### 13. Frontend Coding
 Expert frontend development guidance covering React, Vue, Angular, TypeScript, state management, component architecture, performance optimization, accessibility, and testing.
 
 **Capabilities:**
@@ -180,7 +239,43 @@ Expert frontend development guidance covering React, Vue, Angular, TypeScript, s
 - Performance optimization
 - Frontend testing and accessibility
 
-#### 8. Code Refactoring
+#### 14. Database Design
+Designs comprehensive database schemas including relational and NoSQL models, normalization, indexing strategies, relationship modeling, data types, constraints, and performance optimization.
+
+**Capabilities:**
+- Relational and NoSQL database design
+- Schema design and normalization
+- Indexing strategies and query optimization
+- Entity-relationship diagrams (ERD)
+- Data types and constraints
+- Database best practices
+
+**Use Cases:**
+- Designing database schemas
+- Creating data models
+- Optimizing database queries
+- Schema migrations
+- Database architecture planning
+
+#### 15. DevOps
+Provides comprehensive DevOps guidance including CI/CD pipelines, infrastructure as code (Terraform, CloudFormation), container orchestration (Docker, Kubernetes), deployment strategies, monitoring, and configuration management.
+
+**Capabilities:**
+- CI/CD pipeline design and implementation
+- Infrastructure as code (IaC)
+- Container orchestration with Kubernetes
+- Deployment automation
+- Monitoring and observability
+- Configuration management
+
+**Use Cases:**
+- Building CI/CD pipelines
+- Automating infrastructure provisioning
+- Container orchestration
+- Implementing deployment strategies
+- Setting up monitoring and alerting
+
+#### 16. Code Refactoring
 Guides systematic code refactoring to improve code quality, maintainability, and design. Identifies code smells, applies refactoring patterns, ensures test coverage, and follows safe refactoring practices.
 
 **Capabilities:**
@@ -198,9 +293,81 @@ Guides systematic code refactoring to improve code quality, maintainability, and
 - Modernizing legacy code
 - Code cleanup and optimization
 
-### 🔍 Review & Quality (3 skills)
+### 🔍 Review & Quality (8 skills)
 
-#### 9. Architecture Design Review
+#### 17. Backend Code Review
+Conducts comprehensive backend code reviews including API design (REST/GraphQL/gRPC), database patterns, authentication/authorization, caching strategies, message queues, microservices architecture, security vulnerabilities, and performance optimization.
+
+**Capabilities:**
+- Backend code quality assessment
+- API design review
+- Database query optimization
+- Security vulnerability detection
+- Performance analysis
+- Best practices validation
+
+**Use Cases:**
+- Reviewing backend code
+- Assessing API implementations
+- Validating database patterns
+- Security code review
+- Performance optimization review
+
+#### 18. Frontend Code Review
+Conducts comprehensive frontend code reviews including React/Vue/Angular component analysis, TypeScript/JavaScript quality assessment, CSS/styling review, performance optimization, accessibility compliance, and security vulnerabilities.
+
+**Capabilities:**
+- Frontend code quality assessment
+- Component architecture review
+- JavaScript/TypeScript quality check
+- CSS/styling validation
+- Performance analysis
+- Accessibility compliance (WCAG)
+
+**Use Cases:**
+- Reviewing React/Vue/Angular components
+- Analyzing JavaScript/TypeScript code
+- Validating CSS/SCSS
+- Assessing web performance
+- Accessibility audits
+
+#### 19. Code Quality Review
+Conducts comprehensive code quality reviews including code smells detection, maintainability assessment, complexity analysis, design pattern evaluation, naming conventions, code duplication, and technical debt identification.
+
+**Capabilities:**
+- Code smell detection
+- Maintainability assessment
+- Complexity analysis
+- Design pattern evaluation
+- Technical debt identification
+- Best practices validation
+
+**Use Cases:**
+- Reviewing code quality
+- Detecting code smells
+- Measuring code complexity
+- Identifying technical debt
+- Refactoring candidates assessment
+
+#### 20. Code Security Review
+Conducts comprehensive security code reviews including vulnerability detection (OWASP Top 10, CWE), authentication/authorization flaws, injection attacks, cryptography issues, sensitive data exposure, API security, and compliance validation.
+
+**Capabilities:**
+- Security vulnerability detection
+- OWASP Top 10 compliance
+- Authentication/authorization review
+- Injection attack prevention
+- Cryptography assessment
+- Security best practices validation
+
+**Use Cases:**
+- Security code audits
+- Vulnerability scanning
+- Security compliance validation
+- Penetration testing support
+- Secure coding review
+
+#### 21. Architecture Design Review
 Conducts comprehensive architecture design reviews including system design validation, architecture pattern assessment, quality attributes evaluation, technology stack review, and scalability analysis.
 
 **Capabilities:**
@@ -218,7 +385,7 @@ Conducts comprehensive architecture design reviews including system design valid
 - Evaluating technology choices
 - Architecture quality gates
 
-#### 10. Backend Design Review
+#### 22. Backend Design Review
 Conducts comprehensive backend design reviews covering API design quality, database architecture validation, microservices patterns assessment, integration strategies evaluation, security design review, and scalability analysis.
 
 **Capabilities:**
@@ -236,7 +403,7 @@ Conducts comprehensive backend design reviews covering API design quality, datab
 - Evaluating microservices architectures
 - Security and performance reviews
 
-#### 11. Frontend Design Review
+#### 23. Frontend Design Review
 Conducts comprehensive frontend design reviews covering UI/UX design quality, design system validation, accessibility compliance, responsive design patterns, component library architecture, and visual design consistency.
 
 **Capabilities:**
@@ -254,9 +421,27 @@ Conducts comprehensive frontend design reviews covering UI/UX design quality, de
 - Evaluating component libraries
 - Assessing responsive designs
 
+#### 24. Project Planning
+Guides comprehensive software project planning including task breakdown, estimation, sprint planning, backlog management, resource allocation, milestone tracking, and risk management.
+
+**Capabilities:**
+- Project planning and estimation
+- Task breakdown and user stories
+- Sprint planning and backlog management
+- Resource allocation and milestone tracking
+- Risk management and mitigation
+- Roadmap creation
+
+**Use Cases:**
+- Planning software projects
+- Organizing sprints and iterations
+- Breaking down features into tasks
+- Estimating effort and timeline
+- Managing product backlogs
+
 ### 🧪 Testing (1 skill)
 
-#### 12. Integration Testing
+#### 25. Integration Testing
 Designs comprehensive integration testing strategies including API testing, database testing, microservices testing, end-to-end testing, and test automation frameworks.
 
 **Capabilities:**
@@ -274,9 +459,48 @@ Designs comprehensive integration testing strategies including API testing, data
 - Testing APIs and microservices
 - Quality assurance and CI/CD integration
 
-### 🔄 Legacy Migration (4 skills)
+### 🔄 Legacy Migration & Mainframe (10 skills)
 
-#### 13. JCL Migration Analyzer
+#### 26. Application Migration
+Guides comprehensive application migration projects including legacy system modernization, cloud migration, technology stack upgrades, database migration, and architecture transformation.
+
+**Capabilities:**
+- Migration strategy planning
+- Legacy system assessment
+- Cloud migration patterns
+- Technology stack modernization
+- Risk management and validation
+- Cutover and rollback planning
+
+**Use Cases:**
+- Migrating applications to cloud
+- Modernizing legacy systems
+- Changing technology stacks
+- Replatforming and refactoring
+- Strangler pattern implementation
+
+#### 27. Database Migration
+Guides database migration projects including engine changes (MySQL to PostgreSQL, Oracle to PostgreSQL), version upgrades, cloud migrations, schema migrations, zero-downtime migrations, and replication setup.
+
+**Capabilities:**
+- Database engine migration
+- Schema migration and transformation
+- Zero-downtime migration strategies
+- Replication and synchronization
+- Data migration validation
+- Rollback procedures
+
+**Use Cases:**
+- Migrating database engines
+- Upgrading database versions
+- Moving databases to cloud
+- Schema transformations
+- Data center migrations
+
+#### 28. Platform Migration
+Guides infrastructure and platform migration including cloud-to-cloud migration (AWS to GCP, Azure to AWS), Kubernetes cluster migration, CI/CD platform changes, monitoring stack migration, and network infrastructure transformation.
+
+**Capabilities:**\n- Cloud-to-cloud migration\n- Kubernetes cluster migration\n- CI/CD platform changes\n- Infrastructure as code migration\n- Multi-cloud strategies\n- Service mesh migration\n\n**Use Cases:**\n- Changing cloud providers\n- Migrating Kubernetes clusters\n- Infrastructure platform changes\n- CI/CD tool migration\n- Multi-cloud implementations\n\n#### 29. System Migration\nGuides operating system and hardware platform migrations including Linux distribution changes, Windows to Linux migration, mainframe to x86 modernization, data center migrations, and system consolidation.\n\n**Capabilities:**\n- OS migration and upgrades\n- Hardware platform changes\n- Mainframe to x86 modernization\n- Virtual machine migrations (P2V, V2V)\n- System consolidation\n- Configuration transfer\n\n**Use Cases:**\n- Operating system migrations\n- Hardware platform changes\n- Mainframe modernization\n- Data center migrations\n- System consolidation projects\n\n#### 30. IBM Mainframe\nProvides comprehensive IBM Mainframe administration, development, and modernization guidance including z/OS operations, JCL scripting, COBOL/PL/I programming, CICS/IMS configuration, DB2 administration, and mainframe-to-cloud migration strategies.\n\n**Capabilities:**\n- z/OS system administration\n- JCL scripting and batch processing\n- COBOL/PL/I development\n- CICS/IMS transaction processing\n- DB2 database administration\n- Mainframe modernization strategies\n\n**Use Cases:**\n- Mainframe system administration\n- Batch job development and maintenance\n- COBOL/PL/I programming\n- Transaction processing systems\n- Mainframe to cloud migration\n\n#### 31. Fujitsu Mainframe\nAnalyzes and assists with Fujitsu mainframe systems including FACOM, PRIMERGY, BS2000/OSD, OSIV/MSP, OSIV/XSP, NetCOBOL, PowerCOBOL, and Fujitsu JCL.\n\n**Capabilities:**\n- Fujitsu mainframe system analysis\n- NetCOBOL and PowerCOBOL programming\n- Fujitsu JCL scripting\n- BS2000/OSD and OSIV operations\n- Migration to modern platforms\n- SYMFOWARE database integration\n\n**Use Cases:**\n- Fujitsu mainframe modernization\n- NetCOBOL/PowerCOBOL analysis\n- Fujitsu JCL conversion\n- FACOM system migration\n- BS2000 application modernization\n\n#### 32. JCL Migration Analyzer
 Analyzes Job Control Language (JCL) scripts for migration to modern workflow orchestration systems.
 
 **Capabilities:**
@@ -292,7 +516,7 @@ Analyzes Job Control Language (JCL) scripts for migration to modern workflow orc
 - Converting .jcl/.JCL files to modern orchestration
 - Analyzing job steps and procedures
 
-#### 14. COBOL Migration Analyzer
+#### 33. COBOL Migration Analyzer
 Analyzes COBOL programs for migration to Java applications.
 
 **Capabilities:**
@@ -309,7 +533,7 @@ Analyzes COBOL programs for migration to Java applications.
 - Processing copybooks (.cpy files)
 - Legacy system modernization
 
-#### 15. PL/I Migration Analyzer
+#### 34. PL/I Migration Analyzer
 Analyzes PL/I (Programming Language One) programs for migration to Java.
 
 **Capabilities:**
@@ -326,7 +550,7 @@ Analyzes PL/I (Programming Language One) programs for migration to Java.
 - Processing PL/I procedures and structures
 - Mainframe application modernization
 
-#### 16. RPG Migration Analyzer
+#### 35. RPG Migration Analyzer
 Analyzes RPG (Report Program Generator) programs from AS/400 and IBM i systems for migration to Java.
 
 **Capabilities:**
@@ -342,6 +566,80 @@ Analyzes RPG (Report Program Generator) programs from AS/400 and IBM i systems f
 - AS/400 or IBM i system migration
 - Analyzing .rpg/.RPGLE files
 - Processing display and database files
+
+### 🔧 Specialized Skills (4 skills)
+
+#### 36. Bug Analysis
+Analyzes software bugs including root cause identification, severity assessment, impact analysis, reproduction steps validation, and fix recommendations.
+
+**Capabilities:**
+- Root cause analysis
+- Bug triage and prioritization
+- Impact assessment
+- Reproduction steps validation
+- Fix recommendations
+- Regression analysis
+
+**Use Cases:**
+- Investigating bugs and issues
+- Analyzing crash reports
+- Debugging production problems
+- Root cause analysis
+- Bug report validation
+
+#### 37. Git Commit
+Generates well-structured git commit messages following conventional commit standards and best practices.
+
+**Capabilities:**
+- Conventional commit message generation
+- Commit type classification (feat, fix, docs, etc.)
+- Clear and descriptive commit messages
+- Breaking change documentation
+- Changelog-friendly commits
+- Team convention adherence
+
+**Use Cases:**
+- Writing commit messages
+- Following conventional commits
+- Creating meaningful git history
+- Generating changelogs
+- Maintaining version control quality
+
+#### 38. Technical Writing
+Creates high-quality technical documentation including API documentation, user guides, tutorials, architecture documents, README files, release notes, and technical specifications.
+
+**Capabilities:**
+- API documentation
+- User guides and tutorials
+- Architecture documentation
+- README files
+- Release notes
+- Technical specifications
+
+**Use Cases:**
+- Writing API documentation
+- Creating user guides
+- Documenting architecture
+- Writing tutorials
+- Preparing release notes
+
+#### 39. KeyCloak Administration
+Provides comprehensive KeyCloak administration guidance including realm management, user/group administration, client configuration, authentication flows, identity brokering, and authorization policies.
+
+**Capabilities:**
+- Realm and client configuration
+- User federation (LDAP/AD)
+- SSO setup (SAML/OIDC)
+- Authentication flow customization
+- Role-based access control (RBAC)
+- Multi-factor authentication (MFA)
+
+**Use Cases:**
+- Configuring KeyCloak SSO
+- Setting up identity providers
+- Managing realms and clients
+- Implementing RBAC
+- User federation setup
 
 ## Getting Started
 
@@ -367,6 +665,14 @@ Each skill is automatically activated when you:
 
 **Example Prompts by Category:**
 
+**Cloud Platforms:**
+- "Deploy a Node.js application to AWS using ECS"
+- "Set up Azure Kubernetes Service for microservices"
+- "Design a GCP architecture with Cloud Run and Cloud SQL"
+- "Configure Alibaba Cloud OSS and CDN"
+- "Set up IBM Cloud VPC and IKS cluster"
+- "Deploy Oracle Autonomous Database on OCI"
+
 **Requirements & Architecture:**
 - "Help me gather requirements for a new e-commerce platform"
 - "Review these user stories for quality and completeness"
@@ -377,25 +683,38 @@ Each skill is automatically activated when you:
 - "Design a REST API for user management"
 - "Help me implement authentication in Node.js"
 - "Create a React component library structure"
+- "Design a PostgreSQL schema for e-commerce"
+- "Set up a CI/CD pipeline with GitHub Actions"
 - "Refactor this code to improve maintainability"
 
 **Review & Quality:**
-- "Review this architecture design for scalability issues"
-- "Validate this API specification"
-- "Review this Figma design for accessibility compliance"
-- "Assess the quality of these requirements"
+- "Review this backend API code for best practices"
+- "Check this React component for accessibility issues"
+- "Analyze code quality and identify technical debt"
+- "Perform a security review of this authentication code"
+- "Review this architecture design for scalability"
+- "Validate this database schema design"
+- "Plan the next sprint with these user stories"
 
 **Testing:**
 - "Create an integration test strategy for microservices"
 - "Write integration tests for this REST API"
 - "Set up test automation with Playwright"
 
-**Legacy Migration:**
+**Legacy Migration & Mainframe:**
 - "Analyze this JCL file and explain the job flow"
 - "Convert this COBOL program to Java"
 - "Extract the business logic from this PL/I procedure"
 - "Generate a Spring Batch job from this JCL"
 - "Map this RPG data structure to a Java POJO"
+- "Migrate this IBM mainframe application to AWS"
+- "Analyze this Fujitsu COBOL program for modernization"
+
+**Specialized:**
+- "Analyze this bug and identify root cause"
+- "Generate a conventional commit message for these changes"
+- "Write API documentation for this REST service"
+- "Configure KeyCloak SSO with SAML integration"
 
 ## Key Features
 
@@ -468,65 +787,54 @@ Complete software development lifecycle support from initial requirements gather
 
 ```
 nghe-skills/
-├── .claude/
-│   └── skills/
-│       ├── requirements-gathering/          # Requirements elicitation & documentation
-│       ├── requirement-review/              # Requirements validation & quality
-│       ├── project-planning/                # Project planning & task management
-│       ├── software-solution-architecture/  # Solution architecture design
-│       ├── backend-design/                  # Backend system design
-│       ├── frontend-ui-ux-design/          # Frontend UI/UX design
-│       ├── database-design/                 # Database schema design
-│       ├── backend-coding/                  # Backend implementation
-│       ├── frontend-coding/                 # Frontend implementation
-│       ├── code-refactoring/               # Code quality improvement
-│       ├── backend-code-review/            # Backend code review
-│       ├── frontend-code-review/           # Frontend code review
-│       ├── code-quality-review/            # Code quality review
-│       ├── code-security-review/           # Security code review
-│       ├── architecture-design-review/     # Architecture validation
-│       ├── backend-design-review/          # Backend design validation
-│       ├── frontend-design-review/         # Frontend design validation
-│       ├── integration-testing/            # Integration test strategies
-│       ├── devops/                         # DevOps & CI/CD
-│       ├── git-commit/                     # Git commit messages
-│       ├── technical-writing/              # Technical documentation
-│       ├── application-migration/          # Application migration
-│       ├── database-migration/             # Database migration
-│       ├── platform-migration/             # Platform & infrastructure migration
-│       ├── system-migration/               # OS & system migration
-│       ├── bug-analysis/                   # Bug analysis & troubleshooting
-│       ├── cobol-migration-analyzer/       # COBOL to Java migration
-│       ├── jcl-migration-analyzer/         # JCL to modern orchestration
-│       ├── pli-migration-analyzer/         # PL/I to Java migration
-│       └── rpg-migration-analyzer/         # RPG to Java migration
+├── .claude/skills/              # 39 specialized AI skills
+│   ├── Cloud (6)                # AWS, Azure, GCP, Alibaba, IBM, Oracle
+│   ├── Requirements (3)         # Gathering, review, architecture design
+│   ├── Development (7)          # Backend, frontend, database, DevOps, refactoring
+│   ├── Review (8)               # Code, security, quality, design reviews
+│   ├── Testing (1)              # Integration testing
+│   ├── Migration (10)           # App, DB, platform, mainframe, analyzers
+│   └── Specialized (4)          # Bug analysis, git, docs, KeyCloak
 ├── .gitignore
 ├── LICENSE
-├── README.md
-├── my-skills.md
-├── rules.md
-└── tasks.md
+├── README.md                    # Complete documentation
+└── rules.md                     # Agent Skills guidelines
 ```
 
+### Skill Categories in .claude/skills/
+
+**Cloud Platforms (6):** `alibaba-cloud`, `aws-cloud`, `azure-cloud`, `google-cloud`, `ibm-cloud`, `oracle-cloud`
+
+**Requirements & Planning (3):** `architecture-design`, `requirement-review`, `requirements-gathering`
+
+**Development (7):** `backend-coding`, `backend-design`, `code-refactoring`, `database-design`, `devops`, `frontend-coding`, `frontend-ui-ux-design`
+
+**Review & Quality (8):** `architecture-design-review`, `backend-code-review`, `backend-design-review`, `code-quality-review`, `code-security-review`, `frontend-code-review`, `frontend-design-review`, `project-planning`
+
+**Testing (1):** `integration-testing`
+
+**Migration & Legacy (10):** `application-migration`, `cobol-migration-analyzer`, `database-migration`, `fujitsu-mainframe`, `ibm-mainframe`, `jcl-migration-analyzer`, `platform-migration`, `pli-migration-analyzer`, `rpg-migration-analyzer`, `system-migration`
+
+**Specialized (4):** `bug-analysis`, `git-commit`, `keycloak-administration`, `technical-writing`
+
 Each skill directory contains:
-- `SKILL.md` - Comprehensive skill documentation with examples and best practices
-- `references/` - Supporting documentation and detailed guides (where applicable)
+- `SKILL.md` - Core skill documentation with capabilities and examples
+- `references/` - Detailed reference documentation loaded on demand
 - `assets/` - Templates and resources (where applicable)
-- `scripts/` - Helper scripts (where applicable)
+- `scripts/` - Helper scripts and utilities (where applicable)
 
 ## Skill Categories Overview
 
 | Category | Skills | Focus Area |
 |----------|--------|------------|
-| 📋 **Requirements & Planning** | 4 | Requirements gathering, review, project planning, solution architecture |
-| 🎨 **Design** | 3 | Backend design, frontend UI/UX design, database design |
-| 💻 **Implementation** | 3 | Backend coding, frontend coding, code refactoring |
-| 🔍 **Code Review** | 4 | Backend, frontend, code quality, security code reviews |
-| ✅ **Design Review** | 3 | Architecture, backend design, frontend design reviews |
+| ☁️ **Cloud Platforms** | 6 | AWS, Azure, GCP, Alibaba Cloud, IBM Cloud, Oracle Cloud Infrastructure |
+| 📋 **Requirements & Planning** | 3 | Requirements gathering, review, architecture design |
+| 🛠️ **Design & Implementation** | 7 | Backend, frontend, database design, DevOps, refactoring |
+| 🔍 **Review & Quality** | 8 | Backend/frontend code review, quality, security, architecture/design reviews, project planning |
 | 🧪 **Testing** | 1 | Integration testing strategies |
-| 🚀 **DevOps & Operations** | 3 | DevOps/CI/CD, Git commits, technical writing |
-| 🔄 **Migration** | 9 | Application, database, platform, system, COBOL, JCL, PL/I, RPG, bug analysis |
-| **Total** | **30** | **Complete SDLC + Migration coverage** |
+| 🔄 **Migration & Legacy** | 10 | Application, database, platform, system migrations, IBM/Fujitsu mainframes, COBOL, JCL, PL/I, RPG analyzers |
+| 🔧 **Specialized** | 4 | Bug analysis, Git commits, technical writing, KeyCloak administration |
+| **Total** | **39** | **Complete SDLC + Cloud + Migration + Specialized coverage** |
 
 ## Use Cases
 
@@ -575,6 +883,14 @@ Each skill directory contains:
 
 ## Technologies Supported
 
+### Cloud Platforms
+- **AWS**: EC2, S3, RDS, Lambda, ECS, EKS, CloudFormation, VPC, IAM
+- **Azure**: Virtual Machines, Storage, SQL Database, App Service, Functions, AKS, ARM/Bicep
+- **GCP**: Compute Engine, Cloud Storage, Cloud SQL, BigQuery, GKE, Cloud Functions, Cloud Run
+- **Alibaba Cloud**: ECS, OSS, ApsaraDB, ACK, Function Compute
+- **IBM Cloud**: VPC, IKS, Code Engine, Db2, Cloudant, Watson
+- **Oracle Cloud**: Compute, Autonomous Database, OKE, VCN
+
 ### Languages & Frameworks
 **Modern:**
 - **Backend**: Node.js, Python, Java, Go, Express, Spring Boot, Django, FastAPI
@@ -582,7 +898,7 @@ Each skill directory contains:
 - **Testing**: Jest, JUnit, TestNG, Playwright, Cypress
 
 **Legacy:**
-- **Mainframe**: COBOL, JCL, PL/I
+- **Mainframe**: IBM z/OS, Fujitsu BS2000/OSIV, COBOL, JCL, PL/I
 - **AS/400**: RPG III/IV/ILE
 
 ### Architecture Patterns
@@ -605,10 +921,18 @@ Each skill directory contains:
 ### Workflow Orchestration
 - Spring Batch
 - Apache Airflow
-- Kubernetes Jobs
+- Kubernetes Jobs & CronJobs
 - AWS Step Functions
 - Azure Logic Apps
 - Shell scripts
+
+### Identity & Access Management
+- KeyCloak
+- OAuth2 / OpenID Connect
+- SAML
+- LDAP / Active Directory
+- JWT
+- RBAC / ABAC
 
 ## License
 
@@ -654,33 +978,36 @@ All skills in this repository follow these quality standards:
 ## Roadmap
 
 ### Current Status (v1.0)
-✅ **30 skills** covering complete SDLC, code quality, and migration
-- Requirements & Planning: 4 skills
-- Design: 3 skills  
-- Implementation: 3 skills
-- Code Review: 4 skills
-- Design Review: 3 skills
+✅ **39 skills** covering complete SDLC, cloud platforms, code quality, and migration
+- Cloud Platforms: 6 skills (AWS, Azure, GCP, Alibaba, IBM, Oracle)
+- Requirements & Planning: 3 skills
+- Design & Implementation: 7 skills  
+- Review & Quality: 8 skills
 - Testing: 1 skill
-- DevOps & Operations: 3 skills
-- Migration: 9 skills
+- Migration & Legacy: 10 skills (includes mainframe systems)
+- Specialized: 4 skills
 
 ### Upcoming Skills (Planned for v2.0)
 - **Unit Testing** - Unit test strategies and TDD implementation
 - **Performance Testing** - Load, stress, and performance testing
 - **Security Testing** - Security testing and vulnerability assessment
-- **Mobile App Development** - iOS and Android app development
+- **Mobile App Development** - iOS and Android app development (Swift, Kotlin, React Native, Flutter)
 - **Mobile App Design** - Mobile UI/UX design patterns
 - **API Documentation** - OpenAPI, Swagger, API documentation generation
-- **Cloud Architecture** - AWS, Azure, GCP architecture design
-- **Monitoring & Observability** - Application monitoring and alerting
+- **Cloud Architecture Optimization** - Cost optimization and performance tuning
+- **Monitoring & Observability** - Application monitoring, logging, and alerting (Prometheus, Grafana, ELK)
+- **Terraform Modules** - Reusable infrastructure modules
+- **Kubernetes Operators** - Custom Kubernetes operators development
 
 ### Enhancements (Future)
 - Interactive examples and templates
-- Code generation capabilities
-- Integration with popular tools (Jira, Confluence, Figma)
-- More legacy language support (NATURAL, Assembler)
+- Code generation capabilities with AI
+- Integration with popular tools (Jira, Confluence, Figma, GitHub)
+- More legacy language support (NATURAL, Assembler, CA-Gen)
 - Real-time collaboration features
 - AI-powered code analysis and suggestions
+- Performance profiling and optimization
+- Infrastructure cost analysis and recommendations
 
 ## Acknowledgments
 
@@ -730,6 +1057,6 @@ For issues, questions, or suggestions:
 
 ---
 
-**⚡ Powered by AI | 🎯 Focused on Quality | 🚀 Built for Scale**
+**✨ Crafted by Dau Quang Thanh | 🎯 Focused on Quality | 🚀 Built for Scale**
 
 *Making software development more efficient, one skill at a time.*
