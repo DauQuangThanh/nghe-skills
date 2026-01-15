@@ -24,10 +24,10 @@ This document provides comprehensive guidelines and rules for creating high-qual
 
 **Context window is a shared resource.** Every token in a skill competes for space with the agent's working context.
 
-- **Keep SKILL.md under 500 lines** as a hard target
-- **Frontmatter (name + description) should be ~100 tokens** - always loaded for all skills
-- **SKILL.md body should be < 5000 tokens** - loaded when skill triggers
-- **Move detailed content to reference files** - loaded only when needed
+- **Critical: Keep SKILL.md under 500 lines** as a hard target
+- **Critical: Frontmatter (name + description) should be ~100 tokens** - always loaded for all skills
+- **Critical: SKILL.md body should be < 5000 tokens** - loaded when skill triggers
+- **Critical: Move detailed content to reference files** - loaded only when needed
 
 **Why this matters:**
 - Skills are loaded alongside user requests, code, and other context
