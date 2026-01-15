@@ -12,11 +12,9 @@ A comprehensive collection of AI agent skills for software development, covering
 - **Progressive Disclosure**: Modular reference files loaded on-demand to optimize context usage
 - **Agent Skills Compliant**: Following [agentskills.io specification](https://agentskills.io/specification) with all skills under 500 lines
 
-## 🎉 Recent Update (January 2026)
-
 **All 39 skills fully optimized and Agent Skills compliant!**
 
-### Latest Improvements (January 15, 2026)
+### Latest Improvements
 - ✅ **Specification Compliant** - Removed non-standard frontmatter fields (license, metadata)
 - ✅ **Explicit Loading Conditions** - Added "when to load" guidance for all reference files
 - ✅ **Concrete Examples** - Added Quick Start examples to all skills
@@ -54,6 +52,11 @@ Install the Nghệ CLI tool directly from GitHub using `uv`:
 ```bash
 # Install from GitHub (recommended)
 uv tool install nghe-cli --force --from git+https://github.com/dauquangthanh/nghe-skills.git
+```
+
+```bash
+# Install from GitHub (recommended if you face TLS-related errors)
+uv tool install nghe-cli --force --from git+https://github.com/dauquangthanh/nghe-skills.git --native-tls
 ```
 
 ### Initialize a New Project
@@ -103,7 +106,7 @@ The Nghệ CLI (`nghe`) is a command-line tool for bootstrapping projects with A
 - **Multi-Agent Support**: Install skills for multiple AI assistants in one project
 - **Flexible Installation**: Initialize new projects or add skills to existing projects
 - **Upgrade Capability**: Update existing skill installations with automatic backups
-- **Local Development**: Support for local template testing with `--local-templates`
+- **Local Development**: Support for local template testing with `--use-local-source`
 - **Smart Detection**: Auto-detects git, validates AI assistant tools, and checks for existing installations
 - **Interactive Selection**: Multi-select interface for choosing AI assistants (arrow keys + space)
 - **GitHub Integration**: Downloads latest templates from GitHub releases with optional token authentication
@@ -146,7 +149,7 @@ nghe init my-project --ai claude --ignore-agent-tools
 nghe init existing-project --force
 
 # Use local templates (development)
-nghe init demo --local-templates --template-path /path/to/nghe-skills
+nghe init demo --use-local-source --local-source-path /path/to/nghe-skills
 
 # Skip TLS verification (not recommended)
 nghe init my-project --skip-tls
@@ -859,24 +862,14 @@ Provides comprehensive KeyCloak administration guidance including realm manageme
 # Install directly from GitHub repository
 uv tool install nghe-cli --force --from git+https://github.com/dauquangthanh/nghe-skills.git
 
+# Install directly from GitHub repository (if you face TLS-related errors)
+uv tool install nghe-cli --force --from git+https://github.com/dauquangthanh/nghe-skills.git --native-tls
+
 # Run directly without installation (one-time use)
 uvx --from git+https://github.com/dauquangthanh/nghe-skills.git nghe-cli init my-project
 ```
 
-#### Method 2: Install from PyPI
-
-```bash
-# Install globally via pip
-pip install nghe-cli
-
-# Or using pipx for isolated installation
-pipx install nghe-cli
-
-# Or using uv
-uv tool install nghe-cli
-```
-
-#### Method 3: Install from Source
+#### Method 2: Install from Source
 
 ```bash
 # Clone the repository
@@ -1333,7 +1326,7 @@ Contributions are welcome! Please feel free to submit issues or pull requests to
    nghe version
    
    # Test local templates
-   nghe init test-project --local-templates --template-path .
+   nghe init test-project --use-local-source --local-source-path .
    ```
 
 4. **Create a Feature Branch**

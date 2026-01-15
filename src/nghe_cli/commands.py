@@ -45,8 +45,8 @@ def init(
     skip_tls: bool = typer.Option(False, "--skip-tls", help="Skip SSL/TLS verification (not recommended)"),
     debug: bool = typer.Option(False, "--debug", help="Show verbose diagnostic output for network and extraction failures"),
     github_token: str = typer.Option(None, "--github-token", help="GitHub token to use for API requests (or set GH_TOKEN or GITHUB_TOKEN environment variable)"),
-    local_installation: bool = typer.Option(False, "--local-templates", help="Use local templates from repository instead of downloading from GitHub (for development)"),
-    nghe_skills_path: str = typer.Option(None, "--template-path", help="Path to local template directory (defaults to repo root if --local-templates is used)"),
+    local_installation: bool = typer.Option(False, "--use-local-source", help="Use local templates from repository instead of downloading from GitHub (for development)"),
+    nghe_skills_path: str = typer.Option(None, "--local-source-path", help="Path to local template directory (defaults to repo root if --use-local-source is used)"),
 ):
     """
     Initialize a new Nghệ Skills project from the latest template.
@@ -83,8 +83,8 @@ def init(
         nghe init --here --upgrade
 
         # Use local skills for development
-        nghe init demo --local-templates --ai claude
-        nghe init demo --local-templates --template-path /path/to/nghe-skills
+        nghe init demo --use-local-source --ai claude
+        nghe init demo --use-local-source --local-source-path /path/to/nghe-skills
 
         # With environment variables
         export NGHE_USE_LOCAL_INSTALLATION=1
