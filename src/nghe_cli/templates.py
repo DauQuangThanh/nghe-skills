@@ -1,4 +1,4 @@
-"""Template operations for Nghệ CLI."""
+"""Agent Skills operations for Nghệ CLI."""
 
 import json
 import shutil
@@ -161,18 +161,18 @@ def download_and_extract_template(
     is_first_agent: bool = True,
     downloaded_zip_path: Path = None
 ) -> Path:
-    """Download the latest release and extract it to create a new project.
+    """Download the latest agent skills release and set up for a new project.
     Returns project_path. Uses tracker if provided (with keys: fetch, download, extract, cleanup)
-    If local_installation is True, copies from local nghe_skills_path instead of downloading.
+    If local_installation is True, copies agent skills from local nghe_skills_path instead of downloading.
     If downloaded_zip_path is provided, uses that instead of downloading again.
 
     Args:
         is_first_agent: Currently unused (legacy parameter for backward compatibility).
-        downloaded_zip_path: Optional pre-downloaded template ZIP file path to reuse.
+        downloaded_zip_path: Optional pre-downloaded agent skills ZIP file path to reuse.
     """
     current_dir = Path.cwd()
 
-    # Handle local templates
+    # Handle local source
     if local_installation:
         if tracker:
             tracker.start(f"copy-{ai_assistant}")
@@ -185,25 +185,25 @@ def download_and_extract_template(
             source_path = Path(__file__).parent.parent.parent.resolve()
 
         if not source_path.exists():
-            error_msg = f"Template path does not exist: {source_path}"
+            error_msg = f"Agent skills path does not exist: {source_path}"
             if tracker:
                 tracker.error(f"copy-{ai_assistant}", error_msg)
             raise FileNotFoundError(error_msg)
 
         if verbose and not tracker:
-            console.print(f"[cyan]Using local templates from:[/cyan] {source_path}")
+            console.print(f"[cyan]Using local source from:[/cyan] {source_path}")
 
-        # Build the template by creating a structure similar to the release package
+        # Copy agent skills with structure similar to release package
         return copy_local_template(project_path, source_path, ai_assistant, is_current_dir, verbose, tracker, is_first_agent)
 
     # Use provided ZIP path or download new one
     if downloaded_zip_path and downloaded_zip_path.exists():
-        # Reuse downloaded template
+        # Reuse downloaded agent skills
         zip_path = downloaded_zip_path
         if tracker and verbose:
-            console.print(f"[cyan]Reusing downloaded template for {ai_assistant}[/cyan]")
+            console.print(f"[cyan]Reusing downloaded agent skills for {ai_assistant}[/cyan]")
     else:
-        # Download template (should not happen if called correctly from commands.py)
+        # Download agent skills (should not happen if called correctly from commands.py)
         if tracker:
             tracker.start(f"fetch-{ai_assistant}", "contacting GitHub API")
         try:
@@ -217,22 +217,22 @@ def download_and_extract_template(
             )
             if tracker:
                 tracker.complete(f"fetch-{ai_assistant}", f"release {meta['release']} ({meta['size']:,} bytes)")
-                tracker.add(f"download-{ai_assistant}", "Download template")
+                tracker.add(f"download-{ai_assistant}", "Download agent skills")
                 tracker.complete(f"download-{ai_assistant}", meta['filename'])
         except Exception as e:
             if tracker:
                 tracker.error(f"fetch-{ai_assistant}", str(e))
             else:
                 if verbose:
-                    console.print(f"[red]Error downloading template:[/red] {e}")
+                    console.print(f"[red]Error downloading agent skills:[/red] {e}")
             raise
         raise
 
     if tracker:
-        tracker.add(f"extract-{ai_assistant}", "Extract template")
+        tracker.add(f"extract-{ai_assistant}", "Extract agent skills")
         tracker.start(f"extract-{ai_assistant}")
     elif verbose:
-        console.print("Extracting template...")
+        console.print("Extracting agent skills...")
 
     try:
         if not is_current_dir:

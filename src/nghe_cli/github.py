@@ -100,10 +100,10 @@ def download_template_from_github(
     debug: bool = False,
     github_token: str = None
 ) -> Tuple[Path, dict]:
-    """Download the latest release template from GitHub.
+    """Download the latest agent skills release from GitHub.
 
-    Downloads a single common template package (nghe-skills.zip) that contains
-    all skills. The skills will be copied to appropriate agent folders by the caller.
+    Downloads a single common package (nghe-skills.zip) that contains
+    all agent skills. The skills will be copied to appropriate agent folders by the caller.
 
     Args:
         download_dir: Directory to download the file to
@@ -147,7 +147,7 @@ def download_template_from_github(
         raise typer.Exit(1)
 
     assets = release_data.get("assets", [])
-    # Look for single common template package
+    # Look for agent skills package
     pattern = "nghe-skills.zip"
     matching_assets = [
         asset for asset in assets
@@ -167,13 +167,13 @@ def download_template_from_github(
     file_size = asset["size"]
 
     if verbose:
-        console.print(f"[cyan]Found template:[/cyan] {filename}")
+        console.print(f"[cyan]Found agent skills package:[/cyan] {filename}")
         console.print(f"[cyan]Size:[/cyan] {file_size:,} bytes")
         console.print(f"[cyan]Release:[/cyan] {release_data['tag_name']}")
 
     zip_path = download_dir / filename
     if verbose:
-        console.print(f"[cyan]Downloading template...[/cyan]")
+        console.print(f"[cyan]Downloading agent skills...[/cyan]")
 
     try:
         with client.stream(
@@ -212,7 +212,7 @@ def download_template_from_github(
                         for chunk in response.iter_bytes(chunk_size=8192):
                             f.write(chunk)
     except Exception as e:
-        console.print(f"[red]Error downloading template[/red]")
+        console.print(f"[red]Error downloading agent skills[/red]")
         detail = str(e)
         if zip_path.exists():
             zip_path.unlink()

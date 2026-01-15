@@ -45,19 +45,19 @@ def init(
     skip_tls: bool = typer.Option(False, "--skip-tls", help="Skip SSL/TLS verification (not recommended)"),
     debug: bool = typer.Option(False, "--debug", help="Show verbose diagnostic output for network and extraction failures"),
     github_token: str = typer.Option(None, "--github-token", help="GitHub token to use for API requests (or set GH_TOKEN or GITHUB_TOKEN environment variable)"),
-    local_installation: bool = typer.Option(False, "--use-local-source", help="Use local templates from repository instead of downloading from GitHub (for development)"),
+    local_installation: bool = typer.Option(False, "--use-local-source", help="Use local source from repository instead of downloading from GitHub (for development)"),
     nghe_skills_path: str = typer.Option(None, "--local-source-path", help="Path to local template directory (defaults to repo root if --use-local-source is used)"),
 ):
     """
-    Initialize a new Nghệ Skills project from the latest template.
+    Initialize a new Nghệ Skills project with agent skills.
 
     This command will:
     1. Check that required tools are installed (git is optional)
     2. Let you choose your AI assistant(s) - supports multiple agents
-    3. Download the appropriate template(s) from GitHub (or use local templates)
-    4. Extract the template to a new project directory or current directory
+    3. Download the latest agent skills from GitHub (or use local source)
+    4. Set up agent skills in a new project directory or current directory
     5. Initialize a fresh git repository (if not --no-git and no existing repo)
-    6. Set up AI assistant commands for all selected agents
+    6. Configure AI assistant skills for all selected agents
 
     Examples:
         # Basic project initialization (interactive multi-agent selection)
@@ -82,7 +82,7 @@ def init(
         nghe init --upgrade --ai claude
         nghe init --here --upgrade
 
-        # Use local skills for development
+        # Use local agent skills for development
         nghe init demo --use-local-source --ai claude
         nghe init demo --use-local-source --local-source-path /path/to/nghe-skills
 
@@ -94,14 +94,14 @@ def init(
 
     show_banner()
 
-    # Check for environment variable to use local templates
+    # Check for environment variable to use local source
     if not local_installation:
         local_installation_env = os.getenv("NGHE_USE_LOCAL_INSTALLATION", "").lower() in ("1", "true", "yes")
         if local_installation_env:
             local_installation = True
-            console.print("[cyan]NGHE_USE_LOCAL_INSTALLATION detected - using local templates[/cyan]")
+            console.print("[cyan]NGHE_USE_LOCAL_INSTALLATION detected - using local agent skills[/cyan]")
 
-    # Check for template path from environment
+    # Check for skills path from environment
     if nghe_skills_path is None:
         env_nghe_skills_path = os.getenv("NGHE_SKILL_PATH")
         if env_nghe_skills_path:
@@ -254,7 +254,7 @@ def init(
                 raise typer.Exit(0)
 
     setup_lines = [
-        f"[cyan]Nghệ Project {'Upgrade' if is_upgrade_mode else 'Setup'}[/cyan]",
+        f"[cyan]Nghe-Skills Project {'Upgrade' if is_upgrade_mode else 'Setup'}[/cyan]",
         "",
         f"{'Project':<15} [green]{project_path.name}[/green]",
         f"{'Working Path':<15} [dim]{current_dir}[/dim]",
@@ -316,7 +316,7 @@ def init(
 
     console.print(f"[cyan]Selected AI assistant(s):[/cyan] {', '.join(selected_ais)}")
 
-    tracker = StepTracker("Upgrade Nghệ Project" if is_upgrade_mode else "Initialize Nghệ Project")
+    tracker = StepTracker("Upgrade Nghe-Skills Project" if is_upgrade_mode else "Initialize Nghe-Skills Project")
 
     sys._specify_tracker_active = True
 
@@ -329,17 +329,17 @@ def init(
     if is_upgrade_mode:
         tracker.add("backup", "Backup existing files")
 
-    # Add steps for each AI assistant template download (only if not using local templates)
+    # Add steps for each AI assistant skill setup (only if not using local skills)
     if not local_installation:
-        # Single template download for all agents
+        # Single download for all agents
         tracker.add("fetch-release", "Fetch latest release")
-        tracker.add("download-template", "Download template")
+        tracker.add("download-template", "Download agent skills")
         for selected_ai in selected_ais:
             tracker.add(f"extract-{selected_ai}", f"Setup {selected_ai} skills")
     else:
-        # For local templates, simpler steps
+        # For local skills, simpler steps
         for selected_ai in selected_ais:
-            tracker.add(f"copy-{selected_ai}", f"Copy {selected_ai} templates")
+            tracker.add(f"copy-{selected_ai}", f"Copy {selected_ai} skills")
 
     # Add common steps
     for key, label in [
@@ -378,10 +378,10 @@ def init(
                 backup_count = len(backup_paths)
                 tracker.complete("backup", f"{backup_count} folder{'s' if backup_count != 1 else ''} backed up")
 
-            # Download and extract template once, then copy to each AI agent folder
+            # Download and extract agent skills once, then set up for each AI agent
             zip_path_to_cleanup = None
             if not local_installation:
-                # Download template once
+                # Download agent skills once
                 from .github import download_template_from_github
                 
                 tracker.start("fetch-release", "contacting GitHub API")
@@ -397,7 +397,7 @@ def init(
                     )
                     zip_path_to_cleanup = zip_path  # Save for cleanup later
                     tracker.complete("fetch-release", f"release {meta['release']}")
-                    tracker.add("download-template", "Download template")
+                    tracker.add("download-template", "Download agent skills")
                     tracker.complete("download-template", f"{meta['size']:,} bytes")
                 except Exception as e:
                     tracker.error("fetch-release", str(e))
@@ -419,7 +419,7 @@ def init(
                     zip_path_to_cleanup.unlink()
                     tracker.complete("cleanup", "removed archive")
             else:
-                # Local installation - copy for each agent
+                # Local installation - copy skills for each agent
                 for selected_ai in selected_ais:
                     download_and_extract_template(
                         project_path, selected_ai, here or merge_into_existing,
@@ -654,7 +654,7 @@ def version():
         except Exception:
             pass
 
-    # Fetch latest template release version
+    # Fetch latest agent skills release version
     api_url = f"https://api.github.com/repos/{GITHUB_REPO_OWNER}/{GITHUB_REPO_NAME}/releases/latest"
 
     template_version = "unknown"
@@ -689,7 +689,7 @@ def version():
     info_table.add_column("Value", style="white")
 
     info_table.add_row("CLI Version", cli_version)
-    info_table.add_row("Template Version", template_version)
+    info_table.add_row("Skills Version", template_version)
     info_table.add_row("Released", release_date)
     info_table.add_row("", "")
     info_table.add_row("Python", platform.python_version())

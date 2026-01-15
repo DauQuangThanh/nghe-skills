@@ -148,7 +148,7 @@ nghe init my-project --ai claude --ignore-agent-tools
 # Force merge into existing directory
 nghe init existing-project --force
 
-# Use local templates (development)
+# Use local source (development)
 nghe init demo --use-local-source --local-source-path /path/to/nghe-skills
 
 # Skip TLS verification (not recommended)
@@ -197,7 +197,7 @@ Shows:
 export GITHUB_TOKEN=ghp_yourtoken
 export GH_TOKEN=ghp_yourtoken
 
-# Use local templates instead of downloading
+# Use local source instead of downloading
 export NGHE_USE_LOCAL_INSTALLATION=1
 export NGHE_SKILL_PATH=/path/to/nghe-skills/my-skills
 
@@ -1325,7 +1325,7 @@ Contributions are welcome! Please feel free to submit issues or pull requests to
    nghe check
    nghe version
    
-   # Test local templates
+   # Test local source
    nghe init test-project --use-local-source --local-source-path .
    ```
 
@@ -1570,7 +1570,7 @@ nghe init my-project --debug
 
 **Local Development:**
 ```bash
-# Test with local templates
+# Test with local source
 export NGHE_USE_LOCAL_INSTALLATION=1
 export NGHE_SKILL_PATH=/path/to/nghe-skills/my-skills
 nghe init test-project
