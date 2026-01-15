@@ -900,6 +900,11 @@ pip install dist/nghe_cli-*.whl
    uv tool install nghe-cli --force --from git+https://github.com/dauquangthanh/nghe-skills.git
    ```
 
+   ```bash
+   # Install from GitHub (recommended if you face TLS-related errors)
+   uv tool install nghe-cli --force --from git+https://github.com/dauquangthanh/nghe-skills.git --native-tls
+   ```
+
 2. **Initialize a New Project**
    ```bash
    # Interactive mode (choose AI assistants)

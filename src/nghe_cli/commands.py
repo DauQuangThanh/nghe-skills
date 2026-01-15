@@ -515,6 +515,23 @@ def init(
         console.print()
         console.print(security_notice)
 
+    # Agent Skills enablement reminder
+    enable_lines = [
+        "[bold yellow]⚠️  Important Configuration[/bold yellow]",
+        "",
+        "Make sure [bold]Agent Skills[/bold] (or Custom Instructions/Skills) are enabled in your AI assistant settings:",
+        "",
+        "  • [cyan]GitHub Copilot:[/cyan] Settings → Copilot → Enable 'Agent Skills' or 'Custom Instructions'",
+        "  • [cyan]Claude:[/cyan] Check project settings to ensure skills are recognized",
+        "  • [cyan]Cursor:[/cyan] Settings → Features → Enable 'Agent Skills' or '.cursorrules'",
+        "  • [cyan]Other agents:[/cyan] Check your agent's documentation for skill configuration",
+        "",
+        "[dim]Without this enabled, the skills won't be activated automatically.[/dim]"
+    ]
+    enable_panel = Panel("\n".join(enable_lines), title="Enable Agent Skills", border_style="yellow", padding=(1,2))
+    console.print()
+    console.print(enable_panel)
+
     steps_lines = []
     if not here and not merge_into_existing:
         steps_lines.append(f"1. Go to the project folder: [cyan]cd {project_name}[/cyan]")
