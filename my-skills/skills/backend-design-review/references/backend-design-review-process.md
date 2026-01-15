@@ -5,9 +5,9 @@
 
 **Activities:**
 1. **Gather Design Documentation**
-   - Collect architecture diagrams (C4 model, sequence diagrams)
+   - Collect architecture diagrams (Mermaid C4 model, sequence diagrams)
    - Obtain API specifications (OpenAPI, GraphQL schemas, protobuf definitions)
-   - Review database schemas (ERD, schema diagrams)
+   - Review database schemas (Mermaid ERD, schema diagrams)
    - Gather ADRs (Architecture Decision Records)
    - Review requirements and technical specifications
 

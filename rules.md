@@ -786,6 +786,28 @@ If token expires during operation, request a new token automatically.
 Use OAuth. Get a token and use it.
 ```
 
+### Diagram Standards
+
+**Always Use Mermaid Format**
+
+All diagrams in skills MUST use [Mermaid](https://mermaid.js.org/) syntax, never UML or PlantUML.
+
+**Supported Diagram Types:**
+- **Sequence Diagrams**: `sequenceDiagram` - for interaction flows
+- **Flowcharts**: `flowchart` or `graph` - for process flows
+- **State Diagrams**: `stateDiagram-v2` - for state machines
+- **Class Diagrams**: `classDiagram` - for data models
+- **Entity Relationship**: `erDiagram` - for database schemas
+- **C4 Diagrams**: `C4Context`, `C4Container`, `C4Component` - for architecture
+- **Gantt Charts**: `gantt` - for timelines
+- **User Journey**: `journey` - for user flows
+
+**What NOT to Use:**
+- ❌ PlantUML syntax (@startuml/@enduml)
+- ❌ Raw UML notation
+- ❌ ASCII art diagrams
+- ❌ External diagram tools requiring compilation
+
 ---
 
 ## Quality Standards

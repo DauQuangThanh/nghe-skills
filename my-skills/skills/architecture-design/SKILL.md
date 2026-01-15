@@ -43,8 +43,8 @@ When activated, this skill provides:
    - Apply resilience patterns (circuit breakers, retries, bulkheads)
 
 5. **Documentation & Deliverables**
-   - Create C4 model diagrams (Context, Container, Component, Code)
-   - Generate UML diagrams (class, sequence, deployment)
+   - Create C4 model diagrams in Mermaid format (Context, Container, Component, Code)
+   - Generate Mermaid diagrams (class, sequence, deployment)
    - Produce architecture decision records (ADRs)
    - Write technical specifications and API contracts
    - Create implementation roadmaps and migration plans
@@ -141,11 +141,13 @@ Define key layers and components:
 
 1. **Create Architecture Diagrams**
 
-Use C4 model for comprehensive documentation:
-- **Context**: System in environment with users and external systems
-- **Container**: High-level technology choices and communication
-- **Component**: Internal structure of containers
-- **Code**: Class diagrams for complex components
+Use C4 model in Mermaid format for comprehensive documentation:
+- **Context**: System in environment with users and external systems (use Mermaid C4Context)
+- **Container**: High-level technology choices and communication (use Mermaid C4Container)
+- **Component**: Internal structure of containers (use Mermaid C4Component)
+- **Code**: Class diagrams for complex components (use Mermaid classDiagram)
+
+All diagrams should use Mermaid syntax for easy versioning and rendering in markdown.
 
 2. **Write Architecture Decision Records (ADRs)**
 
@@ -265,11 +267,11 @@ Produce clear, comprehensive architecture documentation:
    - API specifications
    - Integration patterns
 
-3. **Diagrams**
-   - C4 Context diagram
-   - C4 Container diagram
-   - Sequence diagrams for key flows
-   - Deployment diagram
+3. **Diagrams (All in Mermaid format)**
+   - C4 Context diagram (Mermaid C4Context)
+   - C4 Container diagram (Mermaid C4Container)
+   - Sequence diagrams for key flows (Mermaid sequenceDiagram)
+   - Deployment diagram (Mermaid flowchart or C4Deployment)
 
 4. **Implementation Roadmap**
    - Phase breakdown with milestones

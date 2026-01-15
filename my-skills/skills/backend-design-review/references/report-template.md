@@ -11,7 +11,7 @@ Use this template to structure comprehensive backend design review reports.
 **Reviewer**: [Name/Team]  
 **Review Duration**: [Hours/Days]  
 **Design Documents Reviewed**: 
-- Architecture diagrams: [Links]
+- Mermaid architecture diagrams: [Links]
 - API specifications: [Links]
 - Database schemas: [Links]
 - ADRs: [Links]
@@ -148,21 +148,22 @@ Highlight strengths and good design decisions:
 
 ---
 
-## 7. Architecture Diagrams
+## 7. Architecture Diagrams (Mermaid Format)
 
 ### Current Architecture
-```
-[Diagram or description of current design]
+```mermaid
+[Mermaid diagram of current design]
 ```
 
 ### Proposed Improvements
-```
-[Diagram or description with recommended changes highlighted]
+```mermaid
+[Mermaid diagram with recommended changes highlighted]
 ```
 
 ### Data Flow
-```
-[Sequence diagrams showing improved data flows]
+```mermaid
+sequenceDiagram
+    [Sequence diagrams showing improved data flows]
 ```
 
 ---
@@ -203,7 +204,7 @@ Highlight strengths and good design decisions:
 
 ### A. References
 - [Link to API specification]
-- [Link to architecture diagrams]
+- [Link to Mermaid architecture diagrams]
 - [Link to database schema]
 - [Relevant documentation]
 

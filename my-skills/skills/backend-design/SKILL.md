@@ -43,7 +43,7 @@ Follow this systematic design process:
 
 7. **Documentation**
    - Create API specifications (OpenAPI/Swagger)
-   - Document architecture decisions and diagrams
+   - Document architecture decisions with Mermaid diagrams
    - Provide implementation guidelines and roadmap
 
 ## Output Structure
@@ -65,7 +65,7 @@ Present your backend design with these sections:
 - **Security by design** - Build authentication, authorization, and encryption from the start
 - **Design for scalability** - Plan for growth with caching, load balancing, and horizontal scaling
 - **Plan for failure** - Include error handling, retries, circuit breakers, and graceful degradation
-- **Document thoroughly** - Create clear API specs, architecture diagrams, and implementation guides
+- **Document thoroughly** - Create clear API specs, Mermaid architecture diagrams, and implementation guides
 
 ## Reference Files
 

@@ -9,14 +9,14 @@ Follow this systematic approach when conducting architecture reviews:
 ```markdown
 Required Documents:
 - Architecture overview and context
-- C4 diagrams (Context, Container, Component)
+- Mermaid C4 diagrams (Context, Container, Component)
 - Architecture Decision Records (ADRs)
 - Technical specifications
 - Non-functional requirements
 - Technology stack documentation
 - Data models and schemas
 - API specifications
-- Deployment diagrams
+- Deployment diagrams (Mermaid format)
 - Security architecture
 
 Optional Documents:

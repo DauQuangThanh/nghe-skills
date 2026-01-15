@@ -631,7 +631,7 @@ How the system fits in the ecosystem.
 - What's delegated to external systems
 ```
 
-#### 3. Architecture Diagrams
+#### 3. Architecture Diagrams (Mermaid Format)
 Visual representation of system structure.
 
 **Template:**
@@ -640,8 +640,8 @@ Visual representation of system structure.
 
 ### High-Level Architecture
 
-```
-[ASCII diagram or reference to visual diagram]
+```mermaid
+[Mermaid C4 diagram or flowchart]
 ```
 
 ### Component Diagram

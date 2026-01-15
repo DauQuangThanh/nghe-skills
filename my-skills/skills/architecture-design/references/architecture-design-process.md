@@ -144,12 +144,12 @@ Recommend appropriate technologies based on requirements:
 
 Produce comprehensive architecture documentation:
 
-1. **Architecture Diagrams**
-   - **C4 Context Diagram**: System in its environment
-   - **C4 Container Diagram**: High-level technology choices
-   - **C4 Component Diagram**: Components within containers
-   - **Sequence Diagrams**: Interaction flows
-   - **Deployment Diagram**: Infrastructure and deployment
+1. **Architecture Diagrams (All in Mermaid format)**
+   - **C4 Context Diagram**: System in its environment (use Mermaid C4Context)
+   - **C4 Container Diagram**: High-level technology choices (use Mermaid C4Container)
+   - **C4 Component Diagram**: Components within containers (use Mermaid C4Component)
+   - **Sequence Diagrams**: Interaction flows (use Mermaid sequenceDiagram)
+   - **Deployment Diagram**: Infrastructure and deployment (use Mermaid flowchart or C4Deployment)
 
 2. **Architecture Decision Records (ADRs)**
    ```markdown

@@ -15,4 +15,4 @@ This skill should be activated when:
 - Debugging integration issues
 - Improving test coverage
 
-The skill provides the most value when given system architecture diagrams, API specifications, and clear testing objectives.
+The skill provides the most value when given system Mermaid architecture diagrams, API specifications, and clear testing objectives.
