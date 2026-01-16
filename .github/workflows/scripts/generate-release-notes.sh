@@ -28,7 +28,11 @@ fi
 
 # Create release notes
 cat > release_notes.md << EOF
-This is the latest set of releases that you can use with your agent of choice. We recommend using the Rainbow CLI to scaffold your projects, however you can download these independently and manage them yourself.
+Nghệ Skills - A comprehensive collection of 40+ AI agent skills for software development, covering the complete SDLC from requirements gathering to deployment and migration.
+
+Compatible with 17+ AI assistants including GitHub Copilot, Claude Code, Gemini CLI, Cursor, Windsurf, Amazon Q, and more.
+
+Use the Nghệ CLI to scaffold your projects with agent skills, or download and manage them independently.
 
 ## Changelog
 
