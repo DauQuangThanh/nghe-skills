@@ -36,7 +36,7 @@ client = httpx.Client(verify=ssl_context)
 @app.command()
 def init(
     project_name: str = typer.Argument(None, help="Name for your new project directory (optional if using --here, or use '.' for current directory)"),
-    ai_assistant: str = typer.Option(None, "--ai", help="AI agent(s) to use. Can be a single agent or comma-separated list (e.g., 'claude,gemini,copilot'). Valid options: claude, gemini, copilot, cursor-agent, qwen, opencode, codex, windsurf, kilocode, auggie, codebuddy, amp, shai, q, bob. If not specified, an interactive multi-select menu will appear (default: copilot pre-selected)"),
+    ai_assistant: str = typer.Option(None, "--ai", help="AI agent(s) to use. Can be a single agent or comma-separated list (e.g., 'claude,gemini,copilot'). Valid options: claude, gemini, copilot, cursor-agent, qwen, opencode, codex, windsurf, kilocode, auggie, codebuddy, amp, shai, q, bob, antigravity, roo. If not specified, an interactive multi-select menu will appear (default: copilot pre-selected)"),
     ignore_agent_tools: bool = typer.Option(False, "--ignore-agent-tools", help="Skip checks for AI agent tools like Claude Code"),
     no_git: bool = typer.Option(False, "--no-git", help="Skip git repository initialization"),
     here: bool = typer.Option(False, "--here", help="Initialize project in the current directory instead of creating a new one"),
@@ -557,15 +557,15 @@ def init(
 
     steps_lines.append(f"{step_num}. Start using the installed skills with your AI agent:")
     steps_lines.append("")
-    steps_lines.append("   [bold cyan]Available Skills (39 total):[/bold cyan]")
+    steps_lines.append("   [bold cyan]Available Skills (41 total):[/bold cyan]")
     steps_lines.append("")
     steps_lines.append("   [cyan]Cloud Platforms (6):[/cyan] AWS, Azure, GCP, Alibaba, IBM, Oracle Cloud")
-    steps_lines.append("   [cyan]Development (7):[/cyan] Backend, Frontend, Database, DevOps, Refactoring")
-    steps_lines.append("   [cyan]Review & Quality (8):[/cyan] Code quality, Security, Architecture reviews")
-    steps_lines.append("   [cyan]Requirements (3):[/cyan] Gathering, Review, Architecture design")
-    steps_lines.append("   [cyan]Migration & Legacy (10):[/cyan] COBOL, JCL, PL/I, RPG analyzers, Mainframes")
-    steps_lines.append("   [cyan]Testing (1):[/cyan] Integration testing strategies")
-    steps_lines.append("   [cyan]Specialized (4):[/cyan] Bug analysis, Git commits, Technical writing, KeyCloak")
+    steps_lines.append("   [cyan]Backend & Frontend (8):[/cyan] Backend/Frontend design, coding, and code review")
+    steps_lines.append("   [cyan]Requirements & Architecture (6):[/cyan] Gathering, Review, Design, Planning")
+    steps_lines.append("   [cyan]Code Quality (3):[/cyan] Quality review, Security review, Refactoring")
+    steps_lines.append("   [cyan]Database & DevOps (3):[/cyan] Database design/migration, DevOps practices")
+    steps_lines.append("   [cyan]Migration & Legacy (14):[/cyan] COBOL, JCL, PL/I, RPG analyzers, Mainframes, System migration")
+    steps_lines.append("   [cyan]Testing & Specialized (5):[/cyan] Integration testing, Bug analysis, Git commits, KeyCloak")
     steps_lines.append("")
     steps_lines.append("   [dim]Skills are automatically activated based on your requests and file context.[/dim]")
 

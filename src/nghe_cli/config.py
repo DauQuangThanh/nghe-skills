@@ -101,6 +101,12 @@ AGENT_CONFIG = {
         "install_url": None,
         "requires_cli": False,
     },
+    "antigravity": {
+        "name": "Google Antigravity",
+        "folder": ".agent/",
+        "install_url": "https://antigravity.google/docs/skills",
+        "requires_cli": False,
+    },
 }
 
 BANNER = """

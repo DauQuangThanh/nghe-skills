@@ -4,15 +4,15 @@ A comprehensive collection of AI agent skills for software development, covering
 
 ## What is Nghệ Skills?
 
-**Nghệ Skills** is a curated collection of 40 specialized AI skills designed to enhance your software development workflow across any modern AI coding assistant. The project includes:
+**Nghệ Skills** is a curated collection of 41 specialized AI skills designed to enhance your software development workflow across any modern AI coding assistant. The project includes:
 
-- **40 Production-Ready Skills**: Covering cloud platforms, development, code review, testing, and legacy system migration
+- **41 Production-Ready Skills**: Covering cloud platforms, development, code review, testing, and legacy system migration
 - **Nghệ CLI Tool**: A command-line interface to bootstrap projects with agent skills tailored for your AI assistant
-- **Multi-Agent Support**: Compatible with 16+ AI assistants including GitHub Copilot, Claude Code, Gemini, Cursor, Windsurf, Amazon Q, and more
+- **Multi-Agent Support**: Compatible with 17+ AI assistants including GitHub Copilot, Claude Code, Gemini, Cursor, Windsurf, Amazon Q, and more
 - **Progressive Disclosure**: Modular reference files loaded on-demand to optimize context usage
 - **Agent Skills Compliant**: Following [agentskills.io specification](https://agentskills.io/specification) with all skills under 500 lines
 
-**All 39 skills fully optimized and Agent Skills compliant!**
+**All 41 skills fully optimized and Agent Skills compliant!**
 
 ### Latest Improvements
 - ✅ **Specification Compliant** - Removed non-standard frontmatter fields (license, metadata)
@@ -24,7 +24,7 @@ A comprehensive collection of AI agent skills for software development, covering
 - ✅ **90% size reduction** - Average skill reduced from ~700 to ~176 lines
 - ✅ **328+ reference files** - Detailed content split into modular references
 - ✅ **Better organized** - Core concepts in SKILL.md, details in references/
-- ✅ **Nghệ CLI Tool** - Bootstrap projects with multi-agent support (16+ AI assistants)
+- ✅ **Nghệ CLI Tool** - Bootstrap projects with multi-agent support (17+ AI assistants)
 
 ## Table of Contents
 
@@ -79,7 +79,7 @@ nghe init --upgrade
 
 ### Supported AI Assistants
 
-The CLI supports 16+ AI assistants:
+The CLI supports 17+ AI assistants:
 - **GitHub Copilot** (IDE-based)
 - **Claude Code** (requires CLI)
 - **Gemini CLI** (requires CLI)
@@ -96,6 +96,7 @@ The CLI supports 16+ AI assistants:
 - **Kilo Code** (IDE-based)
 - **Roo Code** (IDE-based)
 - **IBM Bob** (IDE-based)
+- **Google Antigravity** (IDE-based)
 
 ## Nghệ CLI Tool
 
@@ -212,15 +213,15 @@ When you run `nghe init my-project --ai copilot,claude`, the CLI creates:
 ```
 my-project/
 ├── .github/               # GitHub Copilot configuration
-│   └── skills/           # 39 agent skills for Copilot
+│   └── skills/           # 41 agent skills for Copilot
 │       ├── aws-cloud/
 │       ├── backend-coding/
-│       └── ... (39 skills total)
+│       └── ... (41 skills total)
 ├── .claude/              # Claude Code configuration
-│   └── skills/           # 39 agent skills for Claude
+│   └── skills/           # 41 agent skills for Claude
 │       ├── aws-cloud/
 │       ├── backend-coding/
-│       └── ... (39 skills total)
+│       └── ... (41 skills total)
 └── .git/                 # Git repository (unless --no-git)
 ```
 
@@ -228,14 +229,18 @@ Each AI assistant gets its own folder with dedicated skill copies optimized for 
 
 ## Skills Overview
 
-This repository provides **40 specialized AI skills** organized into multiple categories:
+This repository provides **41 specialized AI skills** organized into multiple categories:
 - **Cloud Platforms** (6 skills) - AWS, Azure, GCP, Alibaba, IBM, Oracle Cloud
-- **Migration & Legacy** (10 skills) - Application, database, platform, system migrations, COBOL, JCL, PL/I, RPG analyzers, mainframe systems
-- **Development** (7 skills) - Backend, frontend, database, DevOps, refactoring, git commits
-- **Review & Quality** (8 skills) - Code quality, security, architecture, design reviews
-- **Requirements & Planning** (4 skills) - Gathering, review, planning, pseudocode to specification
+- **Requirements & Architecture** (6 skills) - Requirements gathering/review, Architecture design/review, Project planning, Pseudocode to spec
+- **Backend Development** (4 skills) - Backend design, coding, code review, design review
+- **Frontend Development** (4 skills) - Frontend design, coding, code review, UI/UX design
+- **Code Quality & Refactoring** (3 skills) - Quality review, Security review, Refactoring
+- **Database & DevOps** (3 skills) - Database design, Database migration, DevOps practices
+- **Migration Projects** (4 skills) - Application, Platform, System migrations, Mockup creation
+- **Legacy Code Analyzers** (4 skills) - COBOL, JCL, PL/I, RPG migration analyzers
+- **Mainframe Systems** (2 skills) - IBM Mainframe, Fujitsu Mainframe
 - **Testing** (1 skill) - Integration and E2E testing
-- **Specialized** (4 skills) - Bug analysis, technical writing, KeyCloak administration
+- **Specialized Tools** (4 skills) - Bug analysis, Git commits, Technical writing, KeyCloak administration
 
 Each skill follows the [Agent Skills specification](https://agentskills.io/specification) with:
 - Concise SKILL.md files (<500 lines)
@@ -1445,7 +1450,7 @@ The Nghệ CLI is built with a modular architecture:
   - Displays system information
   
 **config.py** (100 lines): Agent configurations
-- Defines 16+ AI assistant configurations
+- Defines 17+ AI assistant configurations
 - Maps agent keys to display names
 - Specifies agent folder structures
 - Identifies CLI tool requirements
@@ -1504,14 +1509,18 @@ truststore     # Enhanced SSL/TLS certificate validation
 ## Roadmap
 
 ### Current Status (v1.0)
-✅ **39 skills** covering complete SDLC, cloud platforms, code quality, and migration
+✅ **41 skills** covering complete SDLC, cloud platforms, code quality, and migration
 - Cloud Platforms: 6 skills (AWS, Azure, GCP, Alibaba, IBM, Oracle)
-- Requirements & Planning: 3 skills
-- Design & Implementation: 7 skills  
-- Review & Quality: 8 skills
+- Requirements & Architecture: 6 skills
+- Backend Development: 4 skills
+- Frontend Development: 4 skills
+- Code Quality & Refactoring: 3 skills
+- Database & DevOps: 3 skills
+- Migration Projects: 4 skills
+- Legacy Code Analyzers: 4 skills
+- Mainframe Systems: 2 skills
 - Testing: 1 skill
-- Migration & Legacy: 10 skills (includes mainframe systems)
-- Specialized: 4 skills
+- Specialized Tools: 4 skills
 
 ### Upcoming Skills (Planned for v2.0)
 - **Unit Testing** - Unit test strategies and TDD implementation
@@ -1543,7 +1552,7 @@ Nghệ Skills is designed to:
 - **Share Knowledge**: Democratize expert-level guidance across teams
 - **Enable Migration**: Facilitate legacy system modernization
 - **Promote Best Practices**: Encourage industry standards and patterns
-- **Multi-Agent Support**: Work seamlessly across 16+ AI coding assistants
+- **Multi-Agent Support**: Work seamlessly across 17+ AI coding assistants
 
 ### Why "Nghệ"?
 
