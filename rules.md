@@ -525,43 +525,66 @@ Agent reads REDLINING.md or OOXML.md only when user needs those features.
 **Purpose:** Executable code agents can run directly
 
 **Characteristics:**
-- Code that performs specific operations (Python, Bash, JavaScript, etc.)
+- Code that performs specific operations (Python, Bash, PowerShell, JavaScript, etc.)
 - Can be executed WITHOUT loading into context window
 - Should be self-contained or clearly document dependencies
+- **MUST provide both Bash (.sh) and PowerShell (.ps1) versions for cross-platform support**
 
 **When to Use:**
 - Complex operations that would be error-prone if written by agent
 - Operations requiring specific libraries or tools
 - Repeatable automation tasks
 
+**Cross-Platform Script Requirements:**
+
+For scripts that interact with the operating system (file operations, process management, etc.), **always provide both versions**:
+
+- **Bash (.sh)**: For Linux and macOS
+- **PowerShell (.ps1)**: For Windows (and optionally Linux/macOS with PowerShell Core)
+
+For platform-agnostic languages (Python, Node.js, etc.), a single script is sufficient as they run on all platforms.
+
 **Examples:**
 ```
 scripts/
-├── extract_form_fields.py    # Extract fields from PDF form
-├── merge_pdfs.py              # Merge multiple PDF files
-└── validate_schema.sh         # Validate JSON schema
+├── extract_form_fields.py        # Python - runs everywhere
+├── merge_pdfs.py                 # Python - runs everywhere
+├── create_component.sh           # Bash version for Linux/macOS
+├── create_component.ps1          # PowerShell version for Windows
+├── build_deploy.sh               # Bash version for Linux/macOS
+└── build_deploy.ps1              # PowerShell version for Windows
 ```
 
 **Best Practices:**
 - Be self-contained or document dependencies clearly
 - Include helpful error messages
 - Handle edge cases gracefully
-- Make scripts executable (`chmod +x`)
-- Add shebang line (`#!/usr/bin/env python3`)
+- **Provide feature parity between Bash and PowerShell versions**
+- Test on target platforms (Windows, Linux, macOS)
+- Make Bash scripts executable (`chmod +x`)
+- Add shebang line for Bash (`#!/usr/bin/env bash` or `#!/usr/bin/env python3`)
+- Use proper execution policy for PowerShell (document if needed)
+- Include platform detection when possible
+- Document platform-specific requirements in script headers
 
 **Script Guidelines:**
+
+**Python Script (Cross-Platform):**
 ```python
 #!/usr/bin/env python3
 """
 Brief description of what this script does.
 
+Platform: Windows, Linux, macOS (requires Python 3.8+)
+
 Usage:
-    script_name.py <arg1> <arg2>
+    python script_name.py <arg1> <arg2>
 
 Example:
-    script_name.py input.pdf output.txt
+    python script_name.py input.pdf output.txt
 """
 import sys
+import platform
 
 def main():
     if len(sys.argv) < 3:
@@ -570,10 +593,108 @@ def main():
         sys.exit(1)
     
     # Implementation
+    # Use os.path or pathlib for cross-platform path handling
     pass
 
 if __name__ == "__main__":
     main()
+```
+
+**Bash Script (Linux/macOS):**
+```bash
+#!/usr/bin/env bash
+
+# Script Description
+# Platform: Linux, macOS
+# Usage: ./script_name.sh <arg1> <arg2>
+# Example: ./script_name.sh input.txt output.txt
+
+set -e  # Exit on error
+
+# Color codes for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# Check arguments
+if [ $# -lt 2 ]; then
+    echo -e "${RED}Error: Missing required arguments${NC}"
+    echo "Usage: $0 <arg1> <arg2>"
+    exit 1
+fi
+
+ARG1=$1
+ARG2=$2
+
+# Implementation
+echo -e "${GREEN}Processing...${NC}"
+
+# Your logic here
+
+echo -e "${GREEN}✓ Complete${NC}"
+```
+
+**PowerShell Script (Windows):**
+```powershell
+# Script Description
+# Platform: Windows (PowerShell 5.1+), optional: Linux/macOS (PowerShell Core 7+)
+# Usage: .\script_name.ps1 -Arg1 <value> -Arg2 <value>
+# Example: .\script_name.ps1 -Arg1 "input.txt" -Arg2 "output.txt"
+
+[CmdletBinding()]
+param(
+    [Parameter(Mandatory=$true)]
+    [string]$Arg1,
+    
+    [Parameter(Mandatory=$true)]
+    [string]$Arg2
+)
+
+# Set error action preference
+$ErrorActionPreference = "Stop"
+
+# Function for colored output
+function Write-ColorOutput {
+    param(
+        [string]$Message,
+        [string]$Color = "White"
+    )
+    Write-Host $Message -ForegroundColor $Color
+}
+
+try {
+    Write-ColorOutput "Processing..." "Green"
+    
+    # Implementation
+    # Use Join-Path for cross-platform path handling
+    
+    Write-ColorOutput "✓ Complete" "Green"
+}
+catch {
+    Write-ColorOutput "Error: $_" "Red"
+    exit 1
+}
+```
+
+**Cross-Platform Wrapper Pattern:**
+
+For complex scenarios, create a platform detector:
+
+```bash
+#!/usr/bin/env bash
+# detect_and_run.sh
+
+if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "win32" ]]; then
+    # Windows (Git Bash or similar)
+    powershell.exe -ExecutionPolicy Bypass -File "./script_name.ps1" "$@"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    # macOS
+    ./script_name.sh "$@"
+else
+    # Linux
+    ./script_name.sh "$@"
+fi
 ```
 
 ### references/
