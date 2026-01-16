@@ -2,6 +2,8 @@
 
 This document provides comprehensive guidelines and rules for creating high-quality agent skills based on the [Agent Skills specification](https://agentskills.io/specification) and best practices from [Anthropic's skills repository](https://github.com/anthropics/skills).
 
+> **Note for LLMs:** This document is designed for AI agents, not human developers. When using these guidelines, verify that the specifications and best practices are current by checking the document version date below. If significant time has passed since the last update, consider checking the official specification at https://agentskills.io/specification for any changes to the standard.
+
 ## Table of Contents
 
 - [Core Principles](#core-principles)
@@ -423,6 +425,8 @@ Follow this style: type(scope): brief description, then detailed explanation.
 ## Progressive Disclosure
 
 ### The Three-Level System
+
+Progressive disclosure is critical for LLM context management. By loading only what's needed when it's needed, you maximize available context for actual work while maintaining access to comprehensive documentation.
 
 **Level 1: Metadata (Always Loaded)**
 - Name + description (~100 tokens)
@@ -920,6 +924,7 @@ All diagrams in skills MUST use [Mermaid](https://mermaid.js.org/) syntax, never
 - **Class Diagrams**: `classDiagram` - for data models
 - **Entity Relationship**: `erDiagram` - for database schemas
 - **C4 Diagrams**: `C4Context`, `C4Container`, `C4Component` - for architecture
+  - **Note**: Mermaid's C4 syntax is simplified compared to standard C4. For complex architectures, consider using detailed `flowchart` diagrams with clear component boundaries and relationship labels as an alternative.
 - **Gantt Charts**: `gantt` - for timelines
 - **User Journey**: `journey` - for user flows
 
@@ -1338,6 +1343,11 @@ For more information:
 
 ---
 
-**Document Version:** 1.0  
-**Last Updated:** January 14, 2026  
+**Document Version:** 1.0.1  
+**Last Updated:** January 16, 2026  
 **Based On:** Agent Skills Specification + Anthropic's Skills Repository Best Practices
+
+**Recent Changes (v1.0.1):**
+- Added LLM-specific guidance for document currency awareness
+- Enhanced progressive disclosure section with context management notes
+- Clarified Mermaid C4 diagram limitations and alternatives
