@@ -123,8 +123,8 @@ def copy_local_template(
 
     agent_folder = agent_config["folder"]
 
-    # Create agent-specific skills directory (e.g., .github/skills/, .claude/skills/)
-    agent_skills_path = project_path / agent_folder / "skills"
+    # Create agent-specific skills directory (e.g., .github/skills/, .cursor/rules/)
+    agent_skills_path = project_path / agent_folder
     agent_skills_path.mkdir(parents=True, exist_ok=True)
 
     # Copy all skill directories from my-skills/skills/ to agent's skills folder
@@ -138,7 +138,7 @@ def copy_local_template(
             skill_count += 1
 
     if verbose and not tracker:
-        console.print(f"[green]✓[/green] Copied {skill_count} Agent Skills to {agent_folder}skills/")
+        console.print(f"[green]✓[/green] Copied {skill_count} Agent Skills to {agent_folder}")
 
     if tracker:
         tracker.complete(f"copy-{ai_assistant}", f"{skill_count} skills copied")
@@ -244,7 +244,7 @@ def download_and_extract_template(
             raise ValueError(f"Unknown AI assistant: {ai_assistant}")
         
         agent_folder = agent_config["folder"]
-        agent_skills_path = project_path / agent_folder / "skills"
+        agent_skills_path = project_path / agent_folder
 
         with zipfile.ZipFile(zip_path, 'r') as zip_ref:
             zip_contents = zip_ref.namelist()
@@ -277,7 +277,10 @@ def download_and_extract_template(
                         console.print(f"[cyan]Found nested directory structure[/cyan]")
 
                 # Look for 'skills' directory in the extracted content
-                skills_source = source_dir / "skills"
+                # Check for my-skills/skills/ structure first, then skills/ directly
+                skills_source = source_dir / "my-skills" / "skills"
+                if not skills_source.exists():
+                    skills_source = source_dir / "skills"
                 if not skills_source.exists():
                     # If no 'skills' subdirectory, assume all directories are skills
                     skills_source = source_dir
@@ -299,10 +302,10 @@ def download_and_extract_template(
                         skill_count += 1
 
                 if verbose and not tracker:
-                    console.print(f"[green]✓[/green] Copied {skill_count} skills to {agent_folder}skills/")
+                    console.print(f"[green]✓[/green] Copied {skill_count} skills to {agent_folder}")
                 elif tracker:
                     if verbose:
-                        console.print(f"[cyan]Copied {skill_count} skills to {agent_folder}skills/[/cyan]")
+                        console.print(f"[cyan]Copied {skill_count} skills to {agent_folder}[/cyan]")
 
     except Exception as e:
         if tracker:
